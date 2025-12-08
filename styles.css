@@ -1,0 +1,785 @@
+:root {
+    --primary: #0F4C5C; /* Deep Teal - Professional & Medical */
+    --secondary: #9A8C98; /* Muted Purple/Grey - Calm */
+    --accent: #E0B1CB; /* Soft Pink/Lavender - Healing */
+    --gold: #C9A227; /* Subtle Gold for Premium feel */
+    --bg-light: #F8F9FA;
+    --text-dark: #2B2D42;
+    --text-light: #6C757D;
+
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Outfit', sans-serif;
+
+    --radius: 12px;
+    --shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: #fff;
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s ease;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(15, 76, 92, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: #0a3540;
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    margin-left: 15px;
+}
+
+.btn-outline:hover {
+    background-color: white;
+    color: var(--primary);
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+    padding: 15px 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+}
+
+.dr-name {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.sub-logo {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-list a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.nav-list a:hover {
+    color: var(--primary);
+}
+
+.nav-list .btn-nav {
+    background-color: var(--primary);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 50px;
+}
+
+.nav-list .btn-nav:hover {
+    background-color: #0a3540;
+    color: white;
+}
+
+/* Hero */
+.hero {
+    position: relative;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    margin-top: 60px; /* Header height offset if needed, but fixed header covers it usually */
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(15, 76, 92, 0.85) 0%, rgba(15, 76, 92, 0.4) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.hero-title {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero-title em {
+    font-family: var(--font-heading);
+    font-style: italic;
+    color: var(--accent);
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* Section Common */
+.section {
+    padding: 100px 0;
+}
+
+.section-header {
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.divider {
+    width: 60px;
+    height: 4px;
+    background-color: var(--gold);
+    border-radius: 2px;
+}
+
+.divider.center {
+    margin: 0 auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* About */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.about-text p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: var(--text-light);
+}
+
+.feature-list {
+    list-style: none;
+    margin-top: 30px;
+}
+
+.feature-list li {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.about-highlight {
+    background-color: var(--bg-light);
+    padding: 40px;
+    border-radius: var(--radius);
+    border-left: 5px solid var(--primary);
+}
+
+.about-highlight h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+/* Symptoms/Benefits Grid */
+.benefits {
+    background-color: #fcfcfc;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.benefit-card {
+    background: white;
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    border-bottom: 3px solid var(--gold);
+}
+
+.benefit-card .icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.benefit-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+
+.benefit-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* Process */
+.process-wrapper {
+    display: grid;
+    grid-template-columns: 1fr; /* Changed for SIBO treatment list usually being sequential or a list */
+    gap: 30px;
+}
+/* Reverting to Hacamat style for consistency if we use Before/After or similar split, but for SIBO Treatment methods we might want a list of steps.
+   Keeping the grid 1fr 1fr for now to support diverse layouts or two main approaches (Antibiotic vs Herbal). */
+.process-wrapper {
+   grid-template-columns: 1fr 1fr;
+}
+
+
+.process-box {
+    padding: 50px;
+    border-radius: var(--radius);
+}
+
+.process-box.before {
+    background-color: #fff4e6; /* Soft Orange tint */
+    border: 1px solid #ffe8cc;
+}
+
+.process-box.after {
+    background-color: #e6f7ff; /* Soft Blue tint */
+    border: 1px solid #bae7ff;
+}
+
+.process-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    color: var(--text-dark);
+}
+
+.process-box ul {
+    list-style-position: inside;
+}
+
+.process-box ul li {
+    margin-bottom: 12px;
+    color: var(--text-dark);
+}
+
+/* Contact */
+.contact {
+    background-color: var(--primary);
+    color: white;
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.contact-title {
+    color: white;
+    margin-bottom: 15px;
+}
+
+.contact-sub {
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+.info-item {
+    margin-bottom: 30px;
+}
+
+.info-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gold);
+    margin-bottom: 5px;
+}
+
+.info-value {
+    font-size: 1.2rem;
+    font-family: var(--font-heading);
+}
+
+.big-phone {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+}
+
+.contact-map {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.footer {
+    background-color: #0a3540;
+    color: rgba(255,255,255,0.6);
+    padding: 30px 0;
+    font-size: 0.9rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-right a {
+    color: rgba(255,255,255,0.6);
+    margin-left: 20px;
+}
+
+.footer-right a:hover {
+    color: white;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .nav {
+        display: none; /* Simplification */
+    }
+
+    .about-grid, .process-wrapper, .contact-container {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-map {
+        height: 300px;
+    }
+}
+
+/* Benefit Detail Pages */
+.benefit-page-header {
+    background-color: var(--primary);
+    padding: 120px 0 60px;
+    color: white;
+    text-align: center;
+}
+
+.benefit-title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.benefit-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.scientific-content {
+    background-color: white;
+    padding: 80px 0;
+}
+
+.scientific-block {
+    margin-bottom: 50px;
+}
+
+.scientific-block h3 {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+    border-left: 4px solid var(--gold);
+    padding-left: 15px;
+}
+
+.scientific-block p {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.scientific-highlight {
+    background: #f0f7f9;
+    padding: 30px;
+    border-radius: var(--radius);
+    margin: 30px 0;
+}
+
+.reference-list {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid #eee;
+}
+
+.reference-item {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: all 0.2s;
+}
+
+.reference-item:hover {
+    border-color: var(--primary);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.reference-title {
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+    display: block;
+}
+
+.reference-authors {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 10px;
+}
+
+.pubmed-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.pubmed-link:hover {
+    text-decoration: underline;
+}
+
+.read-more {
+    display: block;
+    margin-top: 15px;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.social-btn:hover {
+    background-color: white;
+    transform: translateY(-2px);
+}
+
+.social-btn.instagram:hover {
+    color: #E1306C;
+}
+
+.social-btn.youtube:hover {
+    color: #FF0000;
+}
+
+
+/* ... existing styles ... */
+
+/* Hero Original Overlay Layout */
+.hero {
+    position: relative;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    margin-top: 60px;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    display: block; /* Restore */
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(15, 76, 92, 0.85) 0%, rgba(15, 76, 92, 0.4) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.hero-title {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: white; /* Ensure white text */
+}
+
+.hero-title em {
+    font-family: var(--font-heading);
+    font-style: italic;
+    color: var(--accent);
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+    font-weight: 300;
+    color: white;
+}
+
+/* Revert button styles for dark overlay */
+.hero-buttons .btn-outline {
+    border: 2px solid white;
+    color: white;
+}
+
+.hero-buttons .btn-outline:hover {
+    background-color: white;
+    color: var(--primary);
+}
+
+/* Remove Split Layout classes just in case or override them */
+
+/* ... existing styles ... */
+
+/* Test Process Section (Timeline) */
+.test-process {
+    background-color: #fff;
+    padding: 100px 0;
+}
+
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 50px auto 0;
+}
+
+/* Vertical Line */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: var(--bg-light);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+}
+
+.timeline-container {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+}
+
+.timeline-container.left {
+    left: 0;
+}
+
+.timeline-container.right {
+    left: 50%;
+}
+
+/* Circle */
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: -10px;
+    background-color: white;
+    border: 4px solid var(--primary);
+    top: 25px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.timeline-container.right::after {
+    left: -10px;
+}
+
+.content {
+    padding: 20px 30px;
+    background-color: #fcfcfc;
+    position: relative;
+    border-radius: var(--radius);
+    border: 1px solid #eee;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+    transition: transform 0.3s ease;
+}
+
+.content:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+.timeline-date {
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 10px;
+    display: block;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.timeline-container h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+/* Mobile Responsive Timeline */
+@media (max-width: 768px) {
+    .timeline::after {
+        left: 31px;
+    }
+
+    .timeline-container {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    .timeline-container.left::after {
+        left: 21px; /* Force left alignment for circle on mobile */
+    }
+
+    .timeline-container::after {
+        left: 21px;
+    }
+
+    .timeline-container.right {
+        left: 0%;
+    }
+}
