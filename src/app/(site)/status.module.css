@@ -1,0 +1,22 @@
+/* Hata ve 404 sayfaları (error.tsx, not-found.tsx) ortak stilleri. */
+.container {
+  min-height: 55vh;
+  display: grid;
+  place-content: center;
+  gap: 1rem;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.message {
+  max-width: 38rem;
+  color: var(--color-text-light);
+}
+
+.action {
+  composes: button primary from "../../styles/button.module.css";
+  --btn-py: 0.85rem;
+  --btn-px: 1.5rem;
+  --btn-radius: var(--radius-md);
+  justify-self: center;
+}

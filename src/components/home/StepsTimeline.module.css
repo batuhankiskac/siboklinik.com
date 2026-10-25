@@ -1,0 +1,131 @@
+/* Eski sitenin zaman çizelgesi: ortada dikey çizgi, adımlar sırayla sol/sağ. */
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 50px auto 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  margin-left: -2px;
+  background-color: var(--color-bg-alt);
+}
+
+.step {
+  position: relative;
+  width: 50%;
+  padding: 10px 40px;
+}
+
+.left {
+  margin-left: 0;
+}
+
+.right {
+  margin-left: 50%;
+}
+
+/* Nokta */
+.step::after {
+  content: "";
+  position: absolute;
+  top: 24px;
+  right: -12px;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
+  border: 4px solid var(--color-primary);
+  border-radius: 50%;
+  background-color: var(--color-surface);
+}
+
+.right::after {
+  right: auto;
+  left: -12px;
+}
+
+.card {
+  padding: 20px 30px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  box-shadow: 0 5px 15px 0 rgb(0 0 0 / 3%);
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-primary);
+}
+
+.label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.heading {
+  margin: 0 0 15px;
+  font-size: 1.3rem;
+  line-height: 1.35;
+}
+
+.text {
+  color: var(--color-text);
+}
+
+.note {
+  max-width: 700px;
+  margin: 40px auto 0;
+  color: var(--color-text-light);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 31px;
+  }
+
+  .step,
+  .left,
+  .right {
+    width: 100%;
+    margin-left: 0;
+    padding: 10px 25px 10px 70px;
+  }
+
+  .step::after,
+  .right::after {
+    top: 24px;
+    right: auto;
+    left: 21px;
+  }
+
+  .card {
+    padding: 18px 20px;
+  }
+
+  .heading {
+    font-size: 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card:hover {
+    transform: none;
+    transition: none;
+  }
+}

@@ -1,0 +1,126 @@
+.hero {
+  scroll-margin-top: 80px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  min-height: 90svh;
+  padding: 120px 20px 80px;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+  isolation: isolate;
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+/* Eski sitenin gradyanı; açık mavi görselde beyaz metnin ≥4.5:1 kalması için biraz koyulaştırıldı. */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    135deg,
+    rgb(15 76 92 / 88%) 0%,
+    rgb(15 76 92 / 72%) 100%
+  );
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.title {
+  margin: 0 0 20px;
+  color: #fff;
+  font-size: clamp(2.25rem, 5.5vw, 4rem);
+  line-height: 1.1;
+}
+
+.subtitle {
+  max-width: 760px;
+  margin: 0 auto 40px;
+  color: rgb(255 255 255 / 92%);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* Dolgu: beyaz zemin, petrol metin; koyu katmanda en yüksek kontrastı verir. */
+.primary {
+  composes: button from "../../styles/button.module.css";
+  --btn-py: 14px;
+  --btn-px: 32px;
+  --btn-radius: 50px;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  --btn-border-color: #fff;
+  background-color: #fff;
+  box-shadow: 0 4px 15px 0 rgb(0 0 0 / 20%);
+  color: var(--color-primary);
+}
+
+.primary:hover {
+  background-color: var(--gold-light);
+  --btn-border-color: var(--gold-light);
+  color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+.outline {
+  composes: button from "../../styles/button.module.css";
+  --btn-py: 14px;
+  --btn-px: 32px;
+  --btn-radius: 50px;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  --btn-border-color: #fff;
+  background-color: transparent;
+  color: #fff;
+}
+
+.outline:hover {
+  background-color: #fff;
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.primary:focus-visible,
+.outline:focus-visible {
+  outline-color: var(--gold-light);
+}
+
+@media (max-width: 600px) {
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .primary,
+  .outline {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary:hover,
+  .outline:hover {
+    transform: none;
+  }
+}

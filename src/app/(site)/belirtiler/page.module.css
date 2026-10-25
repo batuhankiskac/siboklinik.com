@@ -1,0 +1,22 @@
+.container {
+  composes: container from "../../../styles/page.module.css";
+  --page-max: 1200px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.heading {
+  composes: heading from "../../../styles/page.module.css";
+  --heading-size: 2.5rem;
+  --heading-mb: 1rem;
+}
+
+.subtitle {
+  color: var(--color-text-light);
+  font-size: 1.125rem;
+  max-width: 600px;
+  margin: 0 auto;
+}

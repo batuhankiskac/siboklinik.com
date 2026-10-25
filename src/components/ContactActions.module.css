@@ -1,0 +1,49 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.phoneText {
+  margin-right: 0.25rem;
+  font-weight: 600;
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.iconButton:hover {
+  transform: translateY(-2px);
+}
+
+.iconButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+.call {
+  background: rgb(0 0 0 / 6%);
+  color: var(--color-primary);
+}
+
+.whatsapp {
+  background: #1f9d55;
+  color: white;
+}
+
+.inverted {
+  justify-content: flex-start;
+}
+
+.inverted .call {
+  background: rgb(255 255 255 / 12%);
+  color: var(--color-surface);
+}

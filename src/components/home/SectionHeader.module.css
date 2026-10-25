@@ -1,0 +1,40 @@
+.header {
+  margin-bottom: 60px;
+}
+
+.centered {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(1.875rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  max-width: 720px;
+  margin: 0 auto 20px;
+  color: var(--color-text-light);
+  font-size: 1.1rem;
+}
+
+.divider {
+  width: 60px;
+  height: 4px;
+  margin-top: 0;
+  border-radius: 2px;
+  background-color: var(--gold);
+}
+
+.centered .divider {
+  margin-inline: auto;
+}
+
+@media (max-width: 768px) {
+  .header,
+  .centered {
+    margin-bottom: 40px;
+  }
+}

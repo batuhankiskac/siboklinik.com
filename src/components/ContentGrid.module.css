@@ -1,0 +1,9 @@
+.grid {
+  display: grid;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 400px));
+  justify-content: center;
+  gap: 2rem;
+}

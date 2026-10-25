@@ -1,0 +1,365 @@
+{
+  "brand": {
+    "siteName": "SIBO Klinik",
+    "domain": "siboklinik.com",
+    "shortDescription": "SIBO Tanı ve Tedavi Merkezi",
+    "doctorName": "Prof. Dr. Muharrem Kıskaç",
+    "doctorTitle": "Prof. Dr."
+  },
+  "contact": {
+    "address": "Zuhuratbaba, Haksever Sk. Paşa İş Merkezi No:2 Daire:14, 34147 Bakırköy/İstanbul",
+    "addressParts": {
+      "streetAddress": "Zuhuratbaba, Haksever Sk. Paşa İş Merkezi No:2 Daire:14",
+      "addressLocality": "Bakırköy",
+      "addressRegion": "İstanbul",
+      "postalCode": "34147",
+      "addressCountry": "TR"
+    },
+    "phone": "0 532 219 33 64",
+    "tel": "+905322193364",
+    "whatsapp": "905322193364",
+    "email": null,
+    "social": {
+      "instagram": "https://www.instagram.com/profdrmuharremkiskac/",
+      "youtube": "https://www.youtube.com/@profdrmuharremkiskac"
+    },
+    "mapEmbedUrl": "https://maps.google.com/maps?q=Zuhuratbaba,+Haksever+Sk.+Paşa+iş+merkezi+No:2+Daire:14,+34147+Bakırköy/İstanbul&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    "mapsLink": "https://maps.google.com/maps?q=Zuhuratbaba,+Haksever+Sk.+Paşa+İş+Merkezi+No:2+Daire:14,+34147+Bakırköy/İstanbul",
+    "workingHours": "Pazartesi - Cumartesi: 09:00 - 18:00"
+  },
+  "seo": {
+    "home": {
+      "title": "SIBO Klinik | Prof. Dr. Muharrem Kıskaç ile SIBO Tanı ve Tedavisi",
+      "description": "Prof. Dr. Muharrem Kıskaç gözetiminde SIBO (İnce Bağırsak Aşırı Bakteri Çoğalması) tanı ve tedavisi. Fonksiyonel tıp yaklaşımıyla bağırsak sağlığınızı destekleyen değerlendirme ve tedavi seçenekleri hakkında bilgi alın."
+    },
+    "articlesIndex": {
+      "title": "SIBO Belirtileri",
+      "description": "SIBO ile ilişkili olabilen belirtiler hakkında genel bilgiler. Bu bilgiler bilgilendirme amaçlıdır; değerlendirme için hekime başvurun."
+    },
+    "about": {
+      "title": "SIBO Nedir?",
+      "description": "SIBO (İnce Bağırsak Aşırı Bakteri Çoğalması) nedir, hangi belirtilere yol açabileceği hakkında genel bilgiler."
+    },
+    "contact": {
+      "title": "İletişim ve Randevu",
+      "description": "SIBO ve sindirim sorunları için randevu bilgisi, adres, telefon ve çalışma saatleri."
+    }
+  },
+  "navigation": [
+    {
+      "href": "/#nedir",
+      "label": "SIBO Nedir?"
+    },
+    {
+      "href": "/belirtiler",
+      "label": "Belirtiler"
+    },
+    {
+      "href": "/#tedavi",
+      "label": "Tedavi Yöntemleri"
+    },
+    {
+      "href": "/iletisim",
+      "label": "İletişim"
+    }
+  ],
+  "home": {
+    "sections": [
+      {
+        "id": "hero",
+        "kind": "hero",
+        "title": "Bağırsak Sağlığınız Hayat Kalitenizdir",
+        "subtitle": "Prof. Dr. Muharrem Kıskaç uzmanlığında, SIBO (İnce Bağırsak Aşırı Bakteri Çoğalması) tanı ve tedavisi ile sindirim problemlerinize yönelik değerlendirme ve tedavi yaklaşımları.",
+        "ctas": [
+          {
+            "label": "Randevu Bilgisi Alın",
+            "href": "/iletisim"
+          },
+          {
+            "label": "SIBO Hakkında",
+            "href": "/#nedir"
+          }
+        ]
+      },
+      {
+        "id": "nedir",
+        "kind": "text",
+        "title": "SIBO Nedir?",
+        "paragraphs": [
+          "SIBO (Small Intestinal Bacterial Overgrowth), ince bağırsakta normalden fazla sayıda bakteri bulunması durumudur. Normalde kalın bağırsakta bulunması gereken bakterilerin ince bağırsağa yerleşmesi sonucu sindirim sistemi dengesi bozulur.",
+          "Bu durumun besinlerin emilimini etkileyebildiği, aşırı gaz üretimine yol açabildiği ve bazı kişilerde vücutta inflamasyonu tetikleyebildiği bildirilmektedir. Tedavi yaklaşımları kişinin durumuna göre hekim tarafından belirlenir."
+        ],
+        "items": [
+          {
+            "icon": "✅",
+            "title": "Fonksiyonel Tıp Yaklaşımı",
+            "text": ""
+          },
+          {
+            "icon": "✅",
+            "title": "Kişiye Özel Tedavi Planı",
+            "text": ""
+          },
+          {
+            "icon": "✅",
+            "title": "SIBO Nefes Testi ile Tanı",
+            "text": "İster klinikte, ister kitlerle evinizde uygulanabilir. Ev testinde de sonuçlar hekim tarafından yorumlanır."
+          }
+        ]
+      },
+      {
+        "id": "nedir-neden-onemli",
+        "kind": "text",
+        "title": "Neden Önemli?",
+        "paragraphs": [
+          "Tedavi edilmeyen SIBO'nun vitamin eksiklikleri, kronik yorgunluk, depresyon ve bağırsak geçirgenliğinde artışla ilişkilendirilen durumlarla birlikte görülebileceği bazı çalışmalarda bildirilmiştir. Bu nedenle belirtilerin hekim tarafından değerlendirilmesi önemlidir."
+        ]
+      },
+      {
+        "id": "test-nasil",
+        "kind": "steps",
+        "title": "SIBO Testi Nasıl Yapılır?",
+        "subtitle": "Ev konforunda veya klinikte uygulanan test, 5 basit aşamadan oluşur.",
+        "items": [
+          {
+            "title": "1. Hazırlık Aşaması: Test Öncesi Diyet (Testten 24 Saat Önce)",
+            "text": "Testten 24 saat önce, önerilen gıdalarla (tavuk, balık, pirinç gibi) beslenerek bakterilerin besin kaynağını sınırlamayı amaçlayan hazırlık evresidir."
+          },
+          {
+            "title": "2. Bazal Ölçüm: Aç Karnına ve İlk Nefes",
+            "text": "12 saatlik gece açlığının ardından, test sabahı hiçbir şey yemeden önce ilk nefes örneğini tüpe üflersiniz. Bu sizin başlangıç (bazal) değerinizdir."
+          },
+          {
+            "title": "3. Solüsyon İçimi: Test Kitini Kullanma",
+            "text": "Size verilen test sıvısını (laktüloz veya glikoz karışımı) içersiniz. Bu şeker, bakteriler tarafından fermente edilerek gaz üretimini ölçmeye yardımcı olan bir besin kaynağı görevi görür."
+          },
+          {
+            "title": "4. Süreli Örneklem: Her 20 Dakikada Bir",
+            "text": "Solüsyonu içtikten sonra, her 20 dakikada bir (toplam 2-3 saat boyunca) belirlenen tüplere nefesinizi üflersiniz. Elde edilen gaz artış grafiği, bakterilerin ince bağırsaktaki yerleşimi hakkında bilgi verebilir."
+          },
+          {
+            "title": "5. Sonuç ve Gönderim: Ev Konforunda Tamamlayın",
+            "text": "Test sürecini evinizin rahatlığında tamamlayıp kiti tarafımıza kolayca ulaştırabilirsiniz. Sonuçlar hekim tarafından yorumlanır."
+          }
+        ],
+        "note": "Ev testi uygulansa da sonuçlar hekim tarafından yorumlanır."
+      },
+      {
+        "id": "belirtiler",
+        "kind": "cards",
+        "title": "SIBO Belirtileri",
+        "subtitle": "SIBO bağırsakların yanı sıra bazı kişilerde vücudun farklı bölgelerinde de belirtilere yol açabilir:",
+        "itemLinkLabel": "Detaylı Bilgi →",
+        "items": [
+          {
+            "icon": "🎈",
+            "title": "Aşırı Şişkinlik",
+            "text": "Yemeklerden sonra karında belirgin şişkinlik ve gerginlik hissi.",
+            "href": "/belirtiler/siskinlik"
+          },
+          {
+            "icon": "😣",
+            "title": "Karın Ağrısı ve Kramp",
+            "text": "Belirsiz karın ağrıları, kramplar ve hassasiyet.",
+            "href": "/belirtiler/karin-agrisi"
+          },
+          {
+            "icon": "🌪️",
+            "title": "Gaz ve Hazımsızlık",
+            "text": "Aşırı gaz çıkarma ihtiyacı, geğirme ve sindirim zorluğu.",
+            "href": "/belirtiler/hazimsizlik"
+          },
+          {
+            "icon": "🧠",
+            "title": "Beyin Sisi ve Yorgunluk",
+            "text": "Kronik halsizlik, konsantrasyon güçlüğü ve zihinsel bulanıklık.",
+            "href": "/belirtiler/yorgunluk"
+          },
+          {
+            "icon": "💩",
+            "title": "Kabızlık veya İshal",
+            "text": "Bağırsak alışkanlıklarında düzensizlik, ishal veya kabızlık atakları.",
+            "href": "/belirtiler/kabizlik-ishal"
+          },
+          {
+            "icon": "🚫",
+            "title": "Gıda İntoleransları",
+            "text": "Daha önce rahat yediğiniz besinlere karşı ani oluşan hassasiyetler.",
+            "href": "/belirtiler/intolerans"
+          },
+          {
+            "icon": "🌹",
+            "title": "Cilt Sorunları (Gül)",
+            "text": "Rosacea (Gül hastalığı), akne ve egzama gibi inatçı cilt problemleri.",
+            "href": "/belirtiler/cilt-sorunlari"
+          },
+          {
+            "icon": "⚖️",
+            "title": "Kilo Kaybı / Alamama",
+            "text": "Emilim bozukluğuyla ilişkili olabilen istemsiz kilo kaybı veya vitamin eksiklikleri.",
+            "href": "/belirtiler/kilo-kaybi"
+          },
+          {
+            "icon": "🦴",
+            "title": "Eklem Ağrıları",
+            "text": "Bazı kişilerde inflamasyonla ilişkilendirilen yaygın eklem ve kas ağrıları.",
+            "href": "/belirtiler/eklem-agrisi"
+          }
+        ]
+      },
+      {
+        "id": "tedavi",
+        "kind": "other",
+        "title": "Tedavi Yaklaşımı"
+      },
+      {
+        "id": "tedavi-tani",
+        "kind": "list",
+        "title": "🔍 Tanı Yöntemleri",
+        "items": [
+          {
+            "title": "SIBO Nefes Testi",
+            "text": "İnce bağırsaktaki bakteri aktivitesiyle ilişkili gazı ölçen bir test yöntemidir. Sonuçlar hekim tarafından yorumlanır."
+          },
+          {
+            "title": "Klinik Değerlendirme",
+            "text": "Hastanın semptom ve öyküsünün detaylı analizi."
+          },
+          {
+            "title": "Kan Tahlilleri",
+            "text": "Vitamin ve mineral eksikliklerinin araştırılması."
+          }
+        ]
+      },
+      {
+        "id": "tedavi-protokol",
+        "kind": "list",
+        "title": "💊 Tedavi Protokolü",
+        "items": [
+          {
+            "title": "Eliminasyon Diyeti",
+            "text": "Bakterilerin besin kaynağı olabilen bazı gıdaların (FODMAP vb.) geçici süreyle kısıtlanması. Diyet planı hekim değerlendirmesiyle oluşturulur."
+          },
+          {
+            "title": "Bitkisel veya Medikal Tedavi",
+            "text": "Bağırsak florasını hedefleyen antibiyotik veya bitkisel destek seçenekleri, kişinin durumuna göre hekim tarafından değerlendirilerek planlanır."
+          },
+          {
+            "title": "Probiyotik Desteği",
+            "text": "Probiyotik kullanımı, kişinin durumuna göre hekim tarafından değerlendirilerek planlanır."
+          },
+          {
+            "title": "Bağırsak Bariyeri Desteği",
+            "text": "Bağırsak bariyerini desteklemeye yönelik takviyeler, gerekli görüldüğünde hekim tarafından önerilebilir."
+          }
+        ]
+      },
+      {
+        "id": "iletisim",
+        "kind": "contact",
+        "title": "İletişim & Randevu",
+        "subtitle": "SIBO ve sindirim sorunlarınız için profesyonel destek alın. Bize ulaşın.",
+        "items": [
+          {
+            "title": "Telefon / WhatsApp",
+            "text": "0 532 219 33 64"
+          },
+          {
+            "title": "Adres",
+            "text": "Zuhuratbaba, Haksever Sk. Paşa İş Merkezi No:2 Daire:14, 34147 Bakırköy/İstanbul"
+          },
+          {
+            "title": "Çalışma Saatleri",
+            "text": "Pazartesi - Cumartesi: 09:00 - 18:00"
+          }
+        ],
+        "ctas": [
+          {
+            "label": "Instagram",
+            "href": "https://www.instagram.com/profdrmuharremkiskac/"
+          },
+          {
+            "label": "YouTube",
+            "href": "https://www.youtube.com/@profdrmuharremkiskac"
+          }
+        ]
+      }
+    ]
+  },
+  "redirects": [
+    {
+      "source": "/belirtiler/siskinlik.html",
+      "destination": "/belirtiler/siskinlik"
+    },
+    {
+      "source": "/belirtiler/karin_agrisi.html",
+      "destination": "/belirtiler/karin-agrisi"
+    },
+    {
+      "source": "/belirtiler/hazimsizlik.html",
+      "destination": "/belirtiler/hazimsizlik"
+    },
+    {
+      "source": "/belirtiler/yorgunluk.html",
+      "destination": "/belirtiler/yorgunluk"
+    },
+    {
+      "source": "/belirtiler/kabizlik_ishal.html",
+      "destination": "/belirtiler/kabizlik-ishal"
+    },
+    {
+      "source": "/belirtiler/intolerans.html",
+      "destination": "/belirtiler/intolerans"
+    },
+    {
+      "source": "/belirtiler/cilt_sorunlari.html",
+      "destination": "/belirtiler/cilt-sorunlari"
+    },
+    {
+      "source": "/belirtiler/kilo_kaybi.html",
+      "destination": "/belirtiler/kilo-kaybi"
+    },
+    {
+      "source": "/belirtiler/eklem_agrisi.html",
+      "destination": "/belirtiler/eklem-agrisi"
+    },
+    {
+      "source": "/index.html",
+      "destination": "/"
+    }
+  ],
+  "footer": {
+    "text": "© 2024 Prof. Dr. Muharrem Kıskaç. Tüm Hakları Saklıdır.",
+    "copyrightOwner": "Prof. Dr. Muharrem Kıskaç",
+    "links": [
+      {
+        "label": "Hakkında",
+        "href": "/#nedir"
+      },
+      {
+        "label": "İletişim",
+        "href": "/iletisim"
+      },
+      {
+        "label": "Instagram",
+        "href": "https://www.instagram.com/profdrmuharremkiskac/"
+      },
+      {
+        "label": "YouTube",
+        "href": "https://www.youtube.com/@profdrmuharremkiskac"
+      }
+    ]
+  },
+  "images": [
+    {
+      "file": "assets/sibo_hero_plain.png",
+      "usedIn": "hero",
+      "alt": "SIBO tedavisi ve bağırsak sağlığı temalı ana sayfa görseli"
+    },
+    {
+      "file": "assets/sibo_hero_image.png",
+      "usedIn": "unused",
+      "alt": "SIBO tedavisi ve bağırsak sağlığı temalı görsel"
+    }
+  ]
+}

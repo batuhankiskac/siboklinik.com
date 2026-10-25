@@ -1,0 +1,19 @@
+/* Ana sayfa bölümleri için ortak düzen. */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section {
+  padding: 100px 0;
+  /* Sticky başlık, #çapa bağlantılarında bölüm başlığını örtmesin. */
+  scroll-margin-top: 80px;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 64px 0;
+  }
+}

@@ -1,0 +1,146 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* İçerik genişliği (1200px) ile hizalanır; kenar boşluğu en az 20px. */
+  padding: 15px max(20px, calc(50% - 580px));
+  background-color: rgb(var(--color-bg-rgb) / 95%);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Marka: ad (üst) ve kısa açıklama (alt) iki satır. */
+.logo {
+  display: flex;
+  flex-direction: column;
+  color: var(--color-primary);
+}
+
+.brandName {
+  font-family: var(--font-playfair), serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.brandSub {
+  font-size: 0.85rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  color: var(--color-text-light);
+}
+
+.nav {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.navLink {
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.navLink:hover {
+  color: var(--color-primary);
+}
+
+.navLink[aria-current="page"] {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--color-secondary);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.4em;
+}
+
+.ctaButton {
+  composes: button primary from "../styles/button.module.css";
+  --btn-py: 10px;
+  --btn-px: 24px;
+  --btn-radius: 50px;
+  --btn-shadow: 0 4px 14px 0 rgb(var(--color-primary-rgb) / 25%);
+}
+
+@media (max-width: 1024px) {
+  .header {
+    backdrop-filter: none;
+    background-color: var(--color-bg);
+  }
+
+  .nav {
+    position: fixed;
+    inset: 0;
+    height: 100vh;
+    height: 100dvh;
+    background-color: var(--color-surface);
+    z-index: 110;
+    flex-direction: column;
+    padding: 6rem 2rem 2rem 2rem;
+    gap: 2rem;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .nav.open {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    position: relative;
+    z-index: 120;
+  }
+
+  .hamburger span {
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  /* Hamburger Animation when open */
+  .hamburger.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 6px);
+  }
+
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -6px);
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.75rem 1.25rem;
+  }
+
+  .brandName {
+    font-size: 1.05rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .hamburger {
+    display: none;
+  }
+}

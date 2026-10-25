@@ -1,0 +1,60 @@
+.container {
+  composes: container from "../../../styles/page.module.css";
+  --page-max: 800px;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--color-text);
+}
+
+.heading {
+  composes: heading from "../../../styles/page.module.css";
+  --heading-size: 2.25rem;
+  --heading-align: left;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid var(--color-secondary);
+}
+
+.section {
+  margin-bottom: 2.25rem;
+}
+
+.subheading {
+  margin-bottom: 0.75rem;
+  font-size: 1.35rem;
+}
+
+.section p {
+  margin-bottom: 1rem;
+}
+
+.list {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  padding-left: 1.25rem;
+}
+
+.list li::marker {
+  color: var(--color-primary);
+}
+
+.list strong {
+  color: var(--color-primary);
+}
+
+.notice {
+  margin-top: 3rem;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--color-secondary);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-alt);
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .heading {
+    --heading-size: 1.9rem;
+  }
+}

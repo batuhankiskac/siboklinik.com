@@ -1,0 +1,8 @@
+.container {
+  composes: container from "../../../styles/page.module.css";
+  --page-max: 1200px;
+}
+
+.heading {
+  composes: heading from "../../../styles/page.module.css";
+}

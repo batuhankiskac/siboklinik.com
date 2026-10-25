@@ -1,0 +1,113 @@
+.card {
+  composes: card from "../styles/card.module.css";
+  --card-lift: -5px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.imageContainer {
+  composes: imageContainer from "../styles/card.module.css";
+  --ratio: 16 / 9;
+  background-color: #000;
+  display: block;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  text-align: inherit;
+}
+
+.videoContainer {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #000;
+}
+
+.iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.image {
+  composes: image from "../styles/card.module.css";
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .image {
+  transform: scale(1.05);
+}
+
+.playOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 30%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.card:hover .playOverlay {
+  background: rgb(0 0 0 / 50%);
+}
+
+.playButton {
+  width: 60px;
+  height: 60px;
+  background: rgb(255 255 255 / 90%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--color-primary);
+  box-shadow: 0 4px 15px rgb(0 0 0 / 20%);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  padding-left: 4px; /* Optically center the play icon */
+}
+
+.card:hover .playButton {
+  transform: scale(1.1);
+  background: var(--color-surface);
+}
+
+.content {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  composes: clamp from "../styles/card.module.css";
+  --lines: 2;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* .card clips overflow, so the play button's outset ring would be hidden;
+   draw the focus ring on the card itself instead. */
+@supports selector(:has(*)) {
+  .card:has(.imageContainer:focus-visible) {
+    outline: 3px solid var(--color-secondary);
+    outline-offset: 3px;
+  }
+
+  .imageContainer:focus-visible {
+    outline: none;
+  }
+}
+
+@supports not selector(:has(*)) {
+  .imageContainer:focus-visible {
+    outline-offset: -3px;
+  }
+}

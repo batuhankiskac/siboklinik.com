@@ -1,0 +1,28 @@
+import type { Metadata } from "next";
+import { redirect } from "next/navigation";
+import { getAdminSession } from "@/lib/auth";
+import LoginForm from "./LoginForm";
+import styles from "./page.module.css";
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Admin Girişi",
+  robots: { index: false, follow: false },
+};
+
+export default async function LoginPage() {
+  if (await getAdminSession()) {
+    redirect("/admin/hizmetler");
+  }
+
+  return (
+    <main className={styles.container}>
+      <div className={styles.card}>
+        <p className={styles.brand}>SIBO Klinik</p>
+        <h1 className={styles.title}>Admin Girişi</h1>
+        <LoginForm />
+      </div>
+    </main>
+  );
+}

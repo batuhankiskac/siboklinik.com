@@ -1,0 +1,45 @@
+.card {
+  composes: card from "../styles/card.module.css";
+  --card-radius: var(--radius-lg);
+  --card-lift: -8px;
+  padding: 2.5rem;
+  border: 1px solid rgb(0 0 0 / 3%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.card:hover {
+  border-color: rgb(var(--color-primary-rgb) / 10%);
+}
+
+.imageContainer {
+  composes: imageContainer from "../styles/card.module.css";
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-alt);
+}
+
+.image {
+  composes: image from "../styles/card.module.css";
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  background: var(--color-bg-alt);
+}
+
+.title {
+  composes: title from "../styles/card.module.css";
+  font-size: 1.25rem;
+}
+
+.description {
+  composes: clamp from "../styles/card.module.css";
+  --lines: 4;
+  color: var(--color-text-light);
+  line-height: 1.6;
+  text-overflow: ellipsis;
+}

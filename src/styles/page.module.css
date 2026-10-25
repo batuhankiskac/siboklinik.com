@@ -1,0 +1,18 @@
+.container {
+  max-width: var(--page-max, 1000px);
+  margin: 4rem auto;
+  padding: 0 2rem;
+}
+
+.heading {
+  margin-bottom: var(--heading-mb, 2rem);
+  font-size: var(--heading-size, 2rem);
+  text-align: var(--heading-align, center);
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+  }
+}
