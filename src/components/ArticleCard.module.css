@@ -7,6 +7,7 @@
 }
 
 .link {
+  composes: focusTarget from "../styles/card.module.css";
   text-decoration: none;
   color: inherit;
   display: flex;
@@ -15,25 +16,6 @@
 }
 
 .imageContainer {
-  composes: imageContainer from "../styles/card.module.css";
-  background-color: var(--color-bg-alt);
-}
-
-.image {
-  composes: image from "../styles/card.module.css";
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.placeholder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-text-light);
   background-color: var(--color-bg-alt);
 }
 
@@ -72,23 +54,4 @@
   font-weight: 600;
   color: var(--color-primary);
   margin-top: auto;
-}
-
-/* .card clips overflow, so an outset ring on the full-card link would be
-   hidden; draw the focus ring on the card itself instead. */
-@supports selector(:has(*)) {
-  .card:has(.link:focus-visible) {
-    outline: 3px solid var(--color-secondary);
-    outline-offset: 3px;
-  }
-
-  .link:focus-visible {
-    outline: none;
-  }
-}
-
-@supports not selector(:has(*)) {
-  .link:focus-visible {
-    outline-offset: -3px;
-  }
 }

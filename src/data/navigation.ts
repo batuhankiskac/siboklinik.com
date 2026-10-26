@@ -26,6 +26,9 @@ export const privacyLink: NavigationLink = {
   label: "Gizlilik ve Çerez Politikası",
 };
 
+// Admin girişinden sonra ve /admin kökünden açılan varsayılan sayfa.
+export const ADMIN_HOME = "/admin/hizmetler";
+
 export function isActivePath(pathname: string, href: string): boolean {
   return href === "/"
     ? pathname === "/"

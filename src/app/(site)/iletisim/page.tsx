@@ -1,4 +1,5 @@
 import ContactActions from "@/components/ContactActions";
+import ExternalLink from "@/components/ExternalLink";
 import MapEmbed from "@/components/MapEmbed";
 import contactData from "@/data/contact.json";
 import siteData from "@/data/site.json";
@@ -36,15 +37,9 @@ export default function ContactPage() {
           <div className={styles.item}>
             <h2 className={styles.label}>Adres</h2>
             <address className={styles.value}>{contactData.address}</address>
-            <a
-              className={styles.link}
-              href={contactData.mapsLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <ExternalLink className={styles.link} href={contactData.mapsLink}>
               Google Haritalar&apos;da aç
-              <span className="sr-only"> (yeni sekmede açılır)</span>
-            </a>
+            </ExternalLink>
           </div>
 
           <div className={styles.item}>
@@ -57,15 +52,9 @@ export default function ContactPage() {
             <ul className={styles.socials}>
               {socialLinks.map((link) => (
                 <li key={link.href}>
-                  <a
-                    className={styles.link}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <ExternalLink className={styles.link} href={link.href}>
                     {link.label}
-                    <span className="sr-only"> (yeni sekmede açılır)</span>
-                  </a>
+                  </ExternalLink>
                 </li>
               ))}
             </ul>

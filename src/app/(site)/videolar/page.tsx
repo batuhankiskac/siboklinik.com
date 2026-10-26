@@ -1,7 +1,6 @@
 import { Suspense } from "react";
-import ContentGrid from "@/components/ContentGrid";
-import EmptyState from "@/components/EmptyState";
 import LoadingState from "@/components/LoadingState";
+import PublicContentList from "@/components/PublicContentList";
 import VideoCard from "@/components/VideoCard";
 import { getVideos } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
@@ -13,26 +12,16 @@ export const metadata = pageMetadata({
   path: "/videolar",
 });
 
-async function VideoList() {
-  const videos = await getVideos();
-
-  return (
-    <ContentGrid>
-      {videos.length > 0 ? (
-        videos.map((video) => <VideoCard key={video.id} video={video} />)
-      ) : (
-        <EmptyState>Henüz yayınlanmış bir video bulunmuyor.</EmptyState>
-      )}
-    </ContentGrid>
-  );
-}
-
 export default function VideosPage() {
   return (
     <main id="main-content" className={styles.container}>
       <h1 className={styles.heading}>Videolar</h1>
       <Suspense fallback={<LoadingState />}>
-        <VideoList />
+        <PublicContentList
+          load={getVideos}
+          emptyText="Henüz yayınlanmış bir video bulunmuyor."
+          renderItem={(video) => <VideoCard video={video} />}
+        />
       </Suspense>
     </main>
   );

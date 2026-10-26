@@ -1,8 +1,7 @@
 import { Suspense } from "react";
 import ArticleCard from "@/components/ArticleCard";
-import ContentGrid from "@/components/ContentGrid";
-import EmptyState from "@/components/EmptyState";
 import LoadingState from "@/components/LoadingState";
+import PublicContentList from "@/components/PublicContentList";
 import { getArticles } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
 import siteData from "@/data/site.json";
@@ -16,22 +15,6 @@ export const metadata = pageMetadata({
   path: "/belirtiler",
 });
 
-async function ArticleList() {
-  const articles = await getArticles();
-
-  return (
-    <ContentGrid>
-      {articles.length > 0 ? (
-        articles.map((article) => (
-          <ArticleCard key={article.id} article={article} />
-        ))
-      ) : (
-        <EmptyState>Henüz yayınlanmış bir belirti yazısı bulunmuyor.</EmptyState>
-      )}
-    </ContentGrid>
-  );
-}
-
 export default function ArticlesPage() {
   return (
     <main id="main-content" className={styles.container}>
@@ -40,7 +23,11 @@ export default function ArticlesPage() {
         <p className={styles.subtitle}>{description}</p>
       </div>
       <Suspense fallback={<LoadingState />}>
-        <ArticleList />
+        <PublicContentList
+          load={getArticles}
+          emptyText="Henüz yayınlanmış bir belirti yazısı bulunmuyor."
+          renderItem={(article) => <ArticleCard article={article} />}
+        />
       </Suspense>
     </main>
   );

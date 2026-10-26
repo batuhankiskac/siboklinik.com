@@ -22,8 +22,6 @@ export interface UploadedImage {
   imagePath: string;
 }
 
-export { validateImageFile };
-
 async function processImage(source: Buffer): Promise<Buffer> {
   const image = sharp(source, { limitInputPixels: MAX_INPUT_PIXELS });
   const metadata = await image.metadata().catch(() => {

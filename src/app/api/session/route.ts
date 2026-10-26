@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { isAdminToken } from "@/lib/auth";
 import { getAdminAuth } from "@/lib/firebase-admin";
 import { SESSION_COOKIE_NAME, SESSION_MAX_AGE_SECONDS } from "@/lib/session";
+import { isAdminToken } from "@/lib/validation";
 
 const cookieOptions = {
   httpOnly: true,

@@ -36,8 +36,3 @@
   --btn-px: 1.25rem;
   --btn-radius: var(--radius-sm);
 }
-
-.button:focus-visible {
-  outline: 3px solid var(--color-secondary);
-  outline-offset: 2px;
-}

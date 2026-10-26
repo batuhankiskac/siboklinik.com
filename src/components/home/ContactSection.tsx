@@ -1,3 +1,4 @@
+import ExternalLink from "@/components/ExternalLink";
 import MapEmbed from "@/components/MapEmbed";
 import contact from "@/data/contact.json";
 import type { HomeSection } from "./types";
@@ -66,17 +67,14 @@ export default function ContactSection({ section }: ContactSectionProps) {
           {section.ctas && (
             <div className={styles.social}>
               {section.ctas.map((cta) => (
-                <a
+                <ExternalLink
                   key={cta.href}
                   href={cta.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className={styles.socialLink}
                 >
                   {socialIcon(cta.label)}
                   <span>{cta.label}</span>
-                  <span className="sr-only"> (yeni sekmede açılır)</span>
-                </a>
+                </ExternalLink>
               ))}
             </div>
           )}

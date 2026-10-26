@@ -1,5 +1,6 @@
 import AdminContentList from "@/components/admin/AdminContentList";
 import { getVideos } from "@/lib/content";
+import { videoThumbnail } from "@/lib/youtube";
 import { deleteVideo } from "../actions";
 
 export default async function VideosAdminPage() {
@@ -14,9 +15,7 @@ export default async function VideosAdminPage() {
       items={videos.map((video) => ({
         id: video.id,
         title: video.title,
-        imageUrl:
-          video.imageUrl ??
-          `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`,
+        imageUrl: videoThumbnail(video),
       }))}
     />
   );

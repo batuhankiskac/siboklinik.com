@@ -4,7 +4,6 @@ import {
   FormError,
   isValidDocumentId,
   optionalLines,
-  optionalText,
   parsePrivateKey,
   requiredText,
 } from "@/lib/validation";
@@ -76,23 +75,6 @@ describe("optionalLines", () => {
     expect(() =>
       optionalLines(form({ citations: "abc\ndef" }), "citations", 5),
     ).toThrow("Kaynakça alanı en fazla 5 karakter olabilir.");
-  });
-});
-
-describe("optionalText", () => {
-  it("alan yoksa veya boşsa null döner", () => {
-    expect(optionalText(form({}), "note", 10)).toBeNull();
-    expect(optionalText(form({ note: "   " }), "note", 10)).toBeNull();
-  });
-
-  it("değeri kırpar ve sınır içindeyse döndürür", () => {
-    expect(optionalText(form({ note: " not " }), "note", 10)).toBe("not");
-  });
-
-  it("sınırı aşan değeri Türkçe FormError ile reddeder", () => {
-    expect(() => optionalText(form({ note: "abcdef" }), "note", 3)).toThrow(
-      "note alanı en fazla 3 karakter olabilir.",
-    );
   });
 });
 

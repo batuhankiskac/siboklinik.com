@@ -56,11 +56,6 @@
   background: rgb(var(--color-primary-rgb) / 8%);
 }
 
-.close:focus-visible {
-  outline: 3px solid var(--color-secondary);
-  outline-offset: 2px;
-}
-
 .actions {
   display: flex;
   justify-content: flex-end;
@@ -88,10 +83,4 @@
 
 .secondary:hover {
   background: rgb(var(--color-primary-rgb) / 8%);
-}
-
-.primary:focus-visible,
-.secondary:focus-visible {
-  outline: 3px solid var(--color-secondary);
-  outline-offset: 2px;
 }

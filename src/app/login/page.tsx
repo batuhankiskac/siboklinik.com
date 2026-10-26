@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { ADMIN_HOME } from "@/data/navigation";
 import { getAdminSession } from "@/lib/auth";
 import LoginForm from "./LoginForm";
 import styles from "./page.module.css";
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 
 export default async function LoginPage() {
   if (await getAdminSession()) {
-    redirect("/admin/hizmetler");
+    redirect(ADMIN_HOME);
   }
 
   return (

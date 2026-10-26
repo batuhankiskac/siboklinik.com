@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/lib/format";
 import type { ArticleSummary } from "@/types/content";
+import CardMedia from "./CardMedia";
 import styles from "./ArticleCard.module.css";
 
 export default function ArticleCard({ article }: { article: ArticleSummary }) {
@@ -12,21 +12,11 @@ export default function ArticleCard({ article }: { article: ArticleSummary }) {
         className={styles.link}
         aria-label={`${article.title} yazısını oku`}
       >
-        <div className={styles.imageContainer}>
-          {article.imageUrl ? (
-            <Image
-              src={article.imageUrl}
-              alt=""
-              fill
-              className={styles.image}
-              sizes="(max-width: 700px) 100vw, 400px"
-            />
-          ) : (
-            <div className={styles.placeholder} aria-hidden="true">
-              Belirti
-            </div>
-          )}
-        </div>
+        <CardMedia
+          className={styles.imageContainer}
+          src={article.imageUrl}
+          placeholder="Belirti"
+        />
         <div className={styles.content}>
           {article.createdAt && (
             <time className={styles.date} dateTime={article.createdAt}>

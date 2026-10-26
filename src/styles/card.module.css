@@ -39,3 +39,22 @@
   line-clamp: var(--lines, 3);
   overflow-wrap: break-word;
 }
+
+/* .card clips overflow, so an outset ring on the focusable element would be
+   hidden; draw the focus ring on the card itself instead. */
+@supports selector(:has(*)) {
+  .card:has(.focusTarget:focus-visible) {
+    outline: 3px solid var(--color-secondary);
+    outline-offset: 3px;
+  }
+
+  .focusTarget:focus-visible {
+    outline: none;
+  }
+}
+
+@supports not selector(:has(*)) {
+  .focusTarget:focus-visible {
+    outline-offset: -3px;
+  }
+}

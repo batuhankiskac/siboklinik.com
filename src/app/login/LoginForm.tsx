@@ -4,6 +4,7 @@ import { FirebaseError } from "firebase/app";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { ADMIN_HOME } from "@/data/navigation";
 import { auth } from "@/firebase/config";
 import styles from "./page.module.css";
 
@@ -65,7 +66,7 @@ export default function LoginForm() {
         return;
       }
 
-      router.replace("/admin/hizmetler");
+      router.replace(ADMIN_HOME);
       router.refresh();
     } catch (loginError) {
       setError(authErrorMessage(loginError));

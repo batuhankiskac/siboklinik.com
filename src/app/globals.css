@@ -2,6 +2,7 @@
   /* Eski siboklinik.com renk paleti (styles.css) */
   --color-primary: #0F4C5C; /* Derin petrol (Deep Teal) */
   --color-primary-dark: #0A3540; /* Hover ve koyu zemin */
+  --color-primary-subtle-bg: #edf1ed;
   --color-secondary: #8C6D12; /* Koyu altın: odak halkası ve vurgu çizgileri (beyaz üzerinde 4.8:1) */
   --gold: #C9A227; /* Dekoratif altın: ayırıcı çizgiler (metin için kullanılmaz) */
   --gold-light: #E8CD72; /* Koyu petrol üzerinde altın metin (6:1 üzeri) */
@@ -11,6 +12,7 @@
   --color-text: #2B2D42;
   --color-text-light: #5C636E; /* Açık zeminde ≥4.5:1 */
   --color-danger: #b42318;
+  --color-danger-bg: #fef3f2;
   --color-border: rgb(0 0 0 / 10%);
   --color-input-border: #8a918b; /* ≥3:1 on white for form controls */
   --color-primary-rgb: 15 76 92;

@@ -7,8 +7,6 @@ import { getAdminAuth } from "./firebase-admin";
 import { SESSION_COOKIE_NAME } from "./session";
 import { isAdminToken } from "./validation";
 
-export { isAdminToken };
-
 export async function getAdminSession(): Promise<DecodedIdToken | null> {
   const adminAuth = getAdminAuth();
   if (!adminAuth) return null;

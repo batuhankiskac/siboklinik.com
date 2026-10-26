@@ -1,3 +1,4 @@
+import path from "node:path";
 import type { NextConfig } from "next";
 import siteData from "./src/data/site.json";
 
@@ -45,6 +46,10 @@ const firebaseStoragePathname = storageBucket
   : "/v0/b/**";
 
 const nextConfig: NextConfig = {
+  // Üst dizindeki lockfile'ın Turbopack kökünü yanlış seçmesini önler.
+  turbopack: {
+    root: path.resolve(__dirname),
+  },
   experimental: {
     inlineCss: true,
     serverActions: {
@@ -66,7 +71,21 @@ const nextConfig: NextConfig = {
     ],
   },
   async headers() {
-    return [{ source: "/(.*)", headers: securityHeaders }];
+    return [
+      { source: "/(.*)", headers: securityHeaders },
+      // RSC yanıtları (istemci gezinmesi ve prefetch) CDN'de saklanmasın; CDN
+      // Vary: rsc'yi yok sayabildiği için HTML ile karışabilir.
+      {
+        source: "/(.*)",
+        has: [{ type: "header", key: "rsc" }],
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "private, no-cache, no-store, max-age=0, must-revalidate",
+          },
+        ],
+      },
+    ];
   },
   async redirects() {
     return [

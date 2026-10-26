@@ -15,23 +15,25 @@
   font-size: clamp(1.75rem, 4vw, 2.5rem);
 }
 
+.addButton {
+  composes: button solid from "../../styles/button.module.css";
+}
+
+.editButton {
+  composes: button subtle from "../../styles/button.module.css";
+}
+
+.deleteButton {
+  composes: button danger from "../../styles/button.module.css";
+}
+
 .addButton,
 .editButton,
 .deleteButton {
   min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   padding: 0.7rem 1rem;
+  border: 0;
   border-radius: var(--radius-sm);
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.addButton {
-  background: var(--color-primary);
-  color: var(--color-surface);
 }
 
 .list {
@@ -81,21 +83,10 @@
   gap: 0.5rem;
 }
 
-.editButton {
-  background: #edf1ed;
-  color: var(--color-primary);
-}
-
 .deleteForm {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-}
-
-.deleteButton {
-  border: 0;
-  background: var(--color-danger);
-  color: white;
 }
 
 .deleteError {

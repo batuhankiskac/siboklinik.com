@@ -8,6 +8,8 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
+import ContactClickTracker from "@/components/ContactClickTracker";
+import { gtag, loadGtm } from "@/lib/analytics";
 import {
   CONSENT_STORAGE_KEY,
   consentPayload,
@@ -17,25 +19,8 @@ import styles from "./AnalyticsConsent.module.css";
 
 type ConsentState = "accepted" | "rejected" | null;
 
-// GTM yalnız kabul edildikten sonra yüklenir (bkz. loadGtm).
-const STORAGE_KEY = CONSENT_STORAGE_KEY;
-const GTM_ID = "GTM-5DGZ7QV3";
 const TITLE_ID = "analytics-consent-title";
 const DESCRIPTION_ID = "analytics-consent-description";
-
-declare global {
-  interface Window {
-    dataLayer?: unknown[];
-  }
-}
-
-// gtag komutları dizi değil arguments nesnesi olarak beklenir.
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function gtag(..._args: unknown[]) {
-  window.dataLayer = window.dataLayer || [];
-  // eslint-disable-next-line prefer-rest-params
-  window.dataLayer.push(arguments);
-}
 
 function updateConsent(value: Exclude<ConsentState, null>) {
   gtag(
@@ -45,36 +30,13 @@ function updateConsent(value: Exclude<ConsentState, null>) {
   );
 }
 
-// GTM konteyneri en fazla bir kez ve yalnız kabul edildikten sonra yüklenir.
-// Consent update olayı, gtm.js'ten önce dataLayer'a yazılmış olmalıdır.
-let gtmRequested = false;
-function loadGtm() {
-  if (gtmRequested) return;
-  gtmRequested = true;
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-  const script = document.createElement("script");
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
-  document.head.appendChild(script);
-}
-
-// Telefon ve WhatsApp bağlantıları (belirti yazıları içindekiler dahil) GTM'de
-// dönüşüm etiketi tetiklemek için tek bir olayla bildirilir.
-function contactMethod(link: HTMLAnchorElement) {
-  const href = link.getAttribute("href") ?? "";
-  if (href.startsWith("tel:")) return "phone";
-  if (/^https:\/\/(wa\.me|api\.whatsapp\.com)\//.test(href)) return "whatsapp";
-  return null;
-}
-
 // localStorage erişilemediğinde (ör. Safari gizli mod) tercih bellekte tutulur.
 let memoryConsent: ConsentState = null;
 const listeners = new Set<() => void>();
 
 function readConsent(): ConsentState {
   try {
-    const saved = window.localStorage.getItem(STORAGE_KEY);
+    const saved = window.localStorage.getItem(CONSENT_STORAGE_KEY);
     if (saved === "accepted" || saved === "rejected") return saved;
   } catch {}
   return memoryConsent;
@@ -83,7 +45,7 @@ function readConsent(): ConsentState {
 function writeConsent(value: Exclude<ConsentState, null>) {
   memoryConsent = value;
   try {
-    window.localStorage.setItem(STORAGE_KEY, value);
+    window.localStorage.setItem(CONSENT_STORAGE_KEY, value);
   } catch {}
   listeners.forEach((listener) => listener());
 }
@@ -177,7 +139,7 @@ export default function AnalyticsConsent() {
   useEffect(() => {
     const handleStorage = (event: StorageEvent) => {
       if (
-        event.key === STORAGE_KEY &&
+        event.key === CONSENT_STORAGE_KEY &&
         (event.newValue === "accepted" || event.newValue === "rejected")
       ) {
         updateConsent(event.newValue);
@@ -185,26 +147,6 @@ export default function AnalyticsConsent() {
     };
     window.addEventListener("storage", handleStorage);
     return () => window.removeEventListener("storage", handleStorage);
-  }, []);
-
-  useEffect(() => {
-    const handleClick = (event: MouseEvent) => {
-      const link =
-        event.target instanceof Element
-          ? event.target.closest<HTMLAnchorElement>("a[href]")
-          : null;
-      const method = link && contactMethod(link);
-      if (!method) return;
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "contact_click",
-        contact_method: method,
-        page_path: window.location.pathname,
-      });
-    };
-    document.addEventListener("click", handleClick, { capture: true });
-    return () =>
-      document.removeEventListener("click", handleClick, { capture: true });
   }, []);
 
   const choose = (value: Exclude<ConsentState, null>) => {
@@ -231,8 +173,10 @@ export default function AnalyticsConsent() {
       <p id={DESCRIPTION_ID}>
         Site deneyimini ve reklam dönüşümlerini ölçmek için isteğe bağlı analiz
         çerezleri kullanıyoruz. Ayrıntılar ve haklarınız için{" "}
-        <Link href="/gizlilik">Gizlilik ve Çerez Politikası</Link> sayfasını
-        inceleyebilirsiniz.
+        <Link href="/gizlilik" prefetch={false}>
+          Gizlilik ve Çerez Politikası
+        </Link>{" "}
+        sayfasını inceleyebilirsiniz.
       </p>
       <div className={styles.actions}>
         <button
@@ -255,6 +199,7 @@ export default function AnalyticsConsent() {
 
   return (
     <>
+      <ContactClickTracker />
       {visible &&
         (isDialog ? (
           <div

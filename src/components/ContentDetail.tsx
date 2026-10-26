@@ -3,6 +3,12 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { formatDate } from "@/lib/format";
+import {
+  allowedImageSrc,
+  citationParts,
+  EXTERNAL_LINK,
+} from "@/lib/markdown-media";
+import ExternalLink from "./ExternalLink";
 import styles from "./ContentDetail.module.css";
 
 interface ContentDetailProps {
@@ -14,33 +20,6 @@ interface ContentDetailProps {
   date?: string | null;
   markdown: string;
   citations?: string[];
-}
-
-// URL sonundaki noktalama işaretleri bağlantıya dahil edilmez.
-const URL_PATTERN = /(https?:\/\/[^\s]*[^\s.,;:!?)\]}'"])/g;
-
-const EXTERNAL_LINK = /^https?:\/\//i;
-
-// Markdown görselleri yalnız Firebase Storage barındırmasından kabul edilir.
-const ALLOWED_IMAGE_HOSTS = new Set([
-  "firebasestorage.googleapis.com",
-  "storage.googleapis.com",
-]);
-
-function allowedImageSrc(src: string | undefined): string | null {
-  if (!src) return null;
-  try {
-    const url = new URL(src);
-    return url.protocol === "https:" && ALLOWED_IMAGE_HOSTS.has(url.hostname)
-      ? src
-      : null;
-  } catch {
-    return null;
-  }
-}
-
-function citationParts(value: string) {
-  return value.split(URL_PATTERN).filter(Boolean);
 }
 
 export default function ContentDetail({
@@ -89,18 +68,16 @@ export default function ContentDetail({
               // react-markdown'ın verdiği `node` DOM'a aktarılmaz.
               a: ({ node, href, children, ...props }) => {
                 void node;
-                const external = href ? EXTERNAL_LINK.test(href) : false;
+                if (href && EXTERNAL_LINK.test(href)) {
+                  return (
+                    <ExternalLink href={href} {...props}>
+                      {children}
+                    </ExternalLink>
+                  );
+                }
                 return (
-                  <a
-                    href={href}
-                    target={external ? "_blank" : undefined}
-                    rel={external ? "noopener noreferrer" : undefined}
-                    {...props}
-                  >
+                  <a href={href} {...props}>
                     {children}
-                    {external && (
-                      <span className="sr-only"> (yeni sekmede açılır)</span>
-                    )}
                   </a>
                 );
               },
@@ -143,15 +120,9 @@ export default function ContentDetail({
                 >
                   {citationParts(citation).map((part, partIndex) =>
                     EXTERNAL_LINK.test(part) ? (
-                      <a
-                        key={`${part}-${partIndex}`}
-                        href={part}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <ExternalLink key={`${part}-${partIndex}`} href={part}>
                         {part}
-                        <span className="sr-only"> (yeni sekmede açılır)</span>
-                      </a>
+                      </ExternalLink>
                     ) : (
                       <span key={`${part}-${partIndex}`}>{part}</span>
                     ),

@@ -19,8 +19,9 @@ import type {
   Video,
 } from "@/types/content";
 
-// updateTag'in etiket kaydı süreç içi bellekte tutulur; birden fazla worker
-// çalışıyorsa diğerleri en geç bu süre sonunda güncel veriyi görür.
+// Route ve veri önbelleği bu süreyle yenilenir. updateTag etiket kaydını süreç
+// içi bellekte tutar; birden fazla worker çalışıyorsa diğerleri en geç bu süre
+// sonunda güncel veriyi görür.
 const REVALIDATE_SECONDS = 300;
 const FIRESTORE_TIMEOUT_MS = 8000;
 
@@ -60,7 +61,18 @@ async function orFallback<T>(read: () => Promise<T>, fallback: T): Promise<T> {
   try {
     return await read();
   } catch (error) {
-    if (!isMissingFirebaseConfig(error)) throw error;
+    const missingConfig = isMissingFirebaseConfig(error);
+    // Build sırasında Firestore hatası build'i düşürmesin; sayfa boş listeyle
+    // üretilir ve ISR en fazla REVALIDATE_SECONDS sonra yeniden üretir.
+    const isBuildPhase = process.env.NEXT_PHASE === "phase-production-build";
+    if (!missingConfig && !isBuildPhase) throw error;
+    if (!missingConfig) {
+      console.error(
+        "Build sırasında içerik okunamadı; boş liste kullanılıyor.",
+        error,
+      );
+      return fallback;
+    }
     if (!warnedMissingConfig) {
       console.warn(
         "Firebase yapılandırması eksik; içerik önbelleğe alınmadan boş döndürülüyor.",

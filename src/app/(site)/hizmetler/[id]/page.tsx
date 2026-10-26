@@ -7,6 +7,12 @@ import { excerpt } from "@/lib/text";
 
 type PageProps = { params: Promise<{ id: string }> };
 
+// Build'de Firestore'a gidilmez; detay sayfaları ilk istekte üretilip ISR ile
+// önbelleğe alınır. Bilinmeyen id'ler notFound() ile 404 döner.
+export function generateStaticParams() {
+  return [];
+}
+
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {

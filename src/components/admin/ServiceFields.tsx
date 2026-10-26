@@ -1,5 +1,6 @@
 import type { Service } from "@/types/content";
-import { AdminFormField, AdminImageField, adminFormStyles } from "./AdminForm";
+import { AdminFormField, AdminImageField } from "./AdminForm";
+import styles from "./AdminForm.module.css";
 
 export default function ServiceFields({ service }: { service?: Service }) {
   return (
@@ -12,7 +13,7 @@ export default function ServiceFields({ service }: { service?: Service }) {
           defaultValue={service?.title}
           maxLength={160}
           required
-          className={adminFormStyles.input}
+          className={styles.input}
         />
       </AdminFormField>
       <AdminFormField label="Açıklama (Markdown)" htmlFor="description">
@@ -22,7 +23,7 @@ export default function ServiceFields({ service }: { service?: Service }) {
           rows={service ? 14 : 12}
           defaultValue={service?.description}
           required
-          className={adminFormStyles.textarea}
+          className={styles.textarea}
         />
       </AdminFormField>
       <AdminImageField

@@ -1,4 +1,3 @@
-/* Hata ve 404 sayfaları (error.tsx, not-found.tsx) ortak stilleri. */
 .container {
   min-height: 55vh;
   display: grid;
@@ -14,7 +13,7 @@
 }
 
 .action {
-  composes: button primary from "../../styles/button.module.css";
+  composes: button primary from "../styles/button.module.css";
   --btn-py: 0.85rem;
   --btn-px: 1.5rem;
   --btn-radius: var(--radius-md);

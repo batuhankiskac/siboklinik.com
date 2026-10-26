@@ -5,10 +5,10 @@ import styles from "./layout.module.css";
 
 export default function AdminError({
   error,
-  reset,
+  retry,
 }: {
   error: Error & { digest?: string };
-  reset: () => void;
+  retry: () => void;
 }) {
   useEffect(() => {
     console.error("Admin işlemi başarısız:", error);
@@ -20,7 +20,7 @@ export default function AdminError({
       <p>
         İşlem tamamlanamadı. Bağlantınızı kontrol edip yeniden deneyebilirsiniz.
       </p>
-      <button type="button" className={styles.retryButton} onClick={reset}>
+      <button type="button" className={styles.retryButton} onClick={retry}>
         Yeniden dene
       </button>
     </section>

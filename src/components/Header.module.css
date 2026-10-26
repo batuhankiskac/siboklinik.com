@@ -67,6 +67,7 @@
   --btn-shadow: 0 4px 14px 0 rgb(var(--color-primary-rgb) / 25%);
 }
 
+/* Mobil menü kırılımı; Header.tsx içindeki DESKTOP_MEDIA_QUERY (1025px) ile eşleşmeli. */
 @media (max-width: 1024px) {
   .header {
     backdrop-filter: none;

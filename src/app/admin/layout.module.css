@@ -105,15 +105,11 @@
 }
 
 .retryButton {
+  composes: button solid from "../../styles/button.module.css";
   min-height: 44px;
   padding: 0.7rem 1.25rem;
   border: 0;
   border-radius: var(--radius-sm);
-  background: var(--color-primary);
-  color: var(--color-surface);
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
 }
 
 .main {

@@ -9,7 +9,7 @@
 }
 
 .imageContainer {
-  composes: imageContainer from "../styles/card.module.css";
+  composes: focusTarget from "../styles/card.module.css";
   --ratio: 16 / 9;
   background-color: #000;
   display: block;
@@ -31,14 +31,11 @@
   border: none;
 }
 
-.image {
-  composes: image from "../styles/card.module.css";
-  width: 100%;
-  height: 100%;
+.imageContainer img {
   transition: transform 0.3s ease;
 }
 
-.card:hover .image {
+.card:hover .imageContainer img {
   transform: scale(1.05);
 }
 
@@ -91,23 +88,4 @@
   color: var(--color-text);
   margin: 0;
   line-height: 1.4;
-}
-
-/* .card clips overflow, so the play button's outset ring would be hidden;
-   draw the focus ring on the card itself instead. */
-@supports selector(:has(*)) {
-  .card:has(.imageContainer:focus-visible) {
-    outline: 3px solid var(--color-secondary);
-    outline-offset: 3px;
-  }
-
-  .imageContainer:focus-visible {
-    outline: none;
-  }
-}
-
-@supports not selector(:has(*)) {
-  .imageContainer:focus-visible {
-    outline-offset: -3px;
-  }
 }

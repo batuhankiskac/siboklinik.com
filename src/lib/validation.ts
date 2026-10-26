@@ -68,19 +68,6 @@ export function requiredText(
   return trimmed;
 }
 
-export function optionalText(
-  formData: FormData,
-  name: string,
-  maxLength: number,
-): string | null {
-  const value = formData.get(name);
-  if (typeof value !== "string") return null;
-  const trimmed = value.trim();
-  if (!trimmed) return null;
-  assertWithinLimit(name, trimmed, maxLength);
-  return trimmed;
-}
-
 // Önce satırlara ayrılır, sonra temizlenmiş satırların toplam uzunluğu sınanır.
 export function optionalLines(
   formData: FormData,

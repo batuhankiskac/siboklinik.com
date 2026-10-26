@@ -4,7 +4,7 @@ import type { FormState } from "@/app/admin/actions";
 import DeleteContentForm from "./DeleteContentForm";
 import styles from "./AdminContentList.module.css";
 
-export interface AdminListItem {
+interface AdminListItem {
   id: string;
   title: string;
   description?: string;

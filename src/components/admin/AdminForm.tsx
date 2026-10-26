@@ -102,5 +102,3 @@ export function AdminImageField({
     </AdminFormField>
   );
 }
-
-export { styles as adminFormStyles };

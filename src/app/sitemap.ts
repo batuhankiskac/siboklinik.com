@@ -6,6 +6,8 @@ import type { ArticleSummary, Service } from "@/types/content";
 // Build anında prerender edilmez: build ortamında Firebase bilgileri yoksa
 // site haritası belirti ve hizmetler olmadan donmasın. Veri unstable_cache
 // (300 sn) üzerinden geldiği için istek başına Firestore okuması yapılmaz.
+// readOrEmpty okuma hatasında boş liste döndürdüğü için bu dosya revalidate ile
+// ISR'a alınmaz: boş liste yenileme süresince önbellekte kalırdı.
 export const dynamic = "force-dynamic";
 
 type ChangeFrequency = MetadataRoute.Sitemap[number]["changeFrequency"];
