@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Instrument_Sans } from "next/font/google";
+import { Geist, Newsreader } from "next/font/google";
 import { SITE_NAME } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/site";
 import site from "@/data/site.json";
@@ -7,14 +7,15 @@ import "./globals.css";
 
 // Başlık ve metin yazı tipleri; globals.css bunları --font-display ve
 // --font-body değişkenlerinden okur.
-const display = Bricolage_Grotesque({
-  axes: ["opsz", "wdth"],
+const display = Newsreader({
+  style: ["normal", "italic"],
+  axes: ["opsz"],
   subsets: ["latin", "latin-ext"],
   variable: "--font-display",
   display: "swap",
 });
 
-const body = Instrument_Sans({
+const body = Geist({
   subsets: ["latin", "latin-ext"],
   variable: "--font-body",
   display: "swap",
@@ -49,7 +50,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="tr">
+    <html lang="tr" data-scroll-behavior="smooth">
       <body className={`${body.variable} ${display.variable}`}>
         {children}
       </body>

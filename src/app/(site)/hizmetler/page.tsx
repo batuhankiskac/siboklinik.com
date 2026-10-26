@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, type CSSProperties } from "react";
 import LoadingState from "@/components/LoadingState";
 import PublicContentList from "@/components/PublicContentList";
 import ServiceCard from "@/components/ServiceCard";
@@ -20,9 +20,13 @@ export default function ServicesPage() {
   return (
     <main id="main-content" className={styles.page}>
       <header className={styles.header}>
-        <p className={styles.eyebrow}>Hizmetler</p>
-        <h1 className={styles.title}>Tanı ve Tedavi</h1>
-        <p className={styles.lead}>
+        <p className={styles.eyebrow} data-enter style={{ "--i": 0 } as CSSProperties}>
+          Hizmetler
+        </p>
+        <h1 className={styles.title} data-enter style={{ "--i": 1 } as CSSProperties}>
+          Tanı ve Tedavi
+        </h1>
+        <p className={styles.lead} data-enter style={{ "--i": 2 } as CSSProperties}>
           Tanı yöntemleri ve tedavi protokolü; uygulanacak yaklaşım hekim
           değerlendirmesiyle kişinin durumuna göre belirlenir.
         </p>

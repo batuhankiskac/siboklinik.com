@@ -49,10 +49,12 @@
   border-top: 1px solid var(--color-line);
 }
 
+/* Liste başlığı: gövde yazı tipi, yarı kalın; About bölümüyle aynı. */
 .itemTitle {
   display: block;
   color: var(--color-heading);
-  font-size: var(--step-0);
+  font-family: var(--font-body), sans-serif;
+  font-size: var(--step-1);
   font-weight: 600;
   line-height: 1.4;
 }

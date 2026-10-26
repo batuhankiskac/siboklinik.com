@@ -43,7 +43,7 @@ export default function Footer() {
               className={styles.ctaLink}
               prefetch={false}
             >
-              Randevu Bilgisi Alın
+              Randevu Al
               <ArrowIcon className={buttonStyles.icon} />
             </Link>
           </div>

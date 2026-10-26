@@ -1,53 +1,55 @@
-/* SIBO Klinik — "Nane ve mürekkep": serin açık yeşil zemin, derin petrol
-   yeşili, limon yeşili vurgu (yalnız dolgu olarak; üzerinde koyu metin).
-   Başlıklar Bricolage Grotesque, metin Instrument Sans. */
+/* SIBO Klinik: Prof. Dr. Muharrem Kıskaç sitelerinin ortak paleti (fildişi zemin,
+   mürekkep metin, şampanya altını vurgu); siteye özel olan yalnız ana renk
+   (derin petrol). Başlıklar Newsreader, metin Geist. */
 :root {
-  --color-bg: #F2F5F2;
-  --color-bg-rgb: 242 245 242;
-  --color-bg-alt: #E4ECE6;
+  --color-bg: #F7F4EE;
+  --color-bg-rgb: 247 244 238;
+  --color-bg-alt: #EFE9DF;
   --color-surface: #FFFFFF;
-  --color-text: #0F1E1C;
-  --color-ink-rgb: 15 30 28;
-  --color-heading: #0F1E1C;
-  --color-text-light: #52625F;
-  --color-muted: #52625F;
-  --color-line: rgb(15 30 28 / 11%);
-  --color-line-strong: rgb(15 30 28 / 26%);
+  --color-text: #141A17;
+  --color-ink-rgb: 20 26 23;
+  --color-heading: #141A17;
+  --color-text-light: #5A605C;
+  --color-muted: #5A605C;
+  --color-line: rgb(20 26 23 / 12%);
+  --color-line-strong: rgb(20 26 23 / 26%);
 
-  --color-primary: #0E4A46;
-  --color-primary-rgb: 14 74 70;
-  --color-primary-dark: #08322F;
-  --color-primary-subtle-bg: #DCEBE6;
-  --color-on-primary: #F2F5F2;
-  --color-secondary: #0E7A6F;
-  --color-accent: #CDEB6E;
-  --color-accent-ink: #4A6812;
-  --color-accent-soft: #E4F5B4;
-  --color-accent-on-dark: #CDEB6E;
-  --color-accent-light: #E4F5B4;
-  --color-selection: #E4F5B4;
-  --gold: #CDEB6E;
-  --gold-light: #CDEB6E;
+  /* Ortak premium vurgu: şampanya altını. Metin olarak yalnız --color-accent-ink. */
+  --color-accent: #B8925A;
+  --color-accent-ink: #86663A;
+  --color-accent-soft: #EFE3CF;
+  --color-accent-on-dark: #D9BC8C;
+  --color-accent-light: #EFE3CF;
+  --color-secondary: #86663A;
+  --color-selection: #EFE3CF;
+  --gold: #B8925A;
+  --gold-light: #D9BC8C;
 
-  --color-dark: #0B2422;
-  --color-on-dark: #EAF2EE;
-  --color-on-dark-muted: rgb(234 242 238 / 70%);
+  --color-on-primary: #F7F4EE;
+  --color-on-dark: #F4EFE6;
+  --color-on-dark-muted: rgb(244 239 230 / 72%);
+  --color-input-border: #878C88;
 
-  --color-input-border: #7C8B88;
-  --heading-weight: 600;
-  --heading-tracking: -0.02em;
-  --display-tracking: -0.04em;
+  --heading-weight: 400;
+  --heading-tracking: -0.015em;
+  --display-tracking: -0.03em;
+
+  --color-primary: #0F3B3F;
+  --color-primary-rgb: 15 59 63;
+  --color-primary-dark: #08282B;
+  --color-primary-subtle-bg: #DDE9E9;
+  --color-dark: #0A2124;
 }
 
 :root {
   /* Ortak ölçüler: tipografi ölçeği, boşluklar ve hareket. */
   --step--1: 0.875rem;
   --step-0: 1.0625rem;
-  --step-1: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
-  --step-2: clamp(1.375rem, 1.2rem + 0.75vw, 1.75rem);
-  --step-3: clamp(1.75rem, 1.4rem + 1.5vw, 2.625rem);
-  --step-4: clamp(2.25rem, 1.6rem + 2.9vw, 4rem);
-  --step-5: clamp(2.75rem, 1.7rem + 5vw, 6rem);
+  --step-1: clamp(1.125rem, 1.08rem + 0.2vw, 1.25rem);
+  --step-2: clamp(1.3125rem, 1.2rem + 0.45vw, 1.5625rem);
+  --step-3: clamp(1.625rem, 1.4rem + 0.9vw, 2.0625rem);
+  --step-4: clamp(2rem, 1.6rem + 1.6vw, 3rem);
+  --step-5: clamp(2.375rem, 1.75rem + 2.6vw, 4.375rem);
 
   --container: 1240px;
   --container-narrow: 760px;
@@ -172,9 +174,10 @@ p {
 }
 
 /* ---------- Hareket ----------
-   [data-enter]: sayfa yüklenince oynayan giriş animasyonu.
-   [data-reveal]: öğe ekrana girerken kaydırmaya bağlı açılır (scroll-driven
-   animation; JS yok). Desteklemeyen tarayıcıda içerik doğrudan görünür.
+   [data-enter]: sayfa yüklenince oynayan giriş animasyonu (yalnız CSS).
+   [data-reveal]: ekrana girince bir kez, sabit sürede açılır. Bunu
+   MotionObserver, Web Animations API ile yapar; DOM özniteliklerine
+   dokunmadığı için hidrasyonu etkilemez. JS yoksa içerik hep görünür.
    Sıralı gecikme için öğeye style={{ "--i": n }} verilir. */
 [data-enter] {
   animation: enter-rise var(--dur-reveal) var(--ease-out) both;
@@ -190,31 +193,10 @@ p {
   animation-delay: calc(var(--i, 0) * 110ms);
 }
 
-@supports (animation-timeline: view()) {
-  [data-reveal] {
-    animation: enter-rise var(--ease-out) both;
-    animation-timeline: view();
-    animation-range: entry calc(var(--i, 0) * 6%) entry calc(80% + var(--i, 0) * 10%);
-  }
-
-  [data-reveal="fade"] {
-    animation-name: enter-fade;
-  }
-
-  [data-reveal="scale"] {
-    animation-name: reveal-scale;
-  }
-
-  [data-reveal="mask"] {
-    animation-name: enter-mask;
-    animation-range: entry 0% cover 45%;
-  }
-}
-
 @keyframes enter-rise {
   from {
     opacity: 0;
-    transform: translate3d(0, 32px, 0);
+    transform: translate3d(0, 28px, 0);
   }
   to {
     opacity: 1;
@@ -231,17 +213,6 @@ p {
   }
 }
 
-@keyframes reveal-scale {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 @keyframes enter-mask {
   from {
     clip-path: inset(100% 0 0 0);
@@ -253,6 +224,30 @@ p {
   }
 }
 
+/* Sayfa geçişi: (site)/layout.tsx içindeki <ViewTransition default="page">.
+   Eski sayfa hafifçe kaybolur, yenisi aşağıdan yükselerek gelir. */
+::view-transition-old(.page) {
+  animation: page-out 200ms var(--ease-in-out) both;
+}
+
+::view-transition-new(.page) {
+  animation: page-in 560ms var(--ease-out) 60ms both;
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -260,7 +255,10 @@ p {
 
   *,
   *::before,
-  *::after {
+  *::after,
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
     animation: none !important;

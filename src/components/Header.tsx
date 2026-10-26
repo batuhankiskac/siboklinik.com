@@ -161,7 +161,7 @@ export default function Header() {
             }
             onClick={closeMenu}
           >
-            {contactLink.label}
+            Randevu Al
             <ArrowIcon className={buttonStyles.icon} />
           </Link>
         </nav>

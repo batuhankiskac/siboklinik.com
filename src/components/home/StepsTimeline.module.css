@@ -1,7 +1,5 @@
 /* Masaüstünde (≥1100px) yatay zaman çizelgesi; altında dikey düzen. */
 .timeline {
-  --fill-shown: scaleX(1);
-  --fill-hidden: scaleX(0);
   position: relative;
   margin-top: clamp(2.5rem, 5vw, 3.5rem);
 }
@@ -16,7 +14,7 @@
   background: var(--color-line-strong);
 }
 
-/* Dolgu: birincil renk; bölüm görününce ilerleme çizgisi büyür. */
+/* Dolgu: birincil renk, sabit tam uzunlukta. */
 .fill {
   position: absolute;
   top: -0.5px;
@@ -24,8 +22,6 @@
   width: 100%;
   height: 2px;
   background: var(--color-primary);
-  transform-origin: left center;
-  transform: var(--fill-shown);
 }
 
 .steps {
@@ -44,6 +40,7 @@
   min-width: 0;
 }
 
+/* 44px daire; numara gövde yazı tipinde (600). */
 .dot {
   position: relative;
   z-index: 1;
@@ -56,7 +53,8 @@
   border-radius: 50%;
   background: var(--color-surface);
   color: var(--color-primary);
-  font-size: var(--step--1);
+  font-family: var(--font-body), sans-serif;
+  font-size: var(--step-0);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   line-height: 1;
@@ -82,6 +80,7 @@
   text-transform: uppercase;
 }
 
+/* Kart başlığı --step-2 sınırının altında kalır. */
 .heading {
   margin-bottom: 0.75rem;
   font-size: var(--step-1);
@@ -101,71 +100,8 @@
   font-size: 0.95rem;
 }
 
-/* Giriş animasyonu kaydırmaya bağlıdır: zaman çizelgesi ekrana girerken
-   dolgu büyür, noktalar ve kartlar sırayla açılır. Destek yoksa her şey
-   baştan görünür. */
-@supports (animation-timeline: view()) {
-  .timeline {
-    view-timeline-name: --steps;
-  }
-
-  .rail .fill {
-    animation: fill-grow var(--ease-in-out) both;
-    animation-timeline: --steps;
-    animation-range: entry 60% cover 55%;
-  }
-
-  .dot {
-    animation: dot-pop var(--ease-out) both;
-    animation-timeline: --steps;
-    animation-range: entry calc(60% + var(--i, 0) * 12%) entry calc(90% + var(--i, 0) * 12%);
-  }
-
-  .card {
-    animation: card-in var(--ease-out) both;
-    animation-timeline: --steps;
-    animation-range: entry calc(65% + var(--i, 0) * 12%) entry calc(100% + var(--i, 0) * 12%);
-  }
-}
-
-@keyframes fill-grow {
-  from {
-    transform: var(--fill-hidden);
-  }
-  to {
-    transform: var(--fill-shown);
-  }
-}
-
-@keyframes dot-pop {
-  from {
-    opacity: 0;
-    transform: scale(0.3);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes card-in {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 16px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 /* Dikey düzen: çizgi sol kenarda, nokta solda, kart sağda. */
 @media (max-width: 1099.98px) {
-  .timeline {
-    --fill-shown: scaleY(1);
-    --fill-hidden: scaleY(0);
-  }
-
   .rail {
     top: 0;
     bottom: 0;
@@ -180,7 +116,6 @@
     left: -0.5px;
     width: 2px;
     height: 100%;
-    transform-origin: top center;
   }
 
   .steps {

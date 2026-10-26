@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import ExternalLink from "@/components/ExternalLink";
 import MapEmbed from "@/components/MapEmbed";
 import contact from "@/data/contact.json";
@@ -63,7 +63,12 @@ export default function ContactSection({ section }: ContactSectionProps) {
           />
 
           {phoneItems.map((item) => (
-            <div key={item.title} className={styles.phoneBlock}>
+            <div
+              key={item.title}
+              className={styles.phoneBlock}
+              data-reveal
+              style={{ "--i": 0 } as CSSProperties}
+            >
               <div className={styles.label}>{item.title}</div>
               <a href={`tel:${contact.tel}`} className={styles.phone}>
                 {item.text}
@@ -73,8 +78,13 @@ export default function ContactSection({ section }: ContactSectionProps) {
 
           {rowItems.length > 0 && (
             <div className={styles.rows}>
-              {rowItems.map((item) => (
-                <div key={item.title} className={styles.row}>
+              {rowItems.map((item, index) => (
+                <div
+                  key={item.title}
+                  className={styles.row}
+                  data-reveal
+                  style={{ "--i": index % 4 } as CSSProperties}
+                >
                   <div className={styles.label}>{item.title}</div>
                   <div className={styles.value}>{item.text}</div>
                 </div>
@@ -84,11 +94,13 @@ export default function ContactSection({ section }: ContactSectionProps) {
 
           {section.ctas && (
             <div className={styles.social}>
-              {section.ctas.map((cta) => (
+              {section.ctas.map((cta, index) => (
                 <ExternalLink
                   key={cta.href}
                   href={cta.href}
                   className={styles.socialLink}
+                  data-reveal
+                  style={{ "--i": index % 4 } as CSSProperties}
                 >
                   {socialIcon(cta.label)}
                   <span>{cta.label}</span>
@@ -98,7 +110,7 @@ export default function ContactSection({ section }: ContactSectionProps) {
           )}
         </div>
 
-        <div className={styles.map} data-reveal>
+        <div className={styles.map} data-reveal="mask">
           <MapEmbed
             embedUrl={contact.mapEmbedUrl}
             title="SIBO Klinik konumu (Google Haritalar)"

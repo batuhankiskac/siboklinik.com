@@ -20,7 +20,7 @@ test("ana sayfa ve temel navigasyon erişilebilir", async ({
     navigation.getByRole("link", { name: "Belirtiler", exact: true }),
   ).toBeVisible();
   await expect(
-    navigation.getByRole("link", { name: "İletişim", exact: true }),
+    navigation.getByRole("link", { name: "Randevu Al", exact: true }),
   ).toBeVisible();
 });
 

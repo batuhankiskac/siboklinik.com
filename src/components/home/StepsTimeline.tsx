@@ -46,13 +46,19 @@ export default function StepsTimeline({ section }: StepsTimelineProps) {
             {steps.map((step, index) => {
               const { number, label, heading } = parseStep(step.title, index + 1);
               return (
-                <li
-                  key={step.title}
-                  className={styles.step}
-                  style={{ "--i": index } as CSSProperties}
-                >
-                  <span className={styles.dot}>{number}</span>
-                  <div className={styles.card}>
+                <li key={step.title} className={styles.step}>
+                  <span
+                    className={styles.dot}
+                    data-reveal="scale"
+                    style={{ "--i": index } as CSSProperties}
+                  >
+                    {number}
+                  </span>
+                  <div
+                    className={styles.card}
+                    data-reveal
+                    style={{ "--i": index } as CSSProperties}
+                  >
                     {label && <span className={styles.label}>{label}</span>}
                     <h3 className={styles.heading}>{heading}</h3>
                     <p className={styles.text}>{step.text}</p>

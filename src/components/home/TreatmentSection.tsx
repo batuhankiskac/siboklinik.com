@@ -29,13 +29,18 @@ export default function TreatmentSection({
               <div
                 key={box.id}
                 className={dark ? styles.panelDark : styles.panel}
-                data-reveal
-                style={{ "--i": index } as CSSProperties}
+                data-reveal="scale"
+                style={{ "--i": index % 4 } as CSSProperties}
               >
                 <h3 className={styles.boxTitle}>{box.title}</h3>
                 <ul className={styles.list}>
-                  {(box.items ?? []).map((item) => (
-                    <li key={item.title} className={styles.item}>
+                  {(box.items ?? []).map((item, itemIndex) => (
+                    <li
+                      key={item.title}
+                      className={styles.item}
+                      data-reveal
+                      style={{ "--i": itemIndex % 4 } as CSSProperties}
+                    >
                       <strong className={styles.itemTitle}>{item.title}</strong>
                       {item.text && (
                         <span className={styles.itemText}>{item.text}</span>
@@ -47,7 +52,8 @@ export default function TreatmentSection({
             );
           })}
         </div>
-        <div className={styles.more}>
+        <div className={styles.more} data-reveal>
+
           <Link href="/hizmetler" className={styles.moreButton}>
             Tanı ve tedavi yöntemlerinin ayrıntıları
             <ArrowIcon className={buttonStyles.icon} />

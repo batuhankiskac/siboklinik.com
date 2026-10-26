@@ -8,7 +8,8 @@ import styles from "./HeroSection.module.css";
 
 type HeroSectionProps = {
   section: HomeSection;
-  imageAlt: string;
+  // Eski hero görsel alt metni; portre artık doctorName ile etiketlenir.
+  imageAlt?: string;
   // site.json brand.shortDescription ve brand.doctorName.
   eyebrow: string;
   doctorName: string;
@@ -28,7 +29,6 @@ const enter = (i: number) => ({ "--i": i }) as CSSProperties;
 
 export default function HeroSection({
   section,
-  imageAlt,
   eyebrow,
   doctorName,
 }: HeroSectionProps) {
@@ -72,11 +72,11 @@ export default function HeroSection({
           {/* Hero LCP görseli: preload ile <head> içinde erken istenir (Next 16: priority kullanımdan kalktı). */}
           <div className={styles.frame} data-enter="mask" style={enter(2)}>
             <Image
-              src="/images/hero.webp"
-              alt={imageAlt}
+              src="/images/doctor.jpg"
+              alt={doctorName}
               fill
               preload
-              sizes="(max-width: 899px) 100vw, 42vw"
+              sizes="(max-width: 520px) 90vw, 448px"
               className={styles.image}
             />
           </div>

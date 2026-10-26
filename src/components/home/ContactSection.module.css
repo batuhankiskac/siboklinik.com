@@ -35,7 +35,7 @@
   padding-bottom: 0.12em;
   color: var(--color-text);
   font-family: var(--font-display), sans-serif;
-  font-size: clamp(2rem, 1.1rem + 4.6vw, 4.75rem);
+  font-size: var(--step-3);
   font-weight: var(--heading-weight);
   font-variant-numeric: tabular-nums;
   letter-spacing: var(--display-tracking);

@@ -26,7 +26,7 @@ export default function AboutSection({ section, highlight }: AboutSectionProps) 
               key={paragraph}
               className={index === 0 ? styles.lead : styles.text}
               data-reveal
-              style={at(index)}
+              style={at(index % 4)}
             >
               {paragraph}
             </p>
@@ -69,7 +69,7 @@ export default function AboutSection({ section, highlight }: AboutSectionProps) 
             <aside
               className={styles.panel}
               aria-labelledby={`${highlight.id}-baslik`}
-              data-reveal
+              data-reveal="scale"
             >
               <h3 id={`${highlight.id}-baslik`} className={styles.panelTitle}>
                 {highlight.title}

@@ -1,4 +1,4 @@
-/* Açık zeminli bölünmüş hero: solda metin, sağda çerçeveli görsel. */
+/* Açık zeminli bölünmüş hero: solda metin, sağda çerçeveli portre. */
 .hero {
   position: relative;
   scroll-margin-top: var(--header-h);
@@ -28,11 +28,11 @@
   color: var(--color-heading);
 }
 
-/* Limon vurgusu: metnin arkasında dolgu, metin rengi koyu kalır. */
+/* Altın ince çizgi: metnin altında, sol-sağ çizilerek belirir. Metin rengi koyu kalır. */
 .mark {
   color: var(--color-text);
   background: linear-gradient(var(--color-accent), var(--color-accent))
-    no-repeat 0 88% / 100% 38%;
+    no-repeat 0 92% / 100% 0.12em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
   animation: mark-in 1.1s var(--ease-out) 0.6s both;
@@ -40,10 +40,10 @@
 
 @keyframes mark-in {
   from {
-    background-size: 0% 38%;
+    background-size: 0% 0.12em;
   }
   to {
-    background-size: 100% 38%;
+    background-size: 100% 0.12em;
   }
 }
 
@@ -74,22 +74,28 @@
   --btn-px: 1.75rem;
 }
 
+/* Görsel genişliği 448px ile sınırlı; 4/5 oranda yükseklik en çok 560px olur. */
 .media {
   position: relative;
+  width: min(100%, 448px);
   min-width: 0;
 }
 
 .frame {
   position: relative;
+  width: 100%;
   aspect-ratio: 4 / 5;
+  max-height: 560px;
   overflow: hidden;
   border-radius: var(--radius-lg);
-  background: var(--color-bg-alt);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
 }
 
+/* Portre beyaz zeminli; üst hizalı kırpma başı korur. */
 .image {
   object-fit: cover;
-  object-position: center;
+  object-position: center top;
 }
 
 /* Yüzen kart: görselin sol altına taşar. */
@@ -156,6 +162,7 @@
 
   .media {
     grid-column: 8 / span 5;
+    justify-self: end;
   }
 
   .chip {

@@ -1,5 +1,8 @@
 import Header from "@/components/Header";
+import { ViewTransition } from "react";
 import Footer from "@/components/Footer";
+import MobileCtaBar from "@/components/MobileCtaBar";
+import MotionObserver from "@/components/motion/MotionObserver";
 import AnalyticsConsent from "@/components/AnalyticsConsent";
 import bioData from "@/data/bio.json";
 import contactData from "@/data/contact.json";
@@ -61,8 +64,11 @@ export default function SiteLayout({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(clinicSchema) }}
       />
       <Header />
-      {children}
+      {/* Gezinmede sayfa içeriği yumuşak geçişle değişir (globals.css: .page). */}
+      <ViewTransition default="page">{children}</ViewTransition>
       <Footer />
+      <MobileCtaBar tel={contactData.tel} whatsapp={contactData.whatsapp} />
+      <MotionObserver />
       <AnalyticsConsent />
     </>
   );
