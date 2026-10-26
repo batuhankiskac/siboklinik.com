@@ -20,14 +20,15 @@ import styles from "./layout.module.css";
 export const revalidate = 300;
 
 // Hekim kaydı: klinik ile birlikte veri olarak yer alır (employee/founder).
-// Yalnız schema.org MedicalSpecialty listesindeki değerler geçerlidir;
-// "InternalMedicine" bu listede yok.
+// schema.org'da Physician bir kurum türüdür; employee/founder kişi beklediği
+// için hekim Person olarak verilir. Uzmanlık alanı kliniğe yazılır; yalnız
+// MedicalSpecialty listesindeki değerler geçerlidir ("InternalMedicine" yok).
 const physicianSchema = {
-  "@type": "Physician",
+  "@type": "Person",
   name: bioData.name,
   honorificPrefix: bioData.title,
-  url: SITE_URL,
-  medicalSpecialty: ["Endocrine", "PrimaryCare"],
+  jobTitle: "İç Hastalıkları Uzmanı",
+  url: "https://profdrmuharremkiskac.com",
   worksFor: { "@type": "MedicalClinic", name: SITE_NAME, url: SITE_URL },
 };
 
@@ -43,6 +44,7 @@ const clinicSchema = {
     "@type": "PostalAddress",
     ...contactData.addressParts,
   },
+  medicalSpecialty: ["Endocrine", "PrimaryCare"],
   founder: physicianSchema,
   employee: [physicianSchema],
   sameAs: [contactData.social.instagram, contactData.social.youtube],

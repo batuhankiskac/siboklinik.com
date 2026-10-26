@@ -4,13 +4,27 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./MapEmbed.module.css";
 
 interface MapEmbedProps {
-  // contact.json içindeki mapEmbedUrl (output=embed adresi).
+  // Google Haritalar "embed" bağlantısı (contact.json mapEmbedUrl).
   embedUrl: string;
   title: string;
 }
 
 // Google Haritalar içeriği yalnızca kullanıcı istediğinde yüklenir.
+// İçerik güvenlik politikası çerçeveye yalnız www.google.com'a izin verir;
+// harita adresi bu hosta yönlendirilir.
+function toAllowedEmbedSrc(embedUrl: string): string {
+  try {
+    const url = new URL(embedUrl);
+    url.protocol = "https:";
+    url.hostname = "www.google.com";
+    return url.toString();
+  } catch {
+    return "";
+  }
+}
+
 export default function MapEmbed({ embedUrl, title }: MapEmbedProps) {
+  const src = toAllowedEmbedSrc(embedUrl);
   const [isLoaded, setIsLoaded] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
@@ -25,7 +39,7 @@ export default function MapEmbed({ embedUrl, title }: MapEmbedProps) {
         <iframe
           ref={iframeRef}
           title={title}
-          src={embedUrl}
+          src={src}
           className={styles.iframe}
           allowFullScreen
           referrerPolicy="no-referrer-when-downgrade"

@@ -29,7 +29,7 @@ export default function SymptomCards({ section }: SymptomCardsProps) {
         <div className={styles.grid}>
           {(section.items ?? []).map((item, index) => (
             <div
-              key={item.href}
+              key={item.title}
               className={styles.item}
               data-reveal
               style={{ "--i": index % 4 } as CSSProperties}

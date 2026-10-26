@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import siteData from "@/data/site.json";
+import { getArticles } from "@/lib/content";
+import { resolveContentHref } from "@/lib/home-links";
 import { pageMetadata } from "@/lib/metadata";
 import AboutSection from "@/components/home/AboutSection";
 import ContactSection from "@/components/home/ContactSection";
@@ -23,7 +25,8 @@ const heroImage = siteData.images.find((image) => image.usedIn === "hero");
 // "nedir-neden-onemli" → #nedir yan kutusu, "list" → #tedavi kutuları.
 const ABOUT_HIGHLIGHT_ID = "nedir-neden-onemli";
 
-export default function Home() {
+export default async function Home() {
+  const articleIds = new Set((await getArticles()).map((article) => article.id));
   const highlight = sections.find((section) => section.id === ABOUT_HIGHLIGHT_ID);
   const treatmentBoxes = sections.filter((section) => section.kind === "list");
 
@@ -53,7 +56,18 @@ export default function Home() {
           case "steps":
             return <StepsTimeline key={section.id} section={section} />;
           case "cards":
-            return <SymptomCards key={section.id} section={section} />;
+            return (
+              <SymptomCards
+                key={section.id}
+                section={{
+                  ...section,
+                  items: section.items?.map((item) => ({
+                    ...item,
+                    href: resolveContentHref(item.href, "/belirtiler", articleIds),
+                  })),
+                }}
+              />
+            );
           case "other":
             return (
               <TreatmentSection

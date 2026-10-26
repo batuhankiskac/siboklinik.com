@@ -16,6 +16,11 @@
   animation: consent-rise var(--dur-reveal) var(--ease-out) both;
 }
 
+/* Modal tercih paneli header'ın ve mobil menünün de üstünde açılır. */
+.banner[aria-modal="true"] {
+  z-index: 130;
+}
+
 @keyframes consent-rise {
   from {
     opacity: 0;
