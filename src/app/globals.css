@@ -1,44 +1,43 @@
-/* SIBO Klinik: Prof. Dr. Muharrem Kıskaç sitelerinin ortak paleti (fildişi zemin,
-   mürekkep metin, şampanya altını vurgu); siteye özel olan yalnız ana renk
-   (derin petrol). Başlıklar Newsreader, metin Geist. */
+/* SIBO Klinik: Prof. Dr. Muharrem Kıskaç sitelerinin ortak yapısı, siteye özel
+   palet (gece mavisi ve kum: sıcak kum zemin, gece mavisi ana renk, kum altını vurgu). Başlıklar Newsreader, metin Geist. */
 :root {
-  --color-bg: #F7F4EE;
-  --color-bg-rgb: 247 244 238;
-  --color-bg-alt: #EFE9DF;
+  --color-bg: #F5F3EE;
+  --color-bg-rgb: 245 243 238;
+  --color-bg-alt: #ECE8DF;
   --color-surface: #FFFFFF;
-  --color-text: #141A17;
-  --color-ink-rgb: 20 26 23;
-  --color-heading: #141A17;
-  --color-text-light: #5A605C;
-  --color-muted: #5A605C;
-  --color-line: rgb(20 26 23 / 12%);
-  --color-line-strong: rgb(20 26 23 / 26%);
+  --color-text: #141A24;
+  --color-ink-rgb: 20 26 36;
+  --color-heading: #141A24;
+  --color-text-light: #565C66;
+  --color-muted: #565C66;
+  --color-line: rgb(20 26 36 / 12%);
+  --color-line-strong: rgb(20 26 36 / 26%);
 
-  /* Ortak premium vurgu: şampanya altını. Metin olarak yalnız --color-accent-ink. */
-  --color-accent: #B8925A;
-  --color-accent-ink: #86663A;
-  --color-accent-soft: #EFE3CF;
-  --color-accent-on-dark: #D9BC8C;
-  --color-accent-light: #EFE3CF;
-  --color-secondary: #86663A;
-  --color-selection: #EFE3CF;
-  --gold: #B8925A;
-  --gold-light: #D9BC8C;
+  /* Vurgu rengi; metin olarak yalnız --color-accent-ink kullanılır. */
+  --color-accent: #C7A36B;
+  --color-accent-ink: #8A6A38;
+  --color-accent-soft: #F0E5D1;
+  --color-accent-on-dark: #DDC193;
+  --color-accent-light: #F0E5D1;
+  --color-secondary: #8A6A38;
+  --color-selection: #F0E5D1;
+  --gold: #C7A36B;
+  --gold-light: #DDC193;
 
-  --color-on-primary: #F7F4EE;
-  --color-on-dark: #F4EFE6;
-  --color-on-dark-muted: rgb(244 239 230 / 72%);
-  --color-input-border: #878C88;
+  --color-on-primary: #F5F3EE;
+  --color-on-dark: #F3F1EC;
+  --color-on-dark-muted: rgb(243 241 236 / 72%);
+  --color-input-border: #868B93;
 
   --heading-weight: 400;
   --heading-tracking: -0.015em;
   --display-tracking: -0.03em;
 
-  --color-primary: #0F3B3F;
-  --color-primary-rgb: 15 59 63;
-  --color-primary-dark: #08282B;
-  --color-primary-subtle-bg: #DDE9E9;
-  --color-dark: #0A2124;
+  --color-primary: #1F3050;
+  --color-primary-rgb: 31 48 80;
+  --color-primary-dark: #152340;
+  --color-primary-subtle-bg: #E2E7F0;
+  --color-dark: #111B2E;
 }
 
 :root {

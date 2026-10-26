@@ -26,8 +26,8 @@ export default function GlobalError({
           justifyContent: "center",
           padding: "1.5rem",
           boxSizing: "border-box",
-          background: "#FDFBF7",
-          color: "#2A312B",
+          background: "#F5F3EE",
+          color: "#141A24",
           fontFamily: "system-ui, sans-serif",
         }}
       >
@@ -37,7 +37,7 @@ export default function GlobalError({
               margin: "0 0 1rem",
               fontSize: "1.75rem",
               lineHeight: 1.25,
-              color: "#4A5D4E",
+              color: "#1F3050",
             }}
           >
             Bir şeyler ters gitti
@@ -54,7 +54,7 @@ export default function GlobalError({
               padding: "0.75rem 1.5rem",
               border: 0,
               borderRadius: "8px",
-              background: "#4A5D4E",
+              background: "#1F3050",
               color: "#FFFFFF",
               fontSize: "1rem",
               fontWeight: 600,
