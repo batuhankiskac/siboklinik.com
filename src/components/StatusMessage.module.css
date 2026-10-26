@@ -1,21 +1,36 @@
+/* Editoryal, sola yaslı durum ekranı (404, hata). */
 .container {
-  min-height: 55vh;
-  display: grid;
-  place-content: center;
-  gap: 1rem;
-  padding: 3rem 1.5rem;
-  text-align: center;
+  composes: container from "../styles/layout.module.css";
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.5rem;
+  min-height: 60vh;
+  padding-block: clamp(4rem, 12vw, 9rem);
+}
+
+.eyebrow {
+  composes: eyebrow from "../styles/layout.module.css";
+}
+
+.title {
+  max-width: 18ch;
+  font-size: var(--step-4);
+  line-height: 1.04;
+  letter-spacing: var(--display-tracking);
 }
 
 .message {
-  max-width: 38rem;
+  max-width: 40ch;
+  font-size: var(--step-1);
+  line-height: 1.6;
   color: var(--color-text-light);
 }
 
 .action {
   composes: button primary from "../styles/button.module.css";
-  --btn-py: 0.85rem;
-  --btn-px: 1.5rem;
-  --btn-radius: var(--radius-md);
-  justify-self: center;
+  --btn-py: 0.9rem;
+  --btn-px: 1.6rem;
+  margin-top: 0.5rem;
 }

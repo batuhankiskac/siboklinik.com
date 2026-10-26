@@ -1,40 +1,38 @@
 .header {
-  margin-bottom: 60px;
+  display: grid;
+  gap: 1.25rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 
-.centered {
-  margin-bottom: 60px;
-  text-align: center;
+.titleBlock {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.index {
+  font-variant-numeric: tabular-nums;
 }
 
 .title {
-  font-size: clamp(1.875rem, 4vw, 2.5rem);
-  line-height: 1.2;
-  margin-bottom: 15px;
+  composes: h2 from "../../styles/layout.module.css";
 }
 
-.subtitle {
-  max-width: 720px;
-  margin: 0 auto 20px;
+.intro {
+  max-width: 46ch;
   color: var(--color-text-light);
-  font-size: 1.1rem;
+  font-size: var(--step-0);
+  line-height: 1.7;
 }
 
-.divider {
-  width: 60px;
-  height: 4px;
-  margin-top: 0;
-  border-radius: 2px;
-  background-color: var(--gold);
-}
+/* Masaüstü: başlık solda, giriş metni sağda; ikisi alttan hizalı. */
+@media (min-width: 900px) {
+  .split {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: end;
+    gap: 2rem clamp(2rem, 5vw, 5rem);
+  }
 
-.centered .divider {
-  margin-inline: auto;
-}
-
-@media (max-width: 768px) {
-  .header,
-  .centered {
-    margin-bottom: 40px;
+  .split .intro {
+    margin-bottom: 0.35rem;
   }
 }

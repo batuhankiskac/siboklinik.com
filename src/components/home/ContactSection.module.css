@@ -1,135 +1,108 @@
+/* Açık zemin: hemen ardından gelen koyu alt bilgiyle karışmaz. */
 .contact {
-  padding: 100px 0;
-  scroll-margin-top: 80px;
-  background-color: var(--color-primary);
-  color: #fff;
+  background: var(--color-bg);
+  padding-block: var(--section-y);
+  scroll-margin-top: var(--header-h);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-  gap: 50px;
-  align-items: center;
+  gap: clamp(3rem, 6vw, 4.5rem);
 }
 
-.title {
-  margin-bottom: 15px;
-  color: #fff;
-  font-size: clamp(1.875rem, 4vw, 2.5rem);
-  line-height: 1.2;
+.info {
+  min-width: 0;
 }
 
-.subtitle {
-  margin-bottom: 40px;
-  color: rgb(255 255 255 / 80%);
-  font-size: 1.1rem;
+.phoneBlock {
+  margin-top: 3rem;
 }
 
-.item {
-  margin-bottom: 30px;
-}
-
-/* Altın metin: koyu petrol üzerinde ≥4.5:1 (--gold-light). */
+/* Etiket: küçük, aralıklı büyük harf. */
 .label {
-  margin-bottom: 5px;
-  color: var(--gold-light);
-  font-size: 0.9rem;
-  font-weight: 500;
-  letter-spacing: 1px;
+  margin-bottom: 0.75rem;
+  color: var(--color-accent-ink);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
   text-transform: uppercase;
 }
 
-.value {
-  color: #fff;
-  font-family: var(--font-playfair), serif;
-  font-size: 1.2rem;
-  line-height: 1.5;
-}
-
+/* Büyük, görüntülenen telefon bağlantısı; alt çizgi soldan sağa dolar. */
 .phone {
   display: inline-block;
-  color: #fff;
-  font-family: var(--font-playfair), serif;
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 1.3;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  text-underline-offset: 6px;
-  transition: text-decoration-color 0.2s ease;
+  padding-bottom: 0.12em;
+  color: var(--color-text);
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2rem, 1.1rem + 4.6vw, 4.75rem);
+  font-weight: var(--heading-weight);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--display-tracking);
+  line-height: 1;
+  white-space: nowrap;
+  background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0% 2px;
+  transition: background-size var(--dur-base) var(--ease-out);
 }
 
 .phone:hover {
-  text-decoration-color: currentColor;
+  background-size: 100% 2px;
+}
+
+.rows {
+  margin-top: 2.5rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.row {
+  display: grid;
+  gap: 0.5rem;
+  padding-block: 1.25rem;
+  border-top: 1px solid var(--color-line);
+}
+
+.value {
+  max-width: 40ch;
+  color: var(--color-text);
+  font-size: var(--step-0);
+  line-height: 1.6;
 }
 
 .social {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
-  margin-top: 20px;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
 }
 
+/* Çerçeveli düğme; ikon ve metin yan yana. */
 .socialLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 20px;
-  border: 1px solid rgb(255 255 255 / 20%);
-  border-radius: 50px;
-  background-color: rgb(255 255 255 / 10%);
-  color: #fff;
-  font-weight: 500;
-  transition:
-    transform 0.3s ease,
-    background-color 0.3s ease,
-    color 0.3s ease;
+  composes: button ghost from "../../styles/button.module.css";
+  gap: 0.6rem;
 }
 
-.socialLink:hover {
-  background-color: #fff;
-  color: var(--color-primary);
-  transform: translateY(-2px);
-}
-
-/* Petrol zeminde odak halkası altın olmalı (koyu bordo halka görünmez kalır). */
-.phone:focus-visible,
-.socialLink:focus-visible {
-  outline-color: var(--gold-light);
-}
-
+/* Harita: sağ sütun, yuvarlak çerçeve; içerik ebeveyn yüksekliğini alır. */
 .map {
-  height: 400px;
+  position: relative;
+  min-height: 420px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  border-radius: var(--radius-md);
-  box-shadow: 0 20px 40px 0 rgb(0 0 0 / 20%);
 }
 
-@media (max-width: 768px) {
-  .contact {
-    padding: 64px 0;
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: stretch;
   }
+}
 
-  .subtitle {
-    margin-bottom: 28px;
-  }
-
-  .phone {
-    font-size: 1.6rem;
-  }
-
+@media (max-width: 899.98px) {
   .map {
-    height: 300px;
+    min-height: 340px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .socialLink,
-  .socialLink:hover {
-    transform: none;
-    transition: none;
-  }
-
   .phone {
     transition: none;
   }

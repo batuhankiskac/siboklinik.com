@@ -18,16 +18,17 @@ export const metadata = pageMetadata({
 // engeller.
 export default function ServicesPage() {
   return (
-    <main id="main-content" className={styles.container}>
-      <div className={styles.header}>
+    <main id="main-content" className={styles.page}>
+      <header className={styles.header}>
+        <p className={styles.eyebrow}>Hizmetler</p>
         <h1 className={styles.title}>Tanı ve Tedavi</h1>
-        <p className={styles.subtitle}>
+        <p className={styles.lead}>
           Tanı yöntemleri ve tedavi protokolü; uygulanacak yaklaşım hekim
           değerlendirmesiyle kişinin durumuna göre belirlenir.
         </p>
-      </div>
+      </header>
 
-      <section aria-label="Tanı ve tedavi listesi">
+      <section aria-label="Tanı ve tedavi listesi" className={styles.body}>
         <Suspense fallback={<LoadingState />}>
           <PublicContentList
             load={getServices}

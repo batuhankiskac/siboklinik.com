@@ -1,9 +1,7 @@
+/* Liste ızgarası: genişlik çağıran sayfadan gelir (.page). */
 .grid {
   display: grid;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 400px));
-  justify-content: center;
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 3rem 2rem;
 }

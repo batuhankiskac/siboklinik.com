@@ -91,17 +91,14 @@
         ],
         "items": [
           {
-            "icon": "✅",
             "title": "Fonksiyonel Tıp Yaklaşımı",
             "text": ""
           },
           {
-            "icon": "✅",
             "title": "Kişiye Özel Tedavi Planı",
             "text": ""
           },
           {
-            "icon": "✅",
             "title": "SIBO Nefes Testi ile Tanı",
             "text": "İster klinikte, ister kitlerle evinizde uygulanabilir. Ev testinde de sonuçlar hekim tarafından yorumlanır."
           }
@@ -152,55 +149,46 @@
         "itemLinkLabel": "Detaylı Bilgi →",
         "items": [
           {
-            "icon": "🎈",
             "title": "Aşırı Şişkinlik",
             "text": "Yemeklerden sonra karında belirgin şişkinlik ve gerginlik hissi.",
             "href": "/belirtiler/siskinlik"
           },
           {
-            "icon": "😣",
             "title": "Karın Ağrısı ve Kramp",
             "text": "Belirsiz karın ağrıları, kramplar ve hassasiyet.",
             "href": "/belirtiler/karin-agrisi"
           },
           {
-            "icon": "🌪️",
             "title": "Gaz ve Hazımsızlık",
             "text": "Aşırı gaz çıkarma ihtiyacı, geğirme ve sindirim zorluğu.",
             "href": "/belirtiler/hazimsizlik"
           },
           {
-            "icon": "🧠",
             "title": "Beyin Sisi ve Yorgunluk",
             "text": "Kronik halsizlik, konsantrasyon güçlüğü ve zihinsel bulanıklık.",
             "href": "/belirtiler/yorgunluk"
           },
           {
-            "icon": "💩",
             "title": "Kabızlık veya İshal",
             "text": "Bağırsak alışkanlıklarında düzensizlik, ishal veya kabızlık atakları.",
             "href": "/belirtiler/kabizlik-ishal"
           },
           {
-            "icon": "🚫",
             "title": "Gıda İntoleransları",
             "text": "Daha önce rahat yediğiniz besinlere karşı ani oluşan hassasiyetler.",
             "href": "/belirtiler/intolerans"
           },
           {
-            "icon": "🌹",
             "title": "Cilt Sorunları (Gül)",
             "text": "Rosacea (Gül hastalığı), akne ve egzama gibi inatçı cilt problemleri.",
             "href": "/belirtiler/cilt-sorunlari"
           },
           {
-            "icon": "⚖️",
             "title": "Kilo Kaybı / Alamama",
             "text": "Emilim bozukluğuyla ilişkili olabilen istemsiz kilo kaybı veya vitamin eksiklikleri.",
             "href": "/belirtiler/kilo-kaybi"
           },
           {
-            "icon": "🦴",
             "title": "Eklem Ağrıları",
             "text": "Bazı kişilerde inflamasyonla ilişkilendirilen yaygın eklem ve kas ağrıları.",
             "href": "/belirtiler/eklem-agrisi"
@@ -215,7 +203,7 @@
       {
         "id": "tedavi-tani",
         "kind": "list",
-        "title": "🔍 Tanı Yöntemleri",
+        "title": "Tanı Yöntemleri",
         "items": [
           {
             "title": "SIBO Nefes Testi",
@@ -234,7 +222,7 @@
       {
         "id": "tedavi-protokol",
         "kind": "list",
-        "title": "💊 Tedavi Protokolü",
+        "title": "Tedavi Protokolü",
         "items": [
           {
             "title": "Eliminasyon Diyeti",

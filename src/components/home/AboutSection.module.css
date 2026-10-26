@@ -1,79 +1,123 @@
 .grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(min(300px, 100%), 1fr);
-  gap: 50px;
-  align-items: center;
+  gap: 0.5rem;
 }
 
-.text {
-  margin-bottom: 20px;
-  color: var(--color-text-light);
-  font-size: 1.1rem;
+/* Masaüstünde başlık sol sütunda sabit kalır; sağdaki metin kaydıkça akar. */
+.side {
+  min-width: 0;
 }
 
-.features {
-  list-style: none;
-  margin-top: 30px;
+.body {
+  min-width: 0;
 }
 
-.feature {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 18px;
-  font-size: 1.1rem;
-  font-weight: 500;
-}
-
-.icon {
-  flex-shrink: 0;
+.lead {
+  max-width: 36em;
+  color: var(--color-text);
+  font-size: var(--step-1);
   line-height: 1.6;
 }
 
-.featureTitle {
-  display: block;
+.text {
+  max-width: 40em;
+  color: var(--color-text-light);
+  font-size: var(--step-0);
+  line-height: 1.7;
+}
+
+.lead + .text,
+.text + .text {
+  margin-top: 1rem;
+}
+
+.list {
+  margin-top: 2.75rem;
+  border-bottom: 1px solid var(--color-line);
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding-block: 1.125rem;
+  border-top: 1px solid var(--color-line);
+}
+
+/* Küçük limon dolgulu daire içinde koyu onay işareti. */
+.check {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-top: 0.05rem;
+  border-radius: 50%;
+  background: var(--color-accent);
   color: var(--color-text);
 }
 
-.featureText {
+.check svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.rowBody {
   display: block;
-  margin-top: 4px;
+  min-width: 0;
+}
+
+.rowTitle {
+  display: block;
+  color: var(--color-heading);
+  font-size: var(--step-0);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.rowText {
+  display: block;
+  margin-top: 0.3rem;
   color: var(--color-text-light);
   font-size: 0.95rem;
-  font-weight: 400;
+  line-height: 1.6;
 }
 
-.highlight {
-  padding: 40px;
-  border-left: 5px solid var(--color-primary);
-  border-radius: var(--radius-md);
-  background-color: var(--color-bg-alt);
+/* "Neden Önemli?" paneli: birincil renk zemin, açık metin. */
+.panel {
+  margin-top: 3rem;
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+  border-radius: var(--radius-lg);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
 }
 
-.highlightTitle {
-  margin-bottom: 15px;
-  font-size: 1.5rem;
+.panelTitle {
+  margin-bottom: 1rem;
+  color: var(--color-on-primary);
+  font-size: var(--step-2);
 }
 
-.highlightText {
-  color: var(--color-text);
+.panelText {
+  max-width: 44ch;
+  color: rgb(var(--color-bg-rgb) / 86%);
+  line-height: 1.7;
 }
 
-@media (max-width: 768px) {
+.panelText + .panelText {
+  margin-top: 0.75rem;
+}
+
+@media (min-width: 900px) {
   .grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+    gap: clamp(3rem, 7vw, 7rem);
   }
 
-  .text {
-    font-size: 1rem;
-  }
-
-  .feature {
-    font-size: 1rem;
-  }
-
-  .highlight {
-    padding: 28px;
+  .side {
+    position: sticky;
+    top: calc(var(--header-h) + 2.5rem);
   }
 }

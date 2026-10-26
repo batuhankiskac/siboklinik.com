@@ -2,17 +2,28 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  type CSSProperties,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   contactLink,
   isActivePath,
   primaryNavigationLinks,
 } from "@/data/navigation";
 import siteData from "@/data/site.json";
+import buttonStyles from "@/styles/button.module.css";
+import ArrowIcon from "./ArrowIcon";
 import styles from "./Header.module.css";
 
 // Masaüstü genişlik. Header.module.css içindeki 1024px mobil kuralıyla birlikte değişmeli.
 const DESKTOP_MEDIA_QUERY = "(min-width: 1025px)";
+
+// Bu değerin üstünde kaydırılınca üst çubuk küçülür ve çizgi alır.
+const SCROLLED_OFFSET = 8;
 
 export default function Header() {
   const pathname = usePathname();
@@ -33,6 +44,20 @@ export default function Header() {
 
   const closeMenu = useCallback(() => {
     setIsMenuOpen(false);
+  }, []);
+
+  // Kaydırma durumu data-scrolled ile işaretlenir; React yeniden çizmez.
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+
+    const syncScrolled = () => {
+      header.toggleAttribute("data-scrolled", window.scrollY > SCROLLED_OFFSET);
+    };
+
+    syncScrolled();
+    window.addEventListener("scroll", syncScrolled, { passive: true });
+    return () => window.removeEventListener("scroll", syncScrolled);
   }, []);
 
   useEffect(() => {
@@ -80,61 +105,67 @@ export default function Header() {
 
   return (
     <header ref={headerRef} className={styles.header}>
-      <Link
-        href="/"
-        className={styles.logo}
-        prefetch={false}
-        onClick={closeMenu}
-      >
-        <span className={styles.brandName}>{siteData.brand.siteName}</span>
-        <span className={styles.brandSub}>
-          {siteData.brand.shortDescription}
-        </span>
-      </Link>
-
-      <button
-        ref={buttonRef}
-        type="button"
-        className={`${styles.hamburger} ${isMenuOpen ? styles.open : ""}`}
-        onClick={toggleMenu}
-        aria-label="Menü"
-        aria-expanded={isMenuOpen}
-        aria-controls="primary-navigation"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <nav
-        id="primary-navigation"
-        aria-label="Ana menü"
-        className={`${styles.nav} ${isMenuOpen ? styles.open : ""}`}
-      >
-        {primaryNavigationLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={styles.navLink}
-            aria-current={isActivePath(pathname, link.href) ? "page" : undefined}
-            onClick={closeMenu}
-          >
-            {link.label}
-          </Link>
-        ))}
-
+      <div className={styles.inner}>
         <Link
-          href={contactLink.href}
-          className={styles.ctaButton}
+          href="/"
+          className={styles.logo}
           prefetch={false}
-          aria-current={
-            isActivePath(pathname, contactLink.href) ? "page" : undefined
-          }
           onClick={closeMenu}
         >
-          {contactLink.label}
+          <span className={styles.brandName}>{siteData.brand.siteName}</span>
+          <span className={styles.brandSub}>
+            {siteData.brand.shortDescription}
+          </span>
         </Link>
-      </nav>
+
+        <button
+          ref={buttonRef}
+          type="button"
+          className={`${styles.hamburger} ${isMenuOpen ? styles.open : ""}`}
+          onClick={toggleMenu}
+          aria-label="Menü"
+          aria-expanded={isMenuOpen}
+          aria-controls="primary-navigation"
+        >
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav
+          id="primary-navigation"
+          aria-label="Ana menü"
+          className={`${styles.nav} ${isMenuOpen ? styles.open : ""}`}
+        >
+          {primaryNavigationLinks.map((link, index) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={styles.navLink}
+              style={{ "--i": index } as CSSProperties}
+              aria-current={isActivePath(pathname, link.href) ? "page" : undefined}
+              onClick={closeMenu}
+            >
+              <span className={styles.index} aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span className={styles.navText}>{link.label}</span>
+            </Link>
+          ))}
+
+          <Link
+            href={contactLink.href}
+            className={styles.ctaButton}
+            prefetch={false}
+            aria-current={
+              isActivePath(pathname, contactLink.href) ? "page" : undefined
+            }
+            onClick={closeMenu}
+          >
+            {contactLink.label}
+            <ArrowIcon className={buttonStyles.icon} />
+          </Link>
+        </nav>
+      </div>
     </header>
   );
 }

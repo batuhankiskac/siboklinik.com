@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { excerpt } from "@/lib/text";
 import type { Service } from "@/types/content";
+import ArrowIcon from "./ArrowIcon";
 import CardMedia from "./CardMedia";
+import buttonStyles from "../styles/button.module.css";
 import styles from "./ServiceCard.module.css";
 
 export default function ServiceCard({ service }: { service: Service }) {
@@ -11,13 +13,17 @@ export default function ServiceCard({ service }: { service: Service }) {
       className={styles.card}
       aria-label={`${service.title} hizmetini incele`}
     >
-      {/* Görseli olmayan hizmetler için yer tutucu; yerel varsayılan görsel yok. */}
-      <CardMedia
-        className={styles.imageContainer}
-        src={service.imageUrl}
-      />
-      <h2 className={styles.title}>{service.title}</h2>
-      <p className={styles.description}>{excerpt(service.description)}</p>
+      {service.imageUrl ? (
+        <CardMedia className={styles.media} src={service.imageUrl} />
+      ) : null}
+      <div className={styles.content}>
+        <h2 className={styles.title}>{service.title}</h2>
+        <p className={styles.description}>{excerpt(service.description)}</p>
+        <span className={styles.more}>
+          İncele
+          <ArrowIcon className={buttonStyles.icon} />
+        </span>
+      </div>
     </Link>
   );
 }

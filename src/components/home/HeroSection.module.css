@@ -1,126 +1,165 @@
+/* Açık zeminli bölünmüş hero: solda metin, sağda çerçeveli görsel. */
 .hero {
-  scroll-margin-top: 80px;
   position: relative;
-  display: flex;
+  scroll-margin-top: var(--header-h);
+  padding-block: calc(var(--header-h) + clamp(2.5rem, 6vw, 5rem))
+    clamp(4rem, 7vw, 6.5rem);
+  background: var(--color-bg);
+}
+
+.grid {
+  composes: container from "../../styles/layout.module.css";
+  display: grid;
+  gap: clamp(3rem, 6vw, 4rem);
   align-items: center;
-  justify-content: center;
-  min-height: 90vh;
-  min-height: 90svh;
-  padding: 120px 20px 80px;
-  overflow: hidden;
-  color: #fff;
-  text-align: center;
-  isolation: isolate;
 }
 
-.image {
-  object-fit: cover;
-  object-position: center;
-  z-index: 0;
+.copy {
+  min-width: 0;
 }
 
-/* Eski sitenin gradyanı; açık mavi görselde beyaz metnin ≥4.5:1 kalması için biraz koyulaştırıldı. */
-.overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    135deg,
-    rgb(15 76 92 / 88%) 0%,
-    rgb(15 76 92 / 72%) 100%
-  );
-}
-
-.content {
-  position: relative;
-  z-index: 2;
-  max-width: 800px;
+.eyebrow {
+  composes: eyebrow from "../../styles/layout.module.css";
 }
 
 .title {
-  margin: 0 0 20px;
-  color: #fff;
-  font-size: clamp(2.25rem, 5.5vw, 4rem);
-  line-height: 1.1;
+  composes: display from "../../styles/layout.module.css";
+  margin-top: 1.75rem;
+  color: var(--color-heading);
+}
+
+/* Limon vurgusu: metnin arkasında dolgu, metin rengi koyu kalır. */
+.mark {
+  color: var(--color-text);
+  background: linear-gradient(var(--color-accent), var(--color-accent))
+    no-repeat 0 88% / 100% 38%;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  animation: mark-in 1.1s var(--ease-out) 0.6s both;
+}
+
+@keyframes mark-in {
+  from {
+    background-size: 0% 38%;
+  }
+  to {
+    background-size: 100% 38%;
+  }
 }
 
 .subtitle {
-  max-width: 760px;
-  margin: 0 auto 40px;
-  color: rgb(255 255 255 / 92%);
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  font-weight: 300;
+  max-width: 34rem;
+  margin-top: 1.75rem;
+  color: var(--color-text-light);
+  font-size: var(--step-1);
   line-height: 1.6;
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
 }
 
-/* Dolgu: beyaz zemin, petrol metin; koyu katmanda en yüksek kontrastı verir. */
 .primary {
-  composes: button from "../../styles/button.module.css";
-  --btn-py: 14px;
-  --btn-px: 32px;
-  --btn-radius: 50px;
+  composes: button primary from "../../styles/button.module.css";
+  --btn-py: 1rem;
+  --btn-px: 1.75rem;
+}
+
+.secondary {
+  composes: button ghost from "../../styles/button.module.css";
+  --btn-py: 1rem;
+  --btn-px: 1.75rem;
+}
+
+.media {
+  position: relative;
+  min-width: 0;
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-alt);
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Yüzen kart: görselin sol altına taşar. */
+.chip {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: calc(100% - 1.5rem);
+  padding: 0.9rem 1.25rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+}
+
+.pulse {
+  flex: none;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+  animation: pulse 2.4s var(--ease-in-out) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent) 85%, transparent);
+  }
+  60% {
+    box-shadow: 0 0 0 0.6rem color-mix(in srgb, var(--color-accent) 0%, transparent);
+  }
+}
+
+.chipName {
+  display: block;
+  color: var(--color-heading);
+  font-family: var(--font-display), sans-serif;
   font-size: 1rem;
-  letter-spacing: 0.5px;
-  --btn-border-color: #fff;
-  background-color: #fff;
-  box-shadow: 0 4px 15px 0 rgb(0 0 0 / 20%);
-  color: var(--color-primary);
+  font-weight: var(--heading-weight);
+  line-height: 1.3;
 }
 
-.primary:hover {
-  background-color: var(--gold-light);
-  --btn-border-color: var(--gold-light);
-  color: var(--color-primary-dark);
-  transform: translateY(-2px);
+.chipRole {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--color-text-light);
+  font-size: var(--step--1);
+  line-height: 1.4;
 }
 
-.outline {
-  composes: button from "../../styles/button.module.css";
-  --btn-py: 14px;
-  --btn-px: 32px;
-  --btn-radius: 50px;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-  --btn-border-color: #fff;
-  background-color: transparent;
-  color: #fff;
-}
-
-.outline:hover {
-  background-color: #fff;
-  color: var(--color-primary);
-  transform: translateY(-2px);
-}
-
-.primary:focus-visible,
-.outline:focus-visible {
-  outline-color: var(--gold-light);
-}
-
-@media (max-width: 600px) {
-  .actions {
-    flex-direction: column;
-    align-items: stretch;
-    max-width: 300px;
-    margin: 0 auto;
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 2rem;
   }
 
-  .primary,
-  .outline {
-    width: 100%;
+  .copy {
+    grid-column: 1 / span 7;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .primary:hover,
-  .outline:hover {
-    transform: none;
+  .media {
+    grid-column: 8 / span 5;
+  }
+
+  .chip {
+    left: -2rem;
+    bottom: 2.5rem;
   }
 }

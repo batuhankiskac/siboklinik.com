@@ -1,59 +1,205 @@
+/* Koyu bölüm (.dark) üzerine kurulu; metin ve çizgi renkleri oradan gelir. */
 .footer {
-  background-color: var(--color-primary-dark);
-  color: var(--color-surface);
-  padding: 30px 20px;
-  font-size: 0.9rem;
+  composes: dark from "../styles/layout.module.css";
+  padding-top: clamp(4rem, 8vw, 6.5rem);
+  font-size: 0.95rem;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
+.inner {
+  composes: container from "../styles/layout.module.css";
+}
+
+/* Kapanış çağrısı: sol metin, sağ eylemler (geniş ekranda). */
+.cta {
+  display: grid;
+  gap: 2.5rem;
+  padding-bottom: clamp(3rem, 6vw, 4.5rem);
+}
+
+.ctaCopy {
+  max-width: 44rem;
+}
+
+.eyebrow {
+  composes: eyebrow from "../styles/layout.module.css";
+}
+
+.ctaTitle {
+  max-width: 24ch;
+  margin-top: 1.25rem;
+  font-size: var(--step-3);
+  line-height: 1.04;
+  letter-spacing: var(--display-tracking);
+  color: var(--color-on-dark);
+}
+
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+}
+
+.ctaLink {
+  composes: button light from "../styles/button.module.css";
+  min-height: 48px;
+}
+
+/* Bağlantı sütunları: üstte ince çizgi, sütun başlıkları küçük büyük harf. */
+.grid {
+  display: grid;
+  gap: 2.5rem 2rem;
+  padding-block: 2.5rem;
+  border-top: 1px solid var(--color-line);
+}
+
+.brandCol {
+  display: grid;
+  align-content: start;
+  gap: 0.5rem;
+}
+
+.brandName {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: var(--step-2);
+  font-weight: var(--heading-weight);
+  line-height: 1.1;
+  letter-spacing: var(--heading-tracking);
+  color: var(--color-on-dark);
+}
+
+.brandText {
+  max-width: 28ch;
+  color: var(--color-text-light);
+}
+
+.col {
+  display: grid;
+  align-content: start;
+}
+
+.colTitle {
+  margin-bottom: 1.1rem;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-on-dark-muted);
+}
+
+.list {
+  display: grid;
+  gap: 0.75rem;
+  list-style: none;
+}
+
+/* Bağlantı ve çerez düğmesi: alt çizgi soldan sağa dolar. */
+.link,
+.list button,
+.toTop {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0% 1px;
+  color: var(--color-on-dark);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-size var(--dur-base) var(--ease-out);
+}
+
+.link:hover,
+.list button:hover,
+.toTop:hover {
+  background-size: 100% 1px;
+}
+
+.address {
+  max-width: 30ch;
+  font-style: normal;
+  line-height: 1.6;
+  color: var(--color-on-dark);
+}
+
+.hours {
+  margin-top: 0.75rem;
+  color: var(--color-text-light);
+}
+
+/* Alt satır: telif (solda), yukarı dön (sağda). */
+.bottom {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem 2rem;
+  gap: 0.75rem 2rem;
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--color-line);
+  font-size: 0.875rem;
+  color: var(--color-text-light);
 }
 
 .copyright {
-  opacity: 0.6;
+  color: var(--color-text-light);
 }
 
-.links {
-  display: flex;
-  flex-wrap: wrap;
+.toTop {
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem 1.25rem;
+  gap: 0.5rem;
+  min-height: 44px;
+  font-weight: 600;
 }
 
-.links a,
-.links button {
-  padding: 0;
-  border: 0;
-  background: none;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
+.toTopIcon {
+  display: inline-flex;
+  rotate: -45deg;
+  transition: translate var(--dur-base) var(--ease-out);
 }
 
-.links a:hover,
-.links button:hover {
-  opacity: 1;
+.toTop:hover .toTopIcon {
+  translate: 0 -3px;
+}
+
+.arrow {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Dekoratif dev yazı: taşmayı kırpar, çok soluk. */
+.wordmark {
+  overflow: hidden;
+  padding-top: 0.06em;
+  margin-top: clamp(1rem, 3vw, 2.5rem);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(3rem, 12vw, 11rem);
+  font-weight: var(--heading-weight);
+  line-height: 1;
+  letter-spacing: var(--display-tracking);
+  white-space: nowrap;
+  color: rgb(255 255 255 / 6%);
+  user-select: none;
 }
 
 .footer :focus-visible {
-  outline-color: var(--color-surface);
+  outline-color: var(--color-accent-on-dark);
 }
 
-@media (max-width: 640px) {
-  .container {
-    flex-direction: column;
-    text-align: center;
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .cta {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
   }
 
-  .links {
-    justify-content: center;
+  .grid {
+    grid-template-columns: 1.3fr 1fr 1fr 1.2fr;
   }
 }

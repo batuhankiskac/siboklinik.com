@@ -31,19 +31,21 @@ export default function VideoCard({ video }: { video: Video }) {
         </div>
       ) : (
         <CardMedia
-          className={styles.imageContainer}
+          className={styles.media}
           src={thumbnail}
           onClick={() => setIsPlaying(true)}
           buttonLabel={`${video.title} videosunu oynat`}
         >
           <span className={styles.playOverlay} aria-hidden="true">
-            <span className={styles.playButton}>▶</span>
+            <span className={styles.playButton}>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M8 5.5v13l10.5-6.5L8 5.5z" fill="currentColor" />
+              </svg>
+            </span>
           </span>
         </CardMedia>
       )}
-      <div className={styles.content}>
-        <h2 className={styles.title}>{video.title}</h2>
-      </div>
+      <h2 className={styles.title}>{video.title}</h2>
     </article>
   );
 }

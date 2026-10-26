@@ -1,159 +1,317 @@
-.container {
-  width: min(800px, 100%);
-  margin: 4rem auto;
-  padding: 0 2rem;
+/* Detay sayfası. Genişlikler layout.module.css'ten gelir:
+   .container (geniş görsel) ve .narrow (okuma sütunu). main tam genişlik kalır;
+   gutter yalnız bu iki sınıfta uygulanır, çift boşluk olmaz. */
+.page {
+  width: 100%;
+  padding-block: clamp(2.5rem, 6vw, 4.5rem) var(--section-y);
+}
+
+.narrow {
+  composes: narrow from "../styles/layout.module.css";
+}
+
+.eyebrow {
+  composes: eyebrow from "../styles/layout.module.css";
+}
+
+.header {
+  composes: narrow from "../styles/layout.module.css";
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 
 .backLink {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  margin-bottom: 1.5rem;
+  font-size: var(--step--1);
+  font-weight: 600;
   color: var(--color-text-light);
-  font-size: 0.95rem;
-  transition: color 0.2s;
+  transition: color var(--dur-fast) var(--ease-out);
 }
 
 .backLink:hover {
   color: var(--color-primary);
 }
 
-.imageContainer {
+/* Başlık: en fazla 20 karakter genişlikte, editoryal sıkı izlemeli. */
+.title {
+  max-width: 20ch;
+  font-size: var(--step-4);
+  line-height: 1.04;
+  letter-spacing: var(--display-tracking, -0.03em);
+  overflow-wrap: anywhere;
+}
+
+.date {
+  font-size: var(--step--1);
+  color: var(--color-text-light);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Kapak görseli: container genişliğinde, 16:9, en fazla ekranın %70'i kadar yüksek. */
+.hero {
+  composes: container from "../styles/layout.module.css";
   position: relative;
-  width: 100%;
   aspect-ratio: 16 / 9;
-  margin-bottom: 2rem;
+  max-height: 70svh;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
   overflow: hidden;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--color-bg-alt);
-  box-shadow: var(--shadow-md);
 }
 
 .image {
   object-fit: cover;
 }
 
-.title {
-  margin-bottom: 1rem;
-  font-size: clamp(2rem, 6vw, 3rem);
-  line-height: 1.2;
-  overflow-wrap: anywhere;
-}
-
-.date {
-  display: block;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--color-border);
-  color: var(--color-text-light);
-  font-size: 0.95rem;
-}
-
+/* Okuma sütunu: 68ch; ölçü dışına taşmaz. */
 .content {
+  max-width: 68ch;
+  font-size: var(--step-0);
+  line-height: 1.75;
   color: var(--color-text);
-  font-size: 1.1rem;
-  line-height: 1.8;
   overflow-wrap: anywhere;
 }
 
-.content :is(p, ul, ol, blockquote, table, pre) {
-  margin-bottom: 1.5rem;
+@media (min-width: 900px) {
+  .content {
+    font-size: var(--step-1);
+  }
 }
 
-.content :is(ul, ol) {
-  padding-left: 1.5rem;
+.content p {
+  margin: 0 0 1.25em;
 }
 
-.content li {
-  margin-bottom: 0.5rem;
+.content strong {
+  font-weight: 600;
+  color: var(--color-heading);
 }
 
-.content li::marker {
-  color: var(--color-primary);
-  font-weight: bold;
+.content h2 {
+  margin: 3rem 0 1rem;
+  font-size: var(--step-3);
+  line-height: 1.1;
 }
 
-.content :is(h2, h3, h4) {
-  margin: 2rem 0 1rem;
+.content h3 {
+  margin: 2.25rem 0 0.75rem;
+  font-size: var(--step-2);
+  line-height: 1.2;
 }
 
-.content a,
-.citationItem a {
+.content h4 {
+  margin: 2rem 0 0.5rem;
+  font-size: var(--step-1);
+  line-height: 1.3;
+}
+
+.content a {
   color: var(--color-primary);
   text-decoration: underline;
-  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--dur-fast) var(--ease-out);
 }
 
+.content a:hover {
+  color: var(--color-accent-ink);
+}
+
+/* Madde işaretleri: lime nokta (dolgu) ve koyu halka; sıralı numaralar accent-ink. */
+.content ul,
+.content ol {
+  margin: 0 0 1.25em;
+  padding-left: 1.6em;
+}
+
+.content ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.content li + li {
+  margin-top: 0.5em;
+}
+
+.content ul > li {
+  position: relative;
+  padding-left: 1.5em;
+}
+
+.content ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0.1em;
+  top: 0.66em;
+  width: 0.44em;
+  height: 0.44em;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: inset 0 0 0 1px var(--color-primary);
+}
+
+.content ol > li::marker {
+  color: var(--color-accent-ink);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Alıntı: display italik, sol ince çizgi accent. */
 .content blockquote {
-  padding-left: 1rem;
-  border-left: 4px solid var(--color-secondary);
-  color: var(--color-text-light);
+  margin: 2.5rem 0;
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--color-accent-ink);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: var(--step-2);
+  font-style: italic;
+  line-height: 1.35;
+  color: var(--color-heading);
 }
 
-.content pre {
-  max-width: 100%;
-  padding: 1rem;
-  overflow-x: auto;
-  border-radius: var(--radius-sm);
-  background: #1f2922;
-  color: white;
+.content blockquote p {
+  margin-bottom: 0.75em;
+}
+
+.content blockquote p:last-child {
+  margin-bottom: 0;
 }
 
 .content img {
   display: block;
   max-width: 100%;
   height: auto;
-  margin: 0 auto 1.5rem;
+  margin: 2.5rem auto;
   border-radius: var(--radius-md);
+}
+
+.content hr {
+  margin: 3rem 0;
+  border: 0;
+  border-top: 1px solid var(--color-line);
+}
+
+/* Tablo: yalnız yatay ayırıcı çizgiler; dar ekranda sarmalayıcı kaydırır. */
+.tableWrap {
+  margin: 2rem 0;
+  overflow-x: auto;
 }
 
 .content table {
-  display: block;
   width: 100%;
-  overflow-x: auto;
   border-collapse: collapse;
+  font-size: 0.95em;
 }
 
-.content :is(th, td) {
-  padding: 0.65rem;
-  border: 1px solid #d9ddd9;
+.content th,
+.content td {
+  padding: 0.75rem 1rem 0.75rem 0;
+  border-bottom: 1px solid var(--color-line);
+  text-align: left;
+  vertical-align: top;
 }
 
-.citationsSection {
-  margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--color-border);
+.content th {
+  font-weight: 600;
+  color: var(--color-heading);
+  border-bottom-color: var(--color-line-strong);
 }
 
-.citationsTitle {
-  margin-bottom: 1.5rem;
-  padding-left: 1rem;
-  border-left: 4px solid var(--color-secondary);
-  font-size: 1.5rem;
+.content code {
+  padding: 0.1em 0.35em;
+  border-radius: 6px;
+  background: var(--color-bg-alt);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
 }
 
-.citationsList {
-  display: grid;
-  gap: 1rem;
-  padding-left: 1.5rem;
-}
-
-.citationItem {
-  padding: 1.25rem;
-  border: 1px solid rgb(0 0 0 / 5%);
-  border-radius: var(--radius-md);
-  background: #f8f9fa;
-  overflow-wrap: anywhere;
+.content pre {
+  margin: 0 0 1.5em;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-alt);
+  font-size: 0.9rem;
   line-height: 1.6;
 }
 
-@media (max-width: 640px) {
-  .container {
-    margin: 2.5rem auto;
-    padding: 0 1.25rem;
-  }
+.content pre code {
+  padding: 0;
+  background: none;
+  font-size: inherit;
+}
 
-  .content {
-    font-size: 1rem;
-  }
+/* Kaynakça: numaralı, ince ayırıcılı satırlar. */
+.citationsSection {
+  margin-top: 4rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--color-line);
+}
+
+.citationsTitle {
+  margin-bottom: 1.25rem;
+  font-size: var(--step-2);
+}
+
+.citationsList {
+  counter-reset: citation;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.citationItem {
+  position: relative;
+  counter-increment: citation;
+  padding: 1rem 0 1rem 3rem;
+  border-bottom: 1px solid var(--color-line);
+  font-size: var(--step--1);
+  line-height: 1.65;
+  color: var(--color-text-light);
+  overflow-wrap: anywhere;
+}
+
+.citationItem::before {
+  content: counter(citation, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 1rem;
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 600;
+  color: var(--color-accent-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.citationItem a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* Sayfa sonu: çizgi ve büyük başlık tipinde geri dönüş bağlantısı. */
+.end {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-line);
+}
+
+.endLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: var(--step-2);
+  font-weight: var(--heading-weight, 600);
+  line-height: 1.2;
+  color: var(--color-heading);
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.endLink:hover {
+  color: var(--color-primary);
 }

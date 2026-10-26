@@ -1,7 +1,19 @@
 .empty {
   grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
   width: 100%;
-  padding: 2rem;
+  max-width: 44rem;
+  padding-block: 0.5rem 2.5rem;
+}
+
+.eyebrow {
+  composes: eyebrow from "../styles/layout.module.css";
+}
+
+.message {
+  font-size: var(--step-1);
+  line-height: 1.6;
   color: var(--color-text-light);
-  text-align: center;
 }

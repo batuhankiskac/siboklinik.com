@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
-import { Outfit, Playfair_Display } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Sans } from "next/font/google";
 import { SITE_NAME } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/site";
 import site from "@/data/site.json";
 import "./globals.css";
 
-const playfair = Playfair_Display({
-  style: ["normal", "italic"],
+// Başlık ve metin yazı tipleri; globals.css bunları --font-display ve
+// --font-body değişkenlerinden okur.
+const display = Bricolage_Grotesque({
+  axes: ["opsz", "wdth"],
   subsets: ["latin", "latin-ext"],
-  variable: "--font-playfair",
+  variable: "--font-display",
   display: "swap",
 });
 
-const outfit = Outfit({
+const body = Instrument_Sans({
   subsets: ["latin", "latin-ext"],
-  variable: "--font-outfit",
+  variable: "--font-body",
   display: "swap",
 });
 
@@ -48,7 +50,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="tr">
-      <body className={`${outfit.variable} ${playfair.variable}`}>
+      <body className={`${body.variable} ${display.variable}`}>
         {children}
       </body>
     </html>

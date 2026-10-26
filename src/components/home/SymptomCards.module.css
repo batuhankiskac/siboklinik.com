@@ -1,68 +1,101 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-  gap: 30px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
 }
 
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+/* Üst kapsayıcı reveal öğesidir; hover kaldırması iç bağlantıda kalır. */
+.item {
+  display: flex;
+}
+
+/* İnce çerçeveli kart; hover'da açık limon dolgusu ve hafif yükselme. */
 .card {
-  display: block;
-  height: 100%;
-  padding: 40px;
-  border-bottom: 3px solid transparent;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: clamp(1.5rem, 2.5vw, 2rem);
+  border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
-  background-color: var(--color-surface);
-  box-shadow: var(--shadow-sm);
+  background: var(--color-surface);
   color: inherit;
   transition:
-    transform 0.3s ease,
-    border-color 0.3s ease;
+    transform var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
 }
 
 .card:hover {
-  transform: translateY(-10px);
-  border-bottom-color: var(--gold);
+  transform: translateY(-4px);
+  border-color: var(--color-line-strong);
+  background-color: var(--color-accent-soft);
 }
 
-.card:hover .more {
-  text-decoration: underline;
-}
-
-.icon {
-  display: block;
-  margin-bottom: 20px;
-  font-size: 2.5rem;
+.index {
+  margin-bottom: 2.25rem;
+  color: var(--color-accent-ink);
+  font-family: var(--font-display), sans-serif;
+  font-size: var(--step-1);
+  font-variant-numeric: tabular-nums;
   line-height: 1;
 }
 
 .title {
-  margin-bottom: 10px;
-  font-size: 1.3rem;
-  line-height: 1.35;
+  margin-bottom: 0.75rem;
+  font-size: var(--step-2);
+  line-height: 1.2;
 }
 
 .text {
+  flex: 1;
+  margin-bottom: 1.5rem;
   color: var(--color-text-light);
   font-size: 0.95rem;
+  line-height: 1.65;
 }
 
+/* Alt çizgi soldan sağa dolar (button.link ile aynı desen). */
 .more {
-  display: block;
-  margin-top: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  align-self: flex-start;
+  padding-block: 0.25em;
   color: var(--color-primary);
   font-size: 0.9rem;
   font-weight: 600;
+  background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0% 1px;
+  transition: background-size var(--dur-base) var(--ease-out);
 }
 
-@media (max-width: 768px) {
-  .card {
-    padding: 28px 24px;
-  }
+.card:hover .more {
+  background-size: 100% 1px;
+}
+
+.arrow {
+  composes: icon from "../../styles/button.module.css";
+}
+
+.card:hover .arrow {
+  transform: translateX(4px);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .card,
   .card:hover {
     transform: none;
-    transition: none;
   }
 }

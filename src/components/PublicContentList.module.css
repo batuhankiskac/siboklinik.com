@@ -1,0 +1,12 @@
+/* Her kartın sarmalayıcısı: kart kendi hover hareketini korusun diye reveal burada.
+   Kartlar sarmalayıcıyı doldurur; böylece aynı satırdaki kartlar eşit yükseklikte olur. */
+.item {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.item > * {
+  flex: 1 1 auto;
+  min-width: 0;
+}

@@ -1,19 +1,15 @@
 /* Ana sayfa bölümleri için ortak düzen. */
 .container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  composes: container from "../../styles/layout.module.css";
 }
 
 .section {
-  padding: 100px 0;
+  composes: section from "../../styles/layout.module.css";
   /* Sticky başlık, #çapa bağlantılarında bölüm başlığını örtmesin. */
-  scroll-margin-top: 80px;
+  scroll-margin-top: var(--header-h);
 }
 
-@media (max-width: 768px) {
-  .section {
-    padding: 64px 0;
-  }
+/* Ritim için alternatif zemin (bölümler bg / bg-alt sırasıyla gelir). */
+.alt {
+  background: var(--color-bg-alt);
 }

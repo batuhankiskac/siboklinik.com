@@ -1,12 +1,14 @@
+import type { ReactNode } from "react";
 import ExternalLink from "@/components/ExternalLink";
 import MapEmbed from "@/components/MapEmbed";
 import contact from "@/data/contact.json";
 import type { HomeSection } from "./types";
+import SectionHeader from "./SectionHeader";
 import shared from "./home.module.css";
 import styles from "./ContactSection.module.css";
 
 // Eski sitenin sosyal medya simgeleri (yalnız dekoratif; etiket metinle verilir).
-const SOCIAL_ICONS: Record<string, React.ReactNode> = {
+const SOCIAL_ICONS: Record<string, ReactNode> = {
   instagram: (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +37,7 @@ const SOCIAL_ICONS: Record<string, React.ReactNode> = {
   ),
 };
 
-function socialIcon(label: string): React.ReactNode {
+function socialIcon(label: string): ReactNode {
   return SOCIAL_ICONS[label.trim().toLowerCase()] ?? null;
 }
 
@@ -44,26 +46,42 @@ type ContactSectionProps = {
 };
 
 export default function ContactSection({ section }: ContactSectionProps) {
+  const items = section.items ?? [];
+  // Telefon, büyük görüntülenen tek satır; diğer bilgiler etiket/değer satırlarıdır.
+  const phoneItems = items.filter((item) => item.text === contact.phone);
+  const rowItems = items.filter((item) => item.text !== contact.phone);
+
   return (
     <section id={section.id} className={styles.contact}>
       <div className={`${shared.container} ${styles.grid}`}>
-        <div>
-          <h2 className={styles.title}>{section.title}</h2>
-          {section.subtitle && (
-            <p className={styles.subtitle}>{section.subtitle}</p>
-          )}
-          {(section.items ?? []).map((item) => (
-            <div key={item.title} className={styles.item}>
+        <div className={styles.info}>
+          <SectionHeader
+            index="05"
+            eyebrow="İletişim"
+            title={section.title}
+            intro={section.subtitle}
+          />
+
+          {phoneItems.map((item) => (
+            <div key={item.title} className={styles.phoneBlock}>
               <div className={styles.label}>{item.title}</div>
-              {item.text === contact.phone ? (
-                <a href={`tel:${contact.tel}`} className={styles.phone}>
-                  {item.text}
-                </a>
-              ) : (
-                <div className={styles.value}>{item.text}</div>
-              )}
+              <a href={`tel:${contact.tel}`} className={styles.phone}>
+                {item.text}
+              </a>
             </div>
           ))}
+
+          {rowItems.length > 0 && (
+            <div className={styles.rows}>
+              {rowItems.map((item) => (
+                <div key={item.title} className={styles.row}>
+                  <div className={styles.label}>{item.title}</div>
+                  <div className={styles.value}>{item.text}</div>
+                </div>
+              ))}
+            </div>
+          )}
+
           {section.ctas && (
             <div className={styles.social}>
               {section.ctas.map((cta) => (
@@ -79,7 +97,8 @@ export default function ContactSection({ section }: ContactSectionProps) {
             </div>
           )}
         </div>
-        <div className={styles.map}>
+
+        <div className={styles.map} data-reveal>
           <MapEmbed
             embedUrl={contact.mapEmbedUrl}
             title="SIBO Klinik konumu (Google Haritalar)"

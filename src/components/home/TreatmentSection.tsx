@@ -1,4 +1,7 @@
 import Link from "next/link";
+import type { CSSProperties } from "react";
+import ArrowIcon from "@/components/ArrowIcon";
+import buttonStyles from "@/styles/button.module.css";
 import type { HomeSection } from "./types";
 import SectionHeader from "./SectionHeader";
 import shared from "./home.module.css";
@@ -15,34 +18,41 @@ export default function TreatmentSection({
   boxes,
 }: TreatmentSectionProps) {
   return (
-    <section id={section.id} className={shared.section}>
+    <section id={section.id} className={`${shared.section} ${shared.alt}`}>
       <div className={shared.container}>
-        <SectionHeader title={section.title} />
+        <SectionHeader index="04" eyebrow="Tedavi" title={section.title} />
         <div className={styles.grid}>
-          {boxes.map((box, index) => (
-            <div
-              key={box.id}
-              className={`${styles.box} ${
-                index % 2 === 0 ? styles.warm : styles.cool
-              }`}
-            >
-              <h3 className={styles.boxTitle}>{box.title}</h3>
-              <ul className={styles.list}>
-                {(box.items ?? []).map((item) => (
-                  <li key={item.title} className={styles.item}>
-                    <strong className={styles.itemTitle}>{item.title}</strong>
-                    {item.text && <span>{item.text}</span>}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {boxes.map((box, index) => {
+            // Tek sıra: ilk kutu açık zeminde, ikincisi koyu panelde.
+            const dark = index % 2 === 1;
+            return (
+              <div
+                key={box.id}
+                className={dark ? styles.panelDark : styles.panel}
+                data-reveal
+                style={{ "--i": index } as CSSProperties}
+              >
+                <h3 className={styles.boxTitle}>{box.title}</h3>
+                <ul className={styles.list}>
+                  {(box.items ?? []).map((item) => (
+                    <li key={item.title} className={styles.item}>
+                      <strong className={styles.itemTitle}>{item.title}</strong>
+                      {item.text && (
+                        <span className={styles.itemText}>{item.text}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
-        <p className={styles.more}>
-          <Link href="/hizmetler" className={styles.moreLink}>
-            Tanı ve tedavi yöntemlerinin ayrıntıları →
+        <div className={styles.more}>
+          <Link href="/hizmetler" className={styles.moreButton}>
+            Tanı ve tedavi yöntemlerinin ayrıntıları
+            <ArrowIcon className={buttonStyles.icon} />
           </Link>
-        </p>
+        </div>
       </div>
     </section>
   );

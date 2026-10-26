@@ -14,15 +14,20 @@ export const metadata = pageMetadata({
 
 export default function VideosPage() {
   return (
-    <main id="main-content" className={styles.container}>
-      <h1 className={styles.heading}>Videolar</h1>
-      <Suspense fallback={<LoadingState />}>
-        <PublicContentList
-          load={getVideos}
-          emptyText="Henüz yayınlanmış bir video bulunmuyor."
-          renderItem={(video) => <VideoCard video={video} />}
-        />
-      </Suspense>
+    <main id="main-content" className={styles.page}>
+      <header className={styles.header}>
+        <p className={styles.eyebrow}>Rehber</p>
+        <h1 className={styles.title}>Videolar</h1>
+      </header>
+      <div className={styles.body}>
+        <Suspense fallback={<LoadingState />}>
+          <PublicContentList
+            load={getVideos}
+            emptyText="Henüz yayınlanmış bir video bulunmuyor."
+            renderItem={(video) => <VideoCard video={video} />}
+          />
+        </Suspense>
+      </div>
     </main>
   );
 }

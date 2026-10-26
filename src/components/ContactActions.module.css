@@ -1,27 +1,67 @@
+/* Telefon ve WhatsApp eylemleri: varsayılan olarak düğme, compact modda yuvarlak ikonlar. */
 .wrapper {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
+  justify-content: flex-start;
+  gap: 0.75rem;
 }
 
-.phoneText {
-  margin-right: 0.25rem;
-  font-weight: 600;
+.phone {
+  composes: button primary from "../styles/button.module.css";
 }
 
+.phoneInverted {
+  composes: button ghostLight from "../styles/button.module.css";
+}
+
+.whatsapp {
+  composes: button ghost from "../styles/button.module.css";
+}
+
+.whatsappInverted {
+  composes: button ghostLight from "../styles/button.module.css";
+}
+
+.arrow {
+  composes: icon from "../styles/button.module.css";
+}
+
+.glyph {
+  flex: none;
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.compact {
+  gap: 0.5rem;
+}
+
+/* Hairline çerçeveli yuvarlak ikon düğmesi; dokunma hedefi 44px. */
 .iconButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-line-strong);
   border-radius: 50%;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
 }
 
 .iconButton:hover {
-  transform: translateY(-2px);
+  border-color: var(--color-primary);
+  background: var(--color-primary-subtle-bg);
+}
+
+.iconButton:active {
+  transform: scale(0.96);
 }
 
 .iconButton svg {
@@ -29,21 +69,14 @@
   height: 20px;
 }
 
-.call {
-  background: rgb(0 0 0 / 6%);
-  color: var(--color-primary);
+/* Koyu zemin: ikonlar açık, çerçeve yarı saydam. */
+.inverted .iconButton {
+  border-color: rgb(255 255 255 / 30%);
+  background: transparent;
+  color: var(--color-on-dark);
 }
 
-.whatsapp {
-  background: #1f9d55;
-  color: white;
-}
-
-.inverted {
-  justify-content: flex-start;
-}
-
-.inverted .call {
+.inverted .iconButton:hover {
+  border-color: var(--color-on-dark);
   background: rgb(255 255 255 / 12%);
-  color: var(--color-surface);
 }

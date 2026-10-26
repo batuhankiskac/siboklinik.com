@@ -37,6 +37,8 @@ export default function Home() {
                 key={section.id}
                 section={section}
                 imageAlt={heroImage?.alt ?? ""}
+                eyebrow={siteData.brand.shortDescription}
+                doctorName={siteData.brand.doctorName}
               />
             );
           case "text":

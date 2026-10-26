@@ -1,22 +1,39 @@
+import layout from "../../styles/layout.module.css";
 import styles from "./SectionHeader.module.css";
 
 type SectionHeaderProps = {
+  // Eyebrow'daki sıra numarası (ör. "01") ve kısa etiket (ör. "Hakkında").
+  index?: string;
+  eyebrow?: string;
   title: string;
-  subtitle?: string;
-  centered?: boolean;
+  intro?: string;
+  // Masaüstünde başlık solda, açıklama sağda ve alt hizalı olur.
+  split?: boolean;
 };
 
-// Bölüm başlığı: başlık, isteğe bağlı açıklama ve altın ayırıcı çizgi.
+// Bölüm başlığı: eyebrow, h2 ve isteğe bağlı giriş metni. Altın ayırıcı yok.
 export default function SectionHeader({
+  index,
+  eyebrow,
   title,
-  subtitle,
-  centered = false,
+  intro,
+  split = false,
 }: SectionHeaderProps) {
   return (
-    <div className={centered ? styles.centered : styles.header}>
-      <h2 className={styles.title}>{title}</h2>
-      {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
-      <div className={styles.divider} aria-hidden="true" />
+    <div
+      className={split ? `${styles.header} ${styles.split}` : styles.header}
+      data-reveal
+    >
+      <div className={styles.titleBlock}>
+        {(index || eyebrow) && (
+          <p className={layout.eyebrow}>
+            {index && <span className={styles.index}>{index}</span>}
+            {eyebrow}
+          </p>
+        )}
+        <h2 className={styles.title}>{title}</h2>
+      </div>
+      {intro && <p className={styles.intro}>{intro}</p>}
     </div>
   );
 }

@@ -4,8 +4,8 @@ export type HomeCta = {
   href: string;
 };
 
+// "icon" alanı kaldırıldı; ana sayfada emoji kullanılmaz.
 export type HomeItem = {
-  icon?: string;
   title: string;
   text?: string;
   href?: string;

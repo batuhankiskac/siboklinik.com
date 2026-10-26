@@ -1,16 +1,21 @@
+import type { CSSProperties } from "react";
 import type { HomeSection } from "./types";
 import SectionHeader from "./SectionHeader";
 import shared from "./home.module.css";
 import styles from "./StepsTimeline.module.css";
 
-// "1. Hazırlık Aşaması: Test Öncesi Diyet" → tarih etiketi ve başlık.
+// "1. Hazırlık Aşaması: Test Öncesi Diyet" → nokta numarası, etiket ve başlık.
+// Numara noktada gösterildiği için etiketten çıkarılır.
 // İki nokta içermeyen adımlarda etiket yoktur.
-function splitStepTitle(title: string): { label?: string; heading: string } {
-  const index = title.indexOf(": ");
-  if (index === -1) return { heading: title };
+function parseStep(title: string, fallbackNumber: number) {
+  const numbered = title.match(/^(\d+)\.\s*/);
+  const rest = numbered ? title.slice(numbered[0].length) : title;
+  const colon = rest.indexOf(": ");
+  const number = numbered ? numbered[1] : String(fallbackNumber);
   return {
-    label: title.slice(0, index),
-    heading: title.slice(index + 2),
+    number: number.padStart(2, "0"),
+    label: colon === -1 ? undefined : rest.slice(0, colon),
+    heading: colon === -1 ? rest : rest.slice(colon + 2),
   };
 }
 
@@ -22,32 +27,42 @@ export default function StepsTimeline({ section }: StepsTimelineProps) {
   const steps = section.items ?? [];
 
   return (
-    <section id={section.id} className={shared.section}>
+    <section id={section.id} className={`${shared.section} ${shared.alt}`}>
       <div className={shared.container}>
         <SectionHeader
+          index="02"
+          eyebrow="Test Süreci"
           title={section.title}
-          subtitle={section.subtitle}
-          centered
+          intro={section.subtitle}
+          split
         />
-        <ol className={styles.timeline}>
-          {steps.map((step, index) => {
-            const { label, heading } = splitStepTitle(step.title);
-            return (
-              <li
-                key={step.title}
-                className={`${styles.step} ${
-                  index % 2 === 0 ? styles.left : styles.right
-                }`}
-              >
-                <div className={styles.card}>
-                  {label && <span className={styles.label}>{label}</span>}
-                  <h3 className={styles.heading}>{heading}</h3>
-                  <p className={styles.text}>{step.text}</p>
-                </div>
-              </li>
-            );
-          })}
-        </ol>
+
+        {/* Zaman çizelgesi kapsayıcısı: çizgi dolgusu ve adımlar bu öğenin içindedir. */}
+        <div className={styles.timeline}>
+          <span className={styles.rail} aria-hidden="true">
+            <span className={styles.fill} />
+          </span>
+          <ol className={styles.steps}>
+            {steps.map((step, index) => {
+              const { number, label, heading } = parseStep(step.title, index + 1);
+              return (
+                <li
+                  key={step.title}
+                  className={styles.step}
+                  style={{ "--i": index } as CSSProperties}
+                >
+                  <span className={styles.dot}>{number}</span>
+                  <div className={styles.card}>
+                    {label && <span className={styles.label}>{label}</span>}
+                    <h3 className={styles.heading}>{heading}</h3>
+                    <p className={styles.text}>{step.text}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+
         {section.note && <p className={styles.note}>{section.note}</p>}
       </div>
     </section>

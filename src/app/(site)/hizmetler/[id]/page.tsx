@@ -39,6 +39,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     <ContentDetail
       backHref="/hizmetler"
       backLabel="Tanı ve Tedavi'ye Dön"
+      eyebrow="Hizmet"
       title={service.title}
       imageUrl={service.imageUrl}
       imageAlt={`${service.title} hizmeti`}

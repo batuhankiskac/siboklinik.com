@@ -4,6 +4,7 @@ import StatusMessage from "./StatusMessage";
 export default function NotFoundContent() {
   return (
     <StatusMessage
+      eyebrow="404"
       title="Sayfa bulunamadı"
       message="Aradığınız sayfa kaldırılmış, adı değiştirilmiş veya hiç var olmamış olabilir."
       actionLabel="Ana sayfaya dön"

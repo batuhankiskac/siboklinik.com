@@ -1,8 +1,20 @@
-.container {
-  composes: container from "../../../styles/page.module.css";
-  --page-max: 1200px;
+/* Sayfa iskeleti (page, header, eyebrow, title, body) ortak dosyadan gelir. */
+.page {
+  composes: page from "../../../styles/page.module.css";
 }
 
-.heading {
-  composes: heading from "../../../styles/page.module.css";
+.header {
+  composes: header from "../../../styles/page.module.css";
+}
+
+.eyebrow {
+  composes: eyebrow from "../../../styles/page.module.css";
+}
+
+.title {
+  composes: title from "../../../styles/page.module.css";
+}
+
+.body {
+  composes: body from "../../../styles/page.module.css";
 }
