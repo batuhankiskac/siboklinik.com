@@ -188,9 +188,10 @@ p {
   animation-name: enter-fade;
 }
 
+/* Hero görseli genelde LCP öğesidir: gizlenmez (opaklık/kırpma yok), yalnız
+   hafifçe yakınlaşıp netleşir; böylece LCP animasyonu beklemez. */
 [data-enter="mask"] {
-  animation: enter-mask 1400ms var(--ease-out) both;
-  animation-delay: calc(var(--i, 0) * 110ms);
+  animation: enter-zoom 1600ms var(--ease-out) both;
 }
 
 @keyframes enter-rise {
@@ -213,14 +214,14 @@ p {
   }
 }
 
-@keyframes enter-mask {
+@keyframes enter-zoom {
   from {
-    clip-path: inset(100% 0 0 0);
     transform: scale(1.06);
+    filter: saturate(0.7);
   }
   to {
-    clip-path: inset(0 0 0 0);
     transform: none;
+    filter: none;
   }
 }
 

@@ -9,10 +9,11 @@ import "./globals.css";
 // --font-body değişkenlerinden okur.
 const display = Newsreader({
   style: ["normal", "italic"],
-  axes: ["opsz"],
   subsets: ["latin", "latin-ext"],
   variable: "--font-display",
   display: "swap",
+  // Önyüklenmez: mobilde ağ bant genişliğini hero görseline bırakır.
+  preload: false,
 });
 
 const body = Geist({
