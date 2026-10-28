@@ -72,4 +72,7 @@
 /* Ghost düğme; ok ikonu buttonStyles.icon ile aynı hareketi yapar. */
 .moreButton {
   composes: button ghost from "../../styles/button.module.css";
+  /* Uzun etiket dar ekranda kaydırma yaratmasın diye satır kırar. */
+  max-width: 100%;
+  white-space: normal;
 }

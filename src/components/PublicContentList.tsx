@@ -5,7 +5,7 @@ import styles from "./PublicContentList.module.css";
 
 type PublicContentListProps<T extends { id: string }> = {
   load: () => Promise<T[]>;
-  emptyText: string;
+  emptyText: ReactNode;
   renderItem: (item: T) => ReactNode;
 };
 

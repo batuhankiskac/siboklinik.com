@@ -59,6 +59,10 @@
       "label": "Tedavi Yöntemleri"
     },
     {
+      "href": "/videolar",
+      "label": "Videolar"
+    },
+    {
       "href": "/iletisim",
       "label": "İletişim"
     }
@@ -325,6 +329,10 @@
         "href": "/#nedir"
       },
       {
+        "label": "Videolar",
+        "href": "/videolar"
+      },
+      {
         "label": "İletişim",
         "href": "/iletisim"
       },
@@ -340,9 +348,9 @@
   },
   "images": [
     {
-      "file": "assets/sibo_hero_plain.png",
+      "file": "doctor.jpg",
       "usedIn": "hero",
-      "alt": "SIBO tedavisi ve bağırsak sağlığı temalı ana sayfa görseli"
+      "alt": "Prof. Dr. Muharrem Kıskaç"
     },
     {
       "file": "assets/sibo_hero_image.png",

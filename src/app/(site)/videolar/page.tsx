@@ -1,9 +1,11 @@
 import { Suspense, type CSSProperties } from "react";
+import ExternalLink from "@/components/ExternalLink";
 import LoadingState from "@/components/LoadingState";
 import PublicContentList from "@/components/PublicContentList";
 import VideoCard from "@/components/VideoCard";
 import { getVideos } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
+import contactData from "@/data/contact.json";
 import styles from "./page.module.css";
 
 export const metadata = pageMetadata({
@@ -27,7 +29,15 @@ export default function VideosPage() {
         <Suspense fallback={<LoadingState />}>
           <PublicContentList
             load={getVideos}
-            emptyText="Henüz yayınlanmış bir video bulunmuyor."
+            emptyText={
+              <>
+                Videolarımız çok yakında burada olacak. O zamana kadar{" "}
+                <ExternalLink href={contactData.social.youtube}>
+                  YouTube kanalımıza
+                </ExternalLink>{" "}
+                göz atabilirsiniz.
+              </>
+            }
             renderItem={(video) => <VideoCard video={video} />}
           />
         </Suspense>
