@@ -1,9 +1,9 @@
-import { Suspense, type CSSProperties } from "react";
-import LoadingState from "@/components/LoadingState";
-import PublicContentList from "@/components/PublicContentList";
+import type { CSSProperties } from "react";
+import ContentGrid from "@/components/ContentGrid";
 import ServiceCard from "@/components/ServiceCard";
-import { getServices } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
+import { services } from "@/lib/static-content";
+import listStyles from "@/components/PublicContentList.module.css";
 import styles from "./page.module.css";
 
 export const metadata = pageMetadata({
@@ -13,9 +13,7 @@ export const metadata = pageMetadata({
   path: "/hizmetler",
 });
 
-// Yükleme göstergesi segment yerine sayfa içinde tutulur; segment düzeyindeki
-// loading.tsx alt rotaları da sarar ve detay sayfalarında 404 durum kodunu
-// engeller.
+// İçerik src/data/hizmetler.json dosyasından gelir; sayfa build'de üretilir.
 export default function ServicesPage() {
   return (
     <main id="main-content" className={styles.page}>
@@ -33,13 +31,18 @@ export default function ServicesPage() {
       </header>
 
       <section aria-label="Tanı ve tedavi listesi" className={styles.body}>
-        <Suspense fallback={<LoadingState />}>
-          <PublicContentList
-            load={getServices}
-            emptyText="Tanı ve tedavi bilgileri yakında eklenecektir."
-            renderItem={(service) => <ServiceCard service={service} />}
-          />
-        </Suspense>
+        <ContentGrid>
+          {services.map((service, index) => (
+            <div
+              key={service.id}
+              className={listStyles.item}
+              data-reveal
+              style={{ "--i": index % 3 } as CSSProperties}
+            >
+              <ServiceCard service={service} />
+            </div>
+          ))}
+        </ContentGrid>
       </section>
     </main>
   );

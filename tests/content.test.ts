@@ -7,7 +7,6 @@ import {
   text,
   toArticle,
   toArticleSummary,
-  toService,
   toVideo,
 } from "@/lib/normalize";
 
@@ -101,10 +100,7 @@ describe("normalizer'lar", () => {
     expect(toArticle("a3", { citations: "tek" }).citations).toEqual([]);
   });
 
-  it("hizmet ve video belgelerini çevirir", () => {
-    expect(
-      toService("s1", { title: "Diyabet", description: "Metin" }),
-    ).toMatchObject({ id: "s1", title: "Diyabet", description: "Metin" });
+  it("video belgelerini çevirir", () => {
     expect(
       toVideo("v1", { youtubeId: "dQw4w9WgXcQ", imageUrl: "/t.jpg" }),
     ).toMatchObject({

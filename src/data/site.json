@@ -32,9 +32,13 @@
       "title": "SIBO Klinik | Prof. Dr. Muharrem Kıskaç ile SIBO Tanı ve Tedavisi",
       "description": "Prof. Dr. Muharrem Kıskaç gözetiminde SIBO (İnce Bağırsak Aşırı Bakteri Çoğalması) tanı ve tedavisi. Fonksiyonel tıp yaklaşımıyla bağırsak sağlığınızı destekleyen değerlendirme ve tedavi seçenekleri hakkında bilgi alın."
     },
-    "articlesIndex": {
+    "symptomsIndex": {
       "title": "SIBO Belirtileri",
       "description": "SIBO ile ilişkili olabilen belirtiler hakkında genel bilgiler. Bu bilgiler bilgilendirme amaçlıdır; değerlendirme için hekime başvurun."
+    },
+    "articlesIndex": {
+      "title": "Makaleler",
+      "description": "SIBO ve sindirim sağlığı üzerine Prof. Dr. Muharrem Kıskaç'ın yazıları. Bu bilgiler bilgilendirme amaçlıdır; değerlendirme için hekime başvurun."
     },
     "about": {
       "title": "SIBO Nedir?",
@@ -52,11 +56,15 @@
     },
     {
       "href": "/belirtiler",
-      "label": "Makaleler"
+      "label": "Belirtiler"
     },
     {
       "href": "/#tedavi",
       "label": "Tedavi Yöntemleri"
+    },
+    {
+      "href": "/makaleler",
+      "label": "Makaleler"
     },
     {
       "href": "/videolar",
@@ -327,6 +335,10 @@
       {
         "label": "Hakkında",
         "href": "/#nedir"
+      },
+      {
+        "label": "Makaleler",
+        "href": "/makaleler"
       },
       {
         "label": "Videolar",

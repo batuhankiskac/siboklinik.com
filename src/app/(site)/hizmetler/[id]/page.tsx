@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ContentDetail from "@/components/ContentDetail";
-import { getService } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
+import { getService, services } from "@/lib/static-content";
 import { excerpt } from "@/lib/text";
 
 type PageProps = { params: Promise<{ id: string }> };
 
-// Build'de Firestore'a gidilmez; detay sayfaları ilk istekte üretilip ISR ile
-// önbelleğe alınır. Bilinmeyen id'ler notFound() ile 404 döner.
+// Hizmet sayfaları sabit içeriktir (src/data/hizmetler.json) ve build'de
+// üretilir. Bilinmeyen id'ler notFound() ile 404 döner.
 export function generateStaticParams() {
-  return [];
+  return services.map((service) => ({ id: service.id }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const service = await getService(id);
+  const service = getService(id);
   if (!service) notFound();
 
   return pageMetadata({
@@ -28,11 +28,9 @@ export async function generateMetadata({
   });
 }
 
-// Bu rotayı saran bir loading.tsx/Suspense yoktur; notFound() yanıt akışı
-// başlamadan çalışır ve gerçek 404 durum kodu döner.
 export default async function ServiceDetailPage({ params }: PageProps) {
   const { id } = await params;
-  const service = await getService(id);
+  const service = getService(id);
   if (!service) notFound();
 
   return (

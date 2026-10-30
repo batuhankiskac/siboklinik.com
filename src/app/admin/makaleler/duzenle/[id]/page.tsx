@@ -15,7 +15,7 @@ export default async function EditArticlePage({
 
   return (
     <AdminForm
-      title="Belirtiyi Düzenle"
+      title="Makaleyi Düzenle"
       action={updateArticle.bind(null, id)}
       submitLabel="Güncelle"
     >

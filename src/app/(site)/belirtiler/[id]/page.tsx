@@ -1,53 +1,51 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ContentDetail from "@/components/ContentDetail";
-import { getArticle } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
+import { getSymptom, symptoms } from "@/lib/static-content";
 
 type PageProps = { params: Promise<{ id: string }> };
 
-// Build'de Firestore'a gidilmez; detay sayfaları ilk istekte üretilip ISR ile
-// önbelleğe alınır. Bilinmeyen id'ler notFound() ile 404 döner.
+// Belirti sayfaları sabit içeriktir (src/data/belirtiler.json) ve build'de
+// üretilir. Bilinmeyen id'ler notFound() ile 404 döner.
 export function generateStaticParams() {
-  return [];
+  return symptoms.map((symptom) => ({ id: symptom.id }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const article = await getArticle(id);
-  if (!article) notFound();
+  const symptom = getSymptom(id);
+  if (!symptom) notFound();
 
   return pageMetadata({
-    title: article.title,
-    description: article.summary,
+    title: symptom.title,
+    description: symptom.summary,
     path: `/belirtiler/${id}`,
-    image: article.imageUrl,
+    image: symptom.imageUrl,
     type: "article",
-    publishedTime: article.createdAt,
-    modifiedTime: article.updatedAt,
+    publishedTime: symptom.createdAt,
+    modifiedTime: symptom.updatedAt,
   });
 }
 
-// Bu rotayı saran bir loading.tsx/Suspense yoktur; notFound() yanıt akışı
-// başlamadan çalışır ve gerçek 404 durum kodu döner.
-export default async function ArticleDetailPage({ params }: PageProps) {
+export default async function SymptomDetailPage({ params }: PageProps) {
   const { id } = await params;
-  const article = await getArticle(id);
-  if (!article) notFound();
+  const symptom = getSymptom(id);
+  if (!symptom) notFound();
 
   return (
     <ContentDetail
       backHref="/belirtiler"
       backLabel="Belirtilere Dön"
       eyebrow="Belirti"
-      title={article.title}
-      imageUrl={article.imageUrl}
-      imageAlt={`${article.title} kapak görseli`}
-      date={article.createdAt}
-      markdown={article.content}
-      citations={article.citations}
+      title={symptom.title}
+      imageUrl={symptom.imageUrl}
+      imageAlt={`${symptom.title} kapak görseli`}
+      date={symptom.createdAt}
+      markdown={symptom.content}
+      citations={symptom.citations}
     />
   );
 }

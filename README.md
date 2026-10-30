@@ -1,11 +1,12 @@
 # siboklinik.com
 
 SIBO Klinik (`siboklinik.com`) için Next.js 16 tabanlı kurumsal site ve içerik
-yönetim paneli. Kamuya açık sayfalar (ana sayfa, belirtiler, tanı ve tedavi,
-videolar, iletişim, gizlilik) Firebase Admin ile sunucuda render edilir. Yönetim
-paneli Firebase Authentication ile korunur ve `Hizmetler`, `Belirtiler`,
-`Videolar` koleksiyonlarını yönetir. Tarayıcıya yalnız admin girişinde gereken
-Firebase Auth kodu gönderilir.
+yönetim paneli. Kamuya açık sayfalar: ana sayfa, belirtiler, tanı ve tedavi,
+makaleler, videolar, iletişim, gizlilik. Yönetim paneli Firebase Authentication
+ile korunur ve yalnız `Makaleler` (Firestore `articles`) ile `Videolar`
+(Firestore `videos`) koleksiyonlarını yönetir. Belirtiler ve tanı/tedavi
+(hizmetler) sayfaları sabit içeriktir; panelden düzenlenmez. Tarayıcıya yalnız
+admin girişinde gereken Firebase Auth kodu gönderilir.
 
 Public görünüm eski statik siteyle aynıdır (renkler, yazı tipleri ve bölüm
 düzeni). Sayfa içeriği `src/data/site.json` dosyasından gelir.
@@ -15,17 +16,22 @@ düzeni). Sayfa içeriği `src/data/site.json` dosyasından gelir.
 | Yol | İçerik |
 | --- | --- |
 | `/` | Ana sayfa (`site.json` → `home.sections`, `#nedir`, `#tedavi` gibi bölüm bağlantıları) |
-| `/belirtiler` | Belirtiler listesi (Firestore `articles`) |
-| `/belirtiler/[id]` | Belirti detayı |
-| `/hizmetler` | Tanı ve Tedavi hizmetleri (Firestore `services`) |
-| `/videolar` | Videolar (Firestore `videos`) |
+| `/belirtiler`, `/belirtiler/[id]` | 9 belirti sayfası (sabit: `src/data/belirtiler.json`) |
+| `/hizmetler`, `/hizmetler/[id]` | 7 tanı ve tedavi sayfası (sabit: `src/data/hizmetler.json`) |
+| `/makaleler`, `/makaleler/[id]` | Makaleler (Firestore `articles`, admin panelinden yönetilir) |
+| `/videolar` | Videolar (Firestore `videos`, admin panelinden yönetilir) |
 | `/iletisim` | İletişim ve randevu bilgileri |
 | `/gizlilik` | Gizlilik ve Çerez Politikası / KVKK Aydınlatma Metni |
 | `/login`, `/admin/*` | Yönetim paneli (noindex, robots'ta engelli) |
 
-Eski statik sitenin `*.html` adresleri ve `/makaleler`, `/hakkinda` adresleri
-`next.config.ts` içinde kalıcı (301/308) yönlendirmelerle yeni adreslere
-taşınır. Yönlendirme listesi `src/data/site.json` → `redirects` alanındadır.
+Eski statik sitenin `*.html` adresleri ve `/hakkinda` adresi `next.config.ts`
+içinde kalıcı (301/308) yönlendirmelerle yeni adreslere taşınır. Yönlendirme
+listesi `src/data/site.json` → `redirects` alanındadır.
+
+Belirti ve hizmet sayfalarının metinleri, sırası ve tarihleri
+`src/data/belirtiler.json` ve `src/data/hizmetler.json` dosyalarındadır. Bu
+sayfalar Firestore'a gitmeden build'de üretilir; bilinmeyen kimlikler 404 döner.
+Metin değişikliği bu dosyalarda yapılır ve yeniden yayın gerektirir.
 
 ## Gereksinimler
 
@@ -104,8 +110,11 @@ firebase deploy --only firestore:rules,storage
 
 ## Başlangıç içeriğini yükleme (`npm run seed`)
 
-`seed/content.json` içinde 9 belirti (`articles`), 7 hizmet (`services`) ve
-boş bir video listesi bulunur. Bu içerik Firestore’a aşağıdaki komutla yazılır:
+`seed/content.json` içindeki `articles`, `services` ve `videos` listeleri boştur:
+belirti ve hizmet metinleri artık `src/data/belirtiler.json` ve
+`src/data/hizmetler.json` dosyalarında sabit içerik olarak tutulur. Makaleler ve
+videolar yönetim panelinden eklenir. Seed komutu, listelere kayıt eklenirse
+Firestore’a yazmak için korunmuştur:
 
 ```bash
 npm run seed -- --dry-run   # yazmadan ne yapılacağını listeler
@@ -113,20 +122,17 @@ npm run seed                # eksik belgeleri oluşturur, mevcutları atlar
 npm run seed -- --force     # mevcut belgelerin metin alanlarını seed ile günceller
 ```
 
-- Belge kimlikleri JSON’daki `id` değerleridir (ör. `siskinlik`); tekrar
-  çalıştırmak güvenlidir.
+- Belge kimlikleri JSON’daki `id` değerleridir; tekrar çalıştırmak güvenlidir.
 - Komut `.env.local` içindeki `FIREBASE_PROJECT_ID`, `FIREBASE_CLIENT_EMAIL` ve
   `FIREBASE_PRIVATE_KEY_BASE64` / `FIREBASE_PRIVATE_KEY` değerlerini kullanır.
   `--dry-run` kimlik bilgisi olmadan da çalışır; bu durumda mevcut belgeler
   kontrol edilmez.
 - `--force` yalnız metin alanlarını ve `updatedAt` değerini değiştirir. Panelden
   yüklenmiş görseller (`imageUrl`, `imagePath`) korunur.
-- Seed verisindeki tıbbi metinler gözden geçirilmiş metinlerdir; yayımlanmadan
-  önce içerik değişikliklerini yönetim panelinden yapın.
 
 ## Veri ve güvenlik
 
-- Public belirti, hizmet ve video okumaları sunucudan yapılır.
+- Public makale ve video okumaları sunucudan yapılır (5 dk önbellekli).
 - Admin oturumu doğrulanmış Firebase ID token’dan üretilen `HttpOnly` cookie
   kullanır.
 - `/gizlilik` sayfası veri sorumlusunu `src/data/bio.json` (hekim) ve
@@ -162,7 +168,7 @@ npm run test:e2e
 Playwright testleri sistemde kurulu Google Chrome’u kullanır. Firebase Admin env
 değerleri yoksa public koleksiyonlar boş gösterilir ve admin login entegrasyonu
 yerine anonim ve sahte-cookie yönlendirme davranışı test edilir.
-`E2E_ADMIN_EMAIL` ile `E2E_ADMIN_PASSWORD` tanımlandığında login, hizmet
+`E2E_ADMIN_EMAIL` ile `E2E_ADMIN_PASSWORD` tanımlandığında login, makale
 ekleme-düzenleme-silme ve logout akışı da geçici bir kayıtla çalıştırılır.
 
 ## Production notları
@@ -173,4 +179,4 @@ ekleme-düzenleme-silme ve logout akışı da geçici bir kayıtla çalıştır�
 - Google Ads ve telefon dönüşümü kendi GTM konteyneri içinde tutulmalıdır. Site
   yalnız kullanıcı analiz izni verdikten sonra GTM’yi yükler.
 - Yayımdan sonra `/sitemap.xml` ve `/robots.txt` adreslerini kontrol edin;
-  eski `*.html` ve `/makaleler` adreslerinin 301/308 ile yönlendiğini doğrulayın.
+  eski `*.html` adreslerinin 301/308 ile yönlendiğini doğrulayın.

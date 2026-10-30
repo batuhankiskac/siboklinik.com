@@ -1,6 +1,6 @@
-// Ana sayfa kartları site.json'da makalelere belge kimliğiyle bağlanır. Makale
-// silinir ya da admin panelinden yeni kimlikle yeniden eklenirse kart 404'e
-// gitmesin diye bağlantı liste sayfasına düşürülür.
+// Ana sayfa kartları site.json'da detay sayfalarına kimlikle bağlanır. Kimlik
+// listede yoksa (ör. sayfa kaldırıldıysa ya da yeniden adlandırıldıysa) kart
+// 404'e gitmesin diye bağlantı liste sayfasına düşürülür.
 export function resolveContentHref(
   href: string | undefined,
   listPath: string,

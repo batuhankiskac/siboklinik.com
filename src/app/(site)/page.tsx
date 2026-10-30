@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import siteData from "@/data/site.json";
-import { getArticles } from "@/lib/content";
 import { resolveContentHref } from "@/lib/home-links";
 import { pageMetadata } from "@/lib/metadata";
+import { symptoms } from "@/lib/static-content";
 import AboutSection from "@/components/home/AboutSection";
 import ContactSection from "@/components/home/ContactSection";
 import HeroSection from "@/components/home/HeroSection";
@@ -25,8 +25,10 @@ const heroImage = siteData.images.find((image) => image.usedIn === "hero");
 // "nedir-neden-onemli" → #nedir yan kutusu, "list" → #tedavi kutuları.
 const ABOUT_HIGHLIGHT_ID = "nedir-neden-onemli";
 
-export default async function Home() {
-  const articleIds = new Set((await getArticles()).map((article) => article.id));
+// Belirti kartları sabit belirti sayfalarına (src/data/belirtiler.json) bağlanır.
+const symptomIds = new Set(symptoms.map((symptom) => symptom.id));
+
+export default function Home() {
   const highlight = sections.find((section) => section.id === ABOUT_HIGHLIGHT_ID);
   const treatmentBoxes = sections.filter((section) => section.kind === "list");
 
@@ -63,7 +65,7 @@ export default async function Home() {
                   ...section,
                   items: section.items?.map((item) => ({
                     ...item,
-                    href: resolveContentHref(item.href, "/belirtiler", articleIds),
+                    href: resolveContentHref(item.href, "/belirtiler", symptomIds),
                   })),
                 }}
               />

@@ -15,7 +15,7 @@ import styles from "./ContentDetail.module.css";
 interface ContentDetailProps {
   backHref: string;
   backLabel: string;
-  // Başlığın üstündeki kısa etiket (ör. "Belirti").
+  // Başlığın üstündeki kısa etiket (ör. "Belirti", "Makale").
   eyebrow?: string;
   title: string;
   imageUrl?: string | null;

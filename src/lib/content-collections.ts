@@ -2,7 +2,7 @@ import type { DocumentData } from "firebase-admin/firestore";
 import { requiredText, optionalLines, FormError } from "./validation";
 import { extractYoutubeId } from "./youtube";
 
-export type ContentCollection = "services" | "articles" | "videos";
+export type ContentCollection = "articles" | "videos";
 
 export interface ContentCollectionConfig {
   // Firestore koleksiyon adı.
@@ -19,11 +19,6 @@ export interface ContentCollectionConfig {
   readFields: (formData: FormData) => DocumentData;
 }
 
-const serviceFields = (formData: FormData) => ({
-  title: requiredText(formData, "title", 160),
-  description: requiredText(formData, "description", 20_000),
-});
-
 const articleFields = (formData: FormData) => ({
   title: requiredText(formData, "title", 200),
   summary: requiredText(formData, "summary", 600),
@@ -38,20 +33,11 @@ const videoFields = (formData: FormData) => {
   return { title, youtubeId };
 };
 
-export const serviceCollection: ContentCollectionConfig = {
-  collection: "services",
-  cacheTag: "services",
-  folder: "services",
-  notFound: "Hizmet bulunamadı.",
-  listPath: "/admin/hizmetler",
-  readFields: serviceFields,
-};
-
 export const articleCollection: ContentCollectionConfig = {
   collection: "articles",
   cacheTag: "articles",
   folder: "articles",
-  notFound: "Belirti bulunamadı.",
+  notFound: "Makale bulunamadı.",
   listPath: "/admin/makaleler",
   readFields: articleFields,
 };

@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
-import { getArticles, getServices, getVideos } from "@/lib/content";
+import { getArticles, getVideos } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
-import type { ArticleSummary, Service } from "@/types/content";
+import { services, symptoms } from "@/lib/static-content";
+import type { ArticleSummary } from "@/types/content";
 
 // Build anında prerender edilmez: build ortamında Firebase bilgileri yoksa
-// site haritası belirti ve hizmetler olmadan donmasın. Veri unstable_cache
-// (300 sn) üzerinden geldiği için istek başına Firestore okuması yapılmaz.
+// site haritası makaleler olmadan donmasın. Veri unstable_cache (300 sn)
+// üzerinden geldiği için istek başına Firestore okuması yapılmaz.
 // readOrEmpty okuma hatasında boş liste döndürdüğü için bu dosya revalidate ile
 // ISR'a alınmaz: boş liste yenileme süresince önbellekte kalırdı.
 export const dynamic = "force-dynamic";
@@ -16,6 +17,7 @@ const staticRoutes: [string, ChangeFrequency, number][] = [
   ["", "weekly", 1],
   ["/belirtiler", "weekly", 0.8],
   ["/hizmetler", "weekly", 0.8],
+  ["/makaleler", "weekly", 0.8],
   ["/iletisim", "yearly", 0.6],
   ["/gizlilik", "yearly", 0.3],
 ];
@@ -31,11 +33,16 @@ async function readOrEmpty<T>(label: string, read: () => Promise<T[]>): Promise<
   }
 }
 
+// Belirti ve hizmet sayfaları sabit içeriktir (src/data/*.json).
+const detailRoute = (path: string, item: { updatedAt: string | null; createdAt: string | null }) => ({
+  url: `${SITE_URL}${path}`,
+  lastModified: item.updatedAt ?? item.createdAt ?? undefined,
+  changeFrequency: "monthly" as const,
+  priority: 0.7,
+});
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [articles, services] = await Promise.all([
-    readOrEmpty<ArticleSummary>("belirtiler", getArticles),
-    readOrEmpty<Service>("hizmetler", getServices),
-  ]);
+  const articles = await readOrEmpty<ArticleSummary>("makaleler", getArticles);
   // Video sayfası boşken haritaya eklenmez: boş sayfa dizine girmesin.
   const videos = await readOrEmpty("videolar", getVideos);
 
@@ -48,17 +55,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...(videos.length > 0
       ? [{ url: `${SITE_URL}/videolar`, changeFrequency: "weekly" as const, priority: 0.7 }]
       : []),
-    ...articles.map((article) => ({
-      url: `${SITE_URL}/belirtiler/${article.id}`,
-      lastModified: article.updatedAt ?? article.createdAt ?? undefined,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    })),
-    ...services.map((service) => ({
-      url: `${SITE_URL}/hizmetler/${service.id}`,
-      lastModified: service.updatedAt ?? service.createdAt ?? undefined,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    })),
+    ...symptoms.map((symptom) => detailRoute(`/belirtiler/${symptom.id}`, symptom)),
+    ...services.map((service) => detailRoute(`/hizmetler/${service.id}`, service)),
+    ...articles.map((article) => detailRoute(`/makaleler/${article.id}`, article)),
   ];
 }

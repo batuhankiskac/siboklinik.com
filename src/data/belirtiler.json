@@ -1,0 +1,92 @@
+[
+  {
+    "id": "cilt-sorunlari",
+    "title": "Cilt Sorunları (Rosacea ve Akne)",
+    "summary": "Rosacea, akne ve egzama gibi cilt sorunları ile bağırsak sağlığı arasındaki ilişki araştırılmaktadır. Cilt sorunlarının nedeni hekim tarafından değerlendirilmelidir.",
+    "content": "Geçmeyen bazı cilt sorunlarında bağırsak kaynaklı faktörlerin, SIBO dahil, rol oynayabileceği araştırılmaktadır.\n\n## Bağırsak-Deri Ekseni (Gut-Skin Axis)\n\nBazı çalışmalarda Rosacea (Gül Hastalığı) olan kişilerde SIBO görülme sıklığının sağlıklı bireylere göre daha yüksek olabileceği bildirilmiştir. Ancak bu ilişkinin mekanizması ve SIBO tedavisinin cilt bulguları üzerindeki etkisi henüz kesin olarak ortaya konulmamıştır; daha fazla araştırmaya ihtiyaç vardır.\n\nBağırsaktaki inflamasyon ve geçirgenlik artışının (bağırsak geçirgenliği), kana geçen maddelerin ciltte inflamatuar yanıta katkıda bulunabileceği düşünülmektedir. Bu mekanizmanın akne, egzama ve rosacea alevlenmelerinde rol oynayabileceği öne sürülmektedir.\n\n## Önemli Not\n\nCilt sorunu olan herkeste SIBO bulunmaz. Cilt sorunlarının nedeninin belirlenmesi için hekim muayenesi gereklidir.",
+    "citations": [],
+    "imageUrl": null,
+    "createdAt": "2026-10-26T18:19:19.359Z",
+    "updatedAt": "2026-10-26T18:19:19.359Z"
+  },
+  {
+    "id": "eklem-agrisi",
+    "title": "Eklem Ağrıları ve Fibromiyalji",
+    "summary": "Eklem ve kas ağrılarının bağırsaklardaki inflamasyonla ilişkisi araştırılmaktadır. Ağrıların nedeni hekim değerlendirmesiyle belirlenmelidir.",
+    "content": "Bazı eklem ve kas ağrılarında bağırsaklardaki inflamasyonun katkısı araştırılmaktadır.\n\n## Sistemik İnflamasyon\n\nBağırsak bariyerinin bozulmasıyla kana geçebilen bakteriyel toksinlerin (LPS), bağışıklık sistemini uyararak eklemlerde inflamasyona katkıda bulunabileceği düşünülmektedir.\n\nFibromiyalji ile ilgili bazı çalışmalarda bu hastalarda SIBO'ya rastlandığı bildirilmiştir. Ancak bu bulguların sonuçları çalışmalara göre değişmekte olup bir nedensellik ilişkisi henüz kesin olarak gösterilmemiştir. Bazı hastalarda SIBO tedavisi ile yaygın vücut ağrılarında azalma gözlendiği bildirilmekte, bu konuda daha fazla kanıta ihtiyaç duyulmaktadır.\n\n## Klinik Gözlem\n\nRomatoid artrit ve ankilozan spondilit gibi otoimmün hastalıklarda, bağırsak florasındaki (mikrobiyota) değişikliklerin alevlenmelerde rol oynayabileceği araştırılmaktadır.",
+    "citations": [],
+    "imageUrl": null,
+    "createdAt": "2026-10-26T18:19:19.359Z",
+    "updatedAt": "2026-10-26T18:19:19.359Z"
+  },
+  {
+    "id": "hazimsizlik",
+    "title": "Gaz ve Hazımsızlık",
+    "summary": "Gaz, geğirme ve hazımsızlık şikayetlerinin SIBO ile ilişkili olabilen olası mekanizmaları hakkında genel bilgiler. Belirtilerin nedeni hekim tarafından değerlendirilmelidir.",
+    "content": "Sık geğirme ihtiyacı ve gürültülü bağırsak hareketleri SIBO ile ilişkili olabilir.\n\n## Enzim Yetersizliği ve Fermantasyon\n\nİnce bağırsaktaki bakterilerin safra asitlerinin yapısını bozarak yağların emilimini zorlaştırabileceği (steatore) düşünülmektedir. Bu durum ishal ve hazımsızlık hissiyle ilişkilendirilebilir.\n\nAyrıca karbonhidratların bakteriler tarafından erken fermente edilmesinin yoğun gaz oluşumuna katkıda bulunabileceği bildirilmektedir.",
+    "citations": [],
+    "imageUrl": null,
+    "createdAt": "2026-10-26T18:19:19.359Z",
+    "updatedAt": "2026-10-26T18:19:19.359Z"
+  },
+  {
+    "id": "intolerans",
+    "title": "Gıda İntoleransları",
+    "summary": "Daha önce rahat tüketilen besinlere karşı gelişen hassasiyetlerin SIBO ile ilişkili olabileceği düşünülmektedir. Gıda intoleransı hekim değerlendirmesiyle doğrulanmalıdır.",
+    "content": "“Eskiden yiyebildiğim her şey şimdi dokunuyor” diyorsanız, bu durum SIBO ile ilişkili olabilir.\n\n## Histamin ve FODMAP Hassasiyeti\n\nBağırsak fırça kenarı enzimlerinin (laktaz, diamino oksidaz vb.) bakteriler veya inflamasyon tarafından etkilenmesinin, gıdaların tam olarak sindirilmesini zorlaştırabileceği düşünülmektedir.\n\nBu durumun laktoz, gluten veya histamin içeren gıdalara karşı sonradan gelişen hassasiyetlere yol açabileceği bildirilmektedir. Bazı çalışmalarda SIBO tedavisinin ardından bu hassasiyetlerin bir kısmında iyileşme gözlendiği bildirilmiştir.\n\nGıda intoleransının gerçekten bulunup bulunmadığının belirlenmesi için hekim değerlendirmesi gerekir. Besin kısıtlamaları hekim kontrolünde ve sınırlı süreyle planlanmalıdır.",
+    "citations": [],
+    "imageUrl": null,
+    "createdAt": "2026-10-26T18:19:19.359Z",
+    "updatedAt": "2026-10-26T18:19:19.359Z"
+  },
+  {
+    "id": "kabizlik-ishal",
+    "title": "Kabızlık veya İshal",
+    "summary": "SIBO'da görülebilen ishal veya kabızlık, oluşan gazın türüne göre farklılık gösterebilir. Bağırsak alışkanlıklarındaki değişikliklerin nedeni hekim tarafından değerlendirilmelidir.",
+    "content": "SIBO türüne göre değişen bağırsak alışkanlıkları görülebilir.\n\n## Hidrojen ve Metan Farkı\n\nSIBO tek bir tip değildir. Üretilen gazın türünün belirtileri etkileyebileceği düşünülmektedir:\n\n- **Hidrojen SIBO:** İshale (diyare) yatkınlık yaratabileceği ve hızlı bağırsak hareketleriyle ilişkili olabileceği bildirilmektedir.\n- **Metan SIBO (IMO):** Metan gazının bağırsak hareketlerini yavaşlatabileceği ve inatçı kabızlıkla ilişkili olabileceği öne sürülmektedir.\n\nHangi tipin söz konusu olduğunu anlamak için hekim muayenesi ve uygun test sonuçları gerekir.",
+    "citations": [],
+    "imageUrl": null,
+    "createdAt": "2026-10-26T18:19:19.359Z",
+    "updatedAt": "2026-10-26T18:19:19.359Z"
+  },
+  {
+    "id": "karin-agrisi",
+    "title": "Karın Ağrısı ve Kramplar",
+    "summary": "Tanımlanamayan, gezici karın ağrıları ve kramplar SIBO ile ilişkili olabilir. Bu tür ağrıların olası mekanizmaları ve değerlendirme gereksinimi hakkında genel bilgiler.",
+    "content": "Tanımlanamayan, gezici ve rahatsız edici karın ağrıları SIBO ile ilişkili olabilir.\n\n## Visseral Hipersensitivite\n\nSIBO'lu kişilerde bağırsak duvarının normalden daha duyarlı hale gelebileceği (visseral hipersensitivite) düşünülmektedir. Bu durumda, normalde hissedilmeyen gaz hareketleri veya bağırsak kasılmaları ağrı ya da rahatsızlık olarak algılanabilir.\n\n## Mekanik Etki\n\nOluşan gazın bağırsak duvarlarını germesinin de ağrıya katkıda bulunabileceği bildirilmektedir.\n\n## Ne Yapılmalı?\n\nTekrarlayan veya şiddetli karın ağrılarında nedenin belirlenmesi için bir hekime başvurulması önemlidir.",
+    "citations": [],
+    "imageUrl": null,
+    "createdAt": "2026-10-26T18:19:19.359Z",
+    "updatedAt": "2026-10-26T18:19:19.359Z"
+  },
+  {
+    "id": "kilo-kaybi",
+    "title": "Kilo Kaybı ve Beslenme Eksikliği",
+    "summary": "Emilim bozukluğuyla ilişkili olabilen kilo kaybı, kansızlık ve vitamin eksiklikleri hakkında genel bilgiler. Bu belirtilerin nedeni hekim tarafından değerlendirilmelidir.",
+    "content": "Yemenize rağmen kilo alamıyor musunuz? Emilim bozuklukları bu durumda rol oynayabilir.\n\n## Malabsorpsiyon (Emilim Bozukluğu)\n\nİnce bağırsak, besinlerin emildiği ana bölgedir. SIBO'da bakterilerin bağırsak yüzeyinde biyofilm oluşturarak veya safra asitlerini bozarak besin emilimini etkileyebileceği düşünülmektedir.\n\nBakterilerin demir ve B12 vitamini gibi besin öğelerini kullanarak anemiye (kansızlık) katkıda bulunabileceği bildirilmektedir. Yağların emiliminin bozulması ise kalori kaybına ve yağda çözünen vitaminlerin (A, D, E, K) eksikliğine yol açabilir.\n\n## Ne Yapılmalı?\n\nİstemsiz kilo kaybı veya beslenme eksikliği şüphesinde kan tahlilleri ve hekim değerlendirmesi önemlidir.",
+    "citations": [],
+    "imageUrl": null,
+    "createdAt": "2026-10-26T18:19:19.359Z",
+    "updatedAt": "2026-10-26T18:19:19.359Z"
+  },
+  {
+    "id": "siskinlik",
+    "title": "Aşırı Şişkinlik (Distansiyon)",
+    "summary": "Yemeklerden sonra karında belirgin şişkinlik ve gerginlik, SIBO ile ilişkilendirilen belirtilerden biri olabilir. Belirtilerin nedeni hekim değerlendirmesiyle araştırılmalıdır.",
+    "content": "Yemeklerden sonra hamile gibi görünen bir karın, SIBO ile ilişkilendirilen belirtilerden biri olabilir.\n\n## Bilimsel Açıklama\n\nSIBO'lu kişilerde ince bağırsaktaki bakteriler karbonhidratları fermente ederek hidrojen, metan veya hidrojen sülfür gibi gazlar üretebilir. Bu fermentasyonun normalde kalın bağırsakta gerçekleşmesi gerekirken ince bağırsakta (daha dar ve emilim odaklı bir organ) gerçekleşmesi durumunda, oluşan gazın karın içi basıncını artırabileceği ve diyaframa baskı yapabileceği düşünülmektedir.\n\nBu şişkinliğin sabahları daha az, gün boyunca yemek yedikçe daha belirgin olabileceği ve akşam saatlerinde zirveye ulaşabileceği bildirilmektedir.\n\n## Neden Olabilir?\n\nİnce bağırsaktaki bakterilerin gıdalardaki şekerleri (glikoz, fruktoz vb.) siz sindirmeden önce kullanarak gaz açığa çıkarması bu belirtiye yol açabilir. Şişkinlik başka nedenlerle de ortaya çıkabileceğinden, belirtilerin hekim tarafından değerlendirilmesi gerekir.",
+    "citations": [],
+    "imageUrl": null,
+    "createdAt": "2026-10-26T18:19:19.359Z",
+    "updatedAt": "2026-10-26T18:19:19.359Z"
+  },
+  {
+    "id": "yorgunluk",
+    "title": "Beyin Sisi (Brain Fog) ve Yorgunluk",
+    "summary": "Kronik yorgunluk, konsantrasyon güçlüğü ve zihinsel bulanıklık (beyin sisi), SIBO ile ilişkili olabilen belirtiler arasında yer alabilir. Hekim değerlendirmesi gerekir.",
+    "content": "Bağırsak sağlığı ile zihinsel belirtiler arasındaki ilişki araştırılmaktadır.\n\n## Toksin Yükü ve İnflamasyon\n\nBağırsak bariyerinin bozulmasıyla (bağırsak geçirgenliğinde artış) bakteriyel toksinlerin (LPS) dolaşıma geçebileceği düşünülmektedir. Bunun sistemik bir inflamatuar yanıta katkıda bulunabileceği ve bazı kişilerde “beyin sisi” olarak tanımlanan konsantrasyon güçlüğü, unutkanlık ve zihinsel yavaşlamayla ilişkili olabileceği öne sürülmektedir.\n\nAyrıca B12 vitamini eksikliğinin, bakterilerin bu vitamini kullanmasıyla ilişkilendirilebileceği ve enerji düşüklüğü ile nörolojik belirtilere yol açabileceği bildirilmektedir. Bu nedenle yorgunluk belirtisi olan kişilerde vitamin düzeylerinin kan tahlilleriyle hekim tarafından değerlendirilmesi önemlidir.",
+    "citations": [],
+    "imageUrl": null,
+    "createdAt": "2026-10-26T18:19:19.359Z",
+    "updatedAt": "2026-10-26T18:19:19.359Z"
+  }
+]

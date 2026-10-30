@@ -8,16 +8,10 @@ import {
   newestFirst,
   toArticle,
   toArticleSummary,
-  toService,
   toVideo,
   type RawDocument,
 } from "./normalize";
-import type {
-  Article,
-  ArticleSummary,
-  Service,
-  Video,
-} from "@/types/content";
+import type { Article, ArticleSummary, Video } from "@/types/content";
 
 // Route ve veri önbelleği bu süreyle yenilenir. updateTag etiket kaydını süreç
 // içi bellekte tutar; birden fazla worker çalışıyorsa diğerleri en geç bu süre
@@ -113,12 +107,6 @@ const cachedArticles = unstable_cache(
   { revalidate: REVALIDATE_SECONDS, tags: ["articles"] },
 );
 
-const cachedServices = unstable_cache(
-  async () => newestFirst(await readCollection("services", toService)),
-  ["services"],
-  { revalidate: REVALIDATE_SECONDS, tags: ["services"] },
-);
-
 const cachedVideos = unstable_cache(
   async () => newestFirst(await readCollection("videos", toVideo)),
   ["videos"],
@@ -144,10 +132,6 @@ export const getArticles = cache(
   (): Promise<ArticleSummary[]> => orFallback(cachedArticles, []),
 );
 
-export const getServices = cache(
-  (): Promise<Service[]> => orFallback(cachedServices, []),
-);
-
 export const getVideos = cache(
   (): Promise<Video[]> => orFallback(cachedVideos, []),
 );
@@ -159,12 +143,5 @@ export const getArticle = cache(
     const articles = await getArticles();
     if (!articles.some((article) => article.id === id)) return null;
     return orFallback(() => cachedArticleById(id), null);
-  },
-);
-
-export const getService = cache(
-  async (id: string): Promise<Service | null> => {
-    const services = await getServices();
-    return services.find((service) => service.id === id) ?? null;
   },
 );

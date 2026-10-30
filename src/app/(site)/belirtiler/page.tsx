@@ -1,13 +1,13 @@
-import { Suspense, type CSSProperties } from "react";
+import type { CSSProperties } from "react";
 import ArticleCard from "@/components/ArticleCard";
-import LoadingState from "@/components/LoadingState";
-import PublicContentList from "@/components/PublicContentList";
-import { getArticles } from "@/lib/content";
+import ContentGrid from "@/components/ContentGrid";
 import { pageMetadata } from "@/lib/metadata";
+import { symptoms } from "@/lib/static-content";
 import siteData from "@/data/site.json";
+import listStyles from "@/components/PublicContentList.module.css";
 import styles from "./page.module.css";
 
-const { title, description } = siteData.seo.articlesIndex;
+const { title, description } = siteData.seo.symptomsIndex;
 
 export const metadata = pageMetadata({
   title,
@@ -15,7 +15,8 @@ export const metadata = pageMetadata({
   path: "/belirtiler",
 });
 
-export default function ArticlesPage() {
+// İçerik src/data/belirtiler.json dosyasından gelir; sayfa build'de üretilir.
+export default function SymptomsPage() {
   return (
     <main id="main-content" className={styles.page}>
       <header className={styles.header}>
@@ -30,13 +31,18 @@ export default function ArticlesPage() {
         </p>
       </header>
       <div className={styles.body}>
-        <Suspense fallback={<LoadingState />}>
-          <PublicContentList
-            load={getArticles}
-            emptyText="Henüz yayınlanmış bir belirti yazısı bulunmuyor."
-            renderItem={(article) => <ArticleCard article={article} />}
-          />
-        </Suspense>
+        <ContentGrid>
+          {symptoms.map((symptom, index) => (
+            <div
+              key={symptom.id}
+              className={listStyles.item}
+              data-reveal
+              style={{ "--i": index % 3 } as CSSProperties}
+            >
+              <ArticleCard article={symptom} basePath="/belirtiler" />
+            </div>
+          ))}
+        </ContentGrid>
       </div>
     </main>
   );

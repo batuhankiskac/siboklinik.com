@@ -1,0 +1,58 @@
+[
+  {
+    "id": "bagirsak-bariyeri-destegi",
+    "title": "Bağırsak Bariyeri Desteği",
+    "description": "Bağırsak bariyerini desteklemeye yönelik takviyeler, gerekli görüldüğünde hekim tarafından önerilebilir.",
+    "imageUrl": null,
+    "createdAt": "2026-10-26T18:19:20.025Z",
+    "updatedAt": "2026-10-26T18:19:20.025Z"
+  },
+  {
+    "id": "bitkisel-veya-medikal-tedavi",
+    "title": "Bitkisel veya Medikal Tedavi",
+    "description": "Bağırsak florasını hedefleyen antibiyotik veya bitkisel destek seçenekleri, kişinin durumuna göre hekim tarafından değerlendirilerek planlanır.",
+    "imageUrl": null,
+    "createdAt": "2026-10-26T18:19:20.025Z",
+    "updatedAt": "2026-10-26T18:19:20.025Z"
+  },
+  {
+    "id": "eliminasyon-diyeti",
+    "title": "Eliminasyon Diyeti",
+    "description": "Bakterilerin besin kaynağı olabilen bazı gıdaların (FODMAP vb.) geçici süreyle kısıtlanması. Diyet planı hekim değerlendirmesiyle oluşturulur.",
+    "imageUrl": null,
+    "createdAt": "2026-10-26T18:19:20.025Z",
+    "updatedAt": "2026-10-26T18:19:20.025Z"
+  },
+  {
+    "id": "kan-tahlilleri",
+    "title": "Kan Tahlilleri",
+    "description": "Vitamin ve mineral eksikliklerinin araştırılması.",
+    "imageUrl": null,
+    "createdAt": "2026-10-26T18:19:20.025Z",
+    "updatedAt": "2026-10-26T18:19:20.025Z"
+  },
+  {
+    "id": "klinik-degerlendirme",
+    "title": "Klinik Değerlendirme",
+    "description": "Hastanın semptomlarının ve öyküsünün ayrıntılı olarak değerlendirilmesi.",
+    "imageUrl": null,
+    "createdAt": "2026-10-26T18:19:20.025Z",
+    "updatedAt": "2026-10-26T18:19:20.025Z"
+  },
+  {
+    "id": "probiyotik-destegi",
+    "title": "Probiyotik Desteği",
+    "description": "Probiyotik kullanımı, kişinin durumuna göre hekim tarafından değerlendirilerek planlanır.",
+    "imageUrl": null,
+    "createdAt": "2026-10-26T18:19:20.025Z",
+    "updatedAt": "2026-10-26T18:19:20.025Z"
+  },
+  {
+    "id": "sibo-nefes-testi",
+    "title": "SIBO Nefes Testi",
+    "description": "İnce bağırsaktaki bakteri aktivitesiyle ilişkili gaz üretimini ölçen bir test yöntemidir. Test klinikte veya kitlerle evde uygulanabilir; sonuçlar hekim tarafından yorumlanır.",
+    "imageUrl": null,
+    "createdAt": "2026-10-26T18:19:20.025Z",
+    "updatedAt": "2026-10-26T18:19:20.025Z"
+  }
+]

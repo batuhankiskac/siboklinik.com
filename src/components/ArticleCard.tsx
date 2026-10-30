@@ -6,13 +6,23 @@ import CardMedia from "./CardMedia";
 import buttonStyles from "../styles/button.module.css";
 import styles from "./ArticleCard.module.css";
 
+type ArticleCardProps = {
+  article: ArticleSummary;
+  // Detay sayfasının kök yolu: Firestore makaleleri "/makaleler", sabit
+  // belirti sayfaları "/belirtiler".
+  basePath?: "/makaleler" | "/belirtiler";
+};
+
 // Kutusuz, editoryal kart: görsel, tarih, başlık, özet ve bağlantı dikey akar.
-export default function ArticleCard({ article }: { article: ArticleSummary }) {
+export default function ArticleCard({
+  article,
+  basePath = "/makaleler",
+}: ArticleCardProps) {
 
   return (
     <article className={styles.card}>
       <Link
-        href={`/belirtiler/${article.id}`}
+        href={`${basePath}/${article.id}`}
         className={styles.anchor}
         aria-label={`${article.title} yazısını oku`}
       >

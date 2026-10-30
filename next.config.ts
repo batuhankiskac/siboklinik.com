@@ -98,13 +98,6 @@ const nextConfig: NextConfig = {
         destination,
         permanent: true,
       })),
-      // Makaleler bölümü "Belirtiler" adıyla yeniden adlandırıldı.
-      { source: "/makaleler", destination: "/belirtiler", permanent: true },
-      {
-        source: "/makaleler/:id",
-        destination: "/belirtiler/:id",
-        permanent: true,
-      },
       // Hakkında sayfası kaldırıldı; içerik ana sayfadaki "SIBO Nedir?" bölümüne taşındı.
       { source: "/hakkinda", destination: "/", permanent: true },
     ];

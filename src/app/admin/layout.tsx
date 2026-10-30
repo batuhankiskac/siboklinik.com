@@ -21,11 +21,8 @@ export default async function AdminLayout({
       <aside className={styles.sidebar}>
         <div className={styles.logo}>SIBO Klinik Admin</div>
         <nav className={styles.nav} aria-label="Admin menüsü">
-          <Link href="/admin/hizmetler" className={styles.link}>
-            Hizmetler
-          </Link>
           <Link href="/admin/makaleler" className={styles.link}>
-            Belirtiler
+            Makaleler
           </Link>
           <Link href="/admin/videolar" className={styles.link}>
             Videolar

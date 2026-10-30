@@ -27,7 +27,7 @@ export const privacyLink: NavigationLink = {
 };
 
 // Admin girişinden sonra ve /admin kökünden açılan varsayılan sayfa.
-export const ADMIN_HOME = "/admin/hizmetler";
+export const ADMIN_HOME = "/admin/makaleler";
 
 export function isActivePath(pathname: string, href: string): boolean {
   return href === "/"

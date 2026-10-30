@@ -20,6 +20,9 @@ test("ana sayfa ve temel navigasyon erişilebilir", async ({
     navigation.getByRole("link", { name: "Belirtiler", exact: true }),
   ).toBeVisible();
   await expect(
+    navigation.getByRole("link", { name: "Makaleler", exact: true }),
+  ).toHaveAttribute("href", "/makaleler");
+  await expect(
     navigation.getByRole("link", { name: "Randevu Al", exact: true }),
   ).toBeVisible();
 });
@@ -27,7 +30,12 @@ test("ana sayfa ve temel navigasyon erişilebilir", async ({
 test("public içerik sayfaları yükleniyor metnine bağımlı değil", async ({
   page,
 }) => {
-  for (const path of ["/belirtiler", "/hizmetler", "/videolar"]) {
+  for (const path of [
+    "/belirtiler",
+    "/hizmetler",
+    "/makaleler",
+    "/videolar",
+  ]) {
     await page.goto(path);
     await expect(page.getByText("İçerik hazırlanıyor…")).toHaveCount(0);
     await expect(page.locator("main h1")).toBeVisible();
@@ -166,12 +174,41 @@ test("aktif sayfa bağlantısı işaretlenir", async ({ page, isMobile }) => {
   ).not.toHaveAttribute("aria-current", "page");
 });
 
+test("sabit belirti ve hizmet sayfaları açılır, bilinmeyen kimlik 404 döner", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/belirtiler/siskinlik");
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Aşırı Şişkinlik (Distansiyon)" }),
+  ).toBeVisible();
+  await page.goto("/hizmetler/sibo-nefes-testi");
+  await expect(
+    page.getByRole("heading", { level: 1, name: "SIBO Nefes Testi" }),
+  ).toBeVisible();
+
+  const missingSymptom = await page.goto("/belirtiler/olmayan-belirti");
+  expect(missingSymptom?.status()).toBe(404);
+  await expect(page.getByText("Belirti bulunamadı.")).toBeVisible();
+
+  for (const path of ["/hizmetler/olmayan-hizmet", "/makaleler/olmayan-makale"]) {
+    const response = await request.get(path);
+    expect(response.status(), path).toBe(404);
+  }
+});
+
+test("makaleler sayfası yönlendirilmez", async ({ request }) => {
+  const response = await request.get("/makaleler", { maxRedirects: 0 });
+  expect(response.status()).toBe(200);
+});
+
 test("kaldırılan rotalar 404 döner, eski html adresleri yönlenir", async ({
   request,
 }) => {
-  for (const path of ["/hakkinda", "/makaleler"]) {
-    const response = await request.get(path);
-    expect(response.status(), path).toBe(404);
+  for (const path of ["/hakkinda", "/admin/hizmetler"]) {
+    const response = await request.get(path, { maxRedirects: 0 });
+    // /hakkinda ana sayfaya kalıcı yönlenir; admin hizmetler rotası kaldırıldı.
+    expect([301, 307, 308, 404], path).toContain(response.status());
   }
 
   const redirect = await request.get("/index.html", { maxRedirects: 0 });
@@ -181,7 +218,7 @@ test("kaldırılan rotalar 404 döner, eski html adresleri yönlenir", async ({
 });
 
 test("anonim admin isteği login sayfasına yönlenir", async ({ page }) => {
-  await page.goto("/admin/hizmetler");
+  await page.goto("/admin/makaleler");
   await expect(page).toHaveURL(/\/login$/);
   await expect(
     page.getByRole("heading", { name: "Admin Girişi" }),
@@ -202,7 +239,7 @@ test("sahte admin cookie'si sunucu doğrulamasını geçemez", async ({
       sameSite: "Strict",
     },
   ]);
-  await page.goto("/admin/hizmetler");
+  await page.goto("/admin/makaleler");
   await expect(page).toHaveURL(/\/login$/);
 });
 
@@ -211,6 +248,9 @@ test("sitemap olmayan video detay rotaları üretmez", async ({ request }) => {
   expect(response.ok()).toBeTruthy();
   const body = await response.text();
   expect(body).not.toMatch(/\/videolar\/[^<]+/);
+  expect(body).toContain("/belirtiler/siskinlik");
+  expect(body).toContain("/hizmetler/sibo-nefes-testi");
+  expect(body).toMatch(/\/makaleler<\/loc>/);
 });
 
 test("temel güvenlik başlıkları gönderilir", async ({ request }) => {
@@ -226,10 +266,10 @@ const adminCredentialsAvailable = Boolean(
   process.env.E2E_ADMIN_EMAIL && process.env.E2E_ADMIN_PASSWORD,
 );
 
-// Test yarıda kalsa bile oluşturulan geçici hizmetler arayüzden silinir.
-async function deleteServicesMatching(page: Page, title: string) {
-  await page.goto("/admin/hizmetler");
-  if (!/\/admin\/hizmetler$/.test(page.url())) return;
+// Test yarıda kalsa bile oluşturulan geçici makaleler arayüzden silinir.
+async function deleteArticlesMatching(page: Page, title: string) {
+  await page.goto("/admin/makaleler");
+  if (!/\/admin\/makaleler$/.test(page.url())) return;
   const items = page.getByRole("article").filter({ hasText: title });
   for (let attempt = 0; attempt < 5 && (await items.count()) > 0; attempt++) {
     const remaining = await items.count();
@@ -239,7 +279,7 @@ async function deleteServicesMatching(page: Page, title: string) {
   }
 }
 
-test("admin login, hizmet CRUD ve logout akışı", async ({ page }, testInfo) => {
+test("admin login, makale CRUD ve logout akışı", async ({ page }, testInfo) => {
   test.skip(
     testInfo.project.name !== "desktop",
     "Paylaşılan veriyi değiştirdiği için yalnız desktop projesinde çalışır.",
@@ -249,21 +289,30 @@ test("admin login, hizmet CRUD ve logout akışı", async ({ page }, testInfo) =
     "Firebase admin E2E bilgileri tanımlı değil.",
   );
 
-  const uniqueTitle = `E2E Hizmet ${Date.now()}`;
+  const uniqueTitle = `E2E Makale ${Date.now()}`;
   const updatedTitle = `${uniqueTitle} Güncel`;
 
   await page.goto("/login");
   await page.getByLabel("E-posta").fill(process.env.E2E_ADMIN_EMAIL!);
   await page.getByLabel("Şifre").fill(process.env.E2E_ADMIN_PASSWORD!);
   await page.getByRole("button", { name: "Giriş Yap" }).click();
-  await expect(page).toHaveURL(/\/admin\/hizmetler$/);
+  await expect(page).toHaveURL(/\/admin\/makaleler$/);
+
+  const adminNavigation = page.getByRole("navigation", { name: "Admin menüsü" });
+  await expect(adminNavigation.getByRole("link")).toHaveText([
+    "Makaleler",
+    "Videolar",
+  ]);
 
   try {
-    await page.getByRole("link", { name: "Yeni Hizmet Ekle" }).click();
+    await page.getByRole("link", { name: "Yeni Makale Ekle" }).click();
     await page.getByLabel("Başlık").fill(uniqueTitle);
     await page
-      .getByLabel("Açıklama (Markdown)")
-      .fill("Playwright tarafından oluşturulan geçici hizmet.");
+      .getByLabel("Özet")
+      .fill("Playwright tarafından oluşturulan geçici makale.");
+    await page
+      .getByLabel("İçerik (Markdown)")
+      .fill("Playwright tarafından oluşturulan geçici makale içeriği.");
     await page.getByRole("button", { name: "Kaydet" }).click();
     await expect(page.getByRole("heading", { name: uniqueTitle })).toBeVisible();
 
@@ -287,7 +336,7 @@ test("admin login, hizmet CRUD ve logout akışı", async ({ page }, testInfo) =
     ).toHaveCount(0);
   } finally {
     // Güncellenmiş başlık da benzersiz öneki içerir.
-    await deleteServicesMatching(page, uniqueTitle);
+    await deleteArticlesMatching(page, uniqueTitle);
   }
 
   await page.getByRole("button", { name: "Çıkış Yap" }).click();

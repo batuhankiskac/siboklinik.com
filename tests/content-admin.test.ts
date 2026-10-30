@@ -25,7 +25,6 @@ vi.mock("@/lib/uploads", () => ({
 
 import {
   articleCollection,
-  serviceCollection,
   videoCollection,
 } from "@/lib/content-collections";
 import { deleteContent, saveContent } from "@/lib/content-admin";
@@ -87,28 +86,40 @@ describe("saveContent (oluşturma)", () => {
     expect(mocks.updateTag).toHaveBeenCalledWith("articles");
   });
 
-  it("görselli yeni hizmeti yükler ve kayıtta yükleme bilgisini yazar", async () => {
+  it("görselli yeni makaleyi yükler ve kayıtta yükleme bilgisini yazar", async () => {
     mocks.uploadImage.mockResolvedValue({
       imageUrl: "https://img/new",
-      imagePath: "services/new.webp",
+      imagePath: "articles/new.webp",
     });
 
     await expect(
-      saveContent(
-        serviceCollection,
-        null,
-        form({ title: "Hizmet", description: "Açıklama" }, png()),
-      ),
-    ).rejects.toThrow("NEXT_REDIRECT:/admin/hizmetler");
+      saveContent(articleCollection, null, form(articleFields, png())),
+    ).rejects.toThrow("NEXT_REDIRECT:/admin/makaleler");
 
-    expect(mocks.uploadImage).toHaveBeenCalledWith(expect.any(File), "services");
+    expect(mocks.uploadImage).toHaveBeenCalledWith(expect.any(File), "articles");
     expect(mocks.set).toHaveBeenCalledWith(
       expect.objectContaining({
         imageUrl: "https://img/new",
-        imagePath: "services/new.webp",
+        imagePath: "articles/new.webp",
       }),
     );
-    expect(mocks.updateTag).toHaveBeenCalledWith("services");
+    expect(mocks.updateTag).toHaveBeenCalledWith("articles");
+  });
+
+  it("yeni videoyu kaydeder ve video listesine yönlendirir", async () => {
+    await expect(
+      saveContent(
+        videoCollection,
+        null,
+        form({ title: "Video", url: "https://youtu.be/dQw4w9WgXcQ" }),
+      ),
+    ).rejects.toThrow("NEXT_REDIRECT:/admin/videolar");
+
+    expect(db.collection).toHaveBeenCalledWith("videos");
+    expect(mocks.set).toHaveBeenCalledWith(
+      expect.objectContaining({ title: "Video", youtubeId: "dQw4w9WgXcQ" }),
+    );
+    expect(mocks.updateTag).toHaveBeenCalledWith("videos");
   });
 
   it("alan doğrulaması başarısızsa hata döner ve hiçbir şey yazmaz", async () => {
@@ -194,7 +205,7 @@ describe("saveContent (güncelleme)", () => {
       form(articleFields, png()),
     );
 
-    expect(result).toEqual({ error: articleCollection.notFound });
+    expect(result).toEqual({ error: "Makale bulunamadı." });
     expect(mocks.deleteImage).toHaveBeenCalledWith(
       "https://img/orphan",
       "articles/orphan.webp",
@@ -296,7 +307,7 @@ describe("deleteContent", () => {
   it("belge yoksa görsel silmeden boş sonuç döner", async () => {
     mocks.tx.get.mockResolvedValue({ exists: false });
 
-    const result = await deleteContent(serviceCollection, "doc-1");
+    const result = await deleteContent(articleCollection, "doc-1");
 
     expect(result).toEqual({});
     expect(mocks.tx.delete).not.toHaveBeenCalled();
